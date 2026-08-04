@@ -1,0 +1,12 @@
+# EDA module-specific ignores
+__pycache__/
+.ipynb_checkpoints/
+
+# Log file contents (keep structure)
+logs/*.log
+logs/*.jsonl
+!logs/.gitkeep
+
+# Large temporary exports
+*.csv.tmp
+*.json.tmp

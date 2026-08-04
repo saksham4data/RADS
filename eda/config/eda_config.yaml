@@ -1,0 +1,74 @@
+# ─────────────────────────────────────────────────────────────
+# RADS EDA Module — Configuration
+# ─────────────────────────────────────────────────────────────
+# Central configuration for all EDA notebooks and utilities.
+# Modify this file to change paths, W&B settings, thresholds,
+# and visualization preferences without touching notebook code.
+# ─────────────────────────────────────────────────────────────
+
+project:
+  name: "RADS"
+  eda_version: "1.0.0"
+
+wandb:
+  project: "RADS"
+  entity: null                        # auto-detect from WANDB_API_KEY
+  job_type: "eda"
+  group: "exploratory-analysis"
+  tags: ["eda", "metadata-analysis"]
+
+data:
+  metadata_path: "Datasets/processed/global_master_metadata.csv"
+  primary_label: "type"
+  secondary_labels:
+    - "weather"
+    - "day_time"
+    - "scene_layout"
+    - "quality"
+  split_columns:
+    - "split"
+    - "split_in_distribution"
+    - "split_geo_aware"
+  bbox_columns:
+    - "center_x"
+    - "center_y"
+    - "x1"
+    - "y1"
+    - "x2"
+    - "y2"
+  video_columns:
+    - "fps"
+    - "duration"
+    - "no_frames"
+    - "height"
+    - "width"
+
+reproducibility:
+  seed: 42
+  track_metadata_hash: true           # SHA-256 of the CSV file
+  track_git_commit: true
+
+visualization:
+  video_sampling:
+    enabled: true
+    max_samples: 20
+    seed: 42                          # deterministic frame sampling
+  figure_dpi: 300
+  figure_formats:
+    - "png"
+    - "svg"
+  theme: "dark_professional"
+
+quality_score:
+  weights:
+    missing_values: 0.20
+    duplicates: 0.15
+    class_imbalance: 0.25
+    invalid_bboxes: 0.20
+    corruption: 0.20
+
+output:
+  timestamped: true
+  maintain_latest: true
+  track_run_history: true
+  generate_manifest: true

@@ -1,0 +1,401 @@
+[
+  {
+    "timestamp": "2026-07-31T18:09:26.262147+00:00",
+    "notebook": "01_dataset_overview",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "g34lq8k4",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/g34lq8k4",
+    "files": {
+      "reports": [
+        "dataset_overview_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "missing_values.png",
+        "missing_values.svg",
+        "per_dataset_counts.png",
+        "per_dataset_counts.svg"
+      ],
+      "exports": [
+        "column_completeness.csv",
+        "dataset_summary.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 575.34,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T15:03:09.124074+00:00",
+    "notebook": "02_class_distribution",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "exz7f23d",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/exz7f23d",
+    "files": {
+      "reports": [
+        "class_distribution_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "primary_label_distribution.png",
+        "primary_label_distribution.svg",
+        "weather_distribution.png",
+        "weather_distribution.svg",
+        "day_time_distribution.png",
+        "day_time_distribution.svg",
+        "scene_layout_distribution.png",
+        "scene_layout_distribution.svg",
+        "quality_distribution.png",
+        "quality_distribution.svg",
+        "primary_label_per_dataset.png",
+        "primary_label_per_dataset.svg"
+      ],
+      "exports": [
+        "class_distribution.csv",
+        "secondary_label_distributions.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 78.56,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T15:36:14.180756+00:00",
+    "notebook": "03_video_statistics",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "xouzovqx",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/xouzovqx",
+    "files": {
+      "reports": [
+        "video_statistics_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "duration_distribution.png",
+        "duration_distribution.svg",
+        "fps_distribution.png",
+        "fps_distribution.svg",
+        "resolution_scatter.png",
+        "resolution_scatter.svg",
+        "duration_per_dataset.png",
+        "duration_per_dataset.svg",
+        "frame_count_distribution.png",
+        "frame_count_distribution.svg"
+      ],
+      "exports": [
+        "resolution_distribution.csv",
+        "video_stats_summary.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 404.95,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T15:45:38.395662+00:00",
+    "notebook": "04_annotation_quality",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "k4ztyio6",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/k4ztyio6",
+    "files": {
+      "reports": [
+        "annotation_quality_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "quality_distribution.png",
+        "quality_distribution.svg",
+        "bbox_center_heatmap.png",
+        "bbox_center_heatmap.svg",
+        "bbox_area_aspect_ratio.png",
+        "bbox_area_aspect_ratio.svg",
+        "quality_score_breakdown.png",
+        "quality_score_breakdown.svg"
+      ],
+      "exports": [
+        "quality_distribution.csv",
+        "bbox_statistics.csv",
+        "quality_score.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 39.59,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:41:14.700504+00:00",
+    "notebook": "05_split_analysis",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "zs9wjiax",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/zs9wjiax",
+    "files": {
+      "reports": [
+        "split_analysis_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "split_distribution.png",
+        "split_distribution.svg",
+        "split_in_distribution_distribution.png",
+        "split_in_distribution_distribution.svg",
+        "split_geo_aware_distribution.png",
+        "split_geo_aware_distribution.svg",
+        "split_class_balance.png",
+        "split_class_balance.svg",
+        "split_in_distribution_class_balance.png",
+        "split_in_distribution_class_balance.svg",
+        "split_geo_aware_class_balance.png",
+        "split_geo_aware_class_balance.svg",
+        "split_agreement_heatmap.png",
+        "split_agreement_heatmap.svg"
+      ],
+      "exports": [
+        "split_comparison.csv",
+        "split_class_balance.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 34.57,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:42:13.696223+00:00",
+    "notebook": "03_video_statistics",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "ifnajcp0",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/ifnajcp0",
+    "files": {
+      "reports": [
+        "video_statistics_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "duration_distribution.png",
+        "duration_distribution.svg",
+        "fps_distribution.png",
+        "fps_distribution.svg",
+        "resolution_scatter.png",
+        "resolution_scatter.svg",
+        "duration_per_dataset.png",
+        "duration_per_dataset.svg",
+        "frame_count_distribution.png",
+        "frame_count_distribution.svg"
+      ],
+      "exports": [
+        "resolution_distribution.csv",
+        "video_stats_summary.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 21.48,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:43:06.387675+00:00",
+    "notebook": "01_dataset_overview",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "wz78d5ia",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/wz78d5ia",
+    "files": {
+      "reports": [
+        "dataset_overview_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "missing_values.png",
+        "missing_values.svg",
+        "per_dataset_counts.png",
+        "per_dataset_counts.svg"
+      ],
+      "exports": [
+        "column_completeness.csv",
+        "dataset_summary.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 16.37,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:43:45.829727+00:00",
+    "notebook": "02_class_distribution",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "ymshgy3e",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/ymshgy3e",
+    "files": {
+      "reports": [
+        "class_distribution_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "primary_label_distribution.png",
+        "primary_label_distribution.svg",
+        "weather_distribution.png",
+        "weather_distribution.svg",
+        "day_time_distribution.png",
+        "day_time_distribution.svg",
+        "scene_layout_distribution.png",
+        "scene_layout_distribution.svg",
+        "quality_distribution.png",
+        "quality_distribution.svg",
+        "primary_label_per_dataset.png",
+        "primary_label_per_dataset.svg"
+      ],
+      "exports": [
+        "class_distribution.csv",
+        "secondary_label_distributions.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 20.06,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:44:29.560102+00:00",
+    "notebook": "04_annotation_quality",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "fq3ryqwn",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/fq3ryqwn",
+    "files": {
+      "reports": [
+        "annotation_quality_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "quality_distribution.png",
+        "quality_distribution.svg",
+        "bbox_center_heatmap.png",
+        "bbox_center_heatmap.svg",
+        "bbox_area_aspect_ratio.png",
+        "bbox_area_aspect_ratio.svg",
+        "quality_score_breakdown.png",
+        "quality_score_breakdown.svg"
+      ],
+      "exports": [
+        "quality_distribution.csv",
+        "bbox_statistics.csv",
+        "quality_score.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 20.78,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-01T16:45:12.181459+00:00",
+    "notebook": "06_final_eda_summary",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "us8n0ygz",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/us8n0ygz",
+    "files": {
+      "reports": [
+        "final_eda_summary_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "summary_overview.png",
+        "summary_overview.svg",
+        "class_and_media.png",
+        "class_and_media.svg"
+      ],
+      "exports": [
+        "eda_summary_statistics.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 18.74,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  },
+  {
+    "timestamp": "2026-08-03T08:46:54.677381+00:00",
+    "notebook": "01_dataset_overview",
+    "eda_version": "1.0.0",
+    "dataset_version": "unknown",
+    "metadata_hash": "sha256:a761cf7228fb39da4ebb18fc1645dcf604229f53a651c8f0eb858d5575f7213a",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": "u8drhrk5",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/u8drhrk5",
+    "files": {
+      "reports": [
+        "dataset_overview_report.md",
+        "summary.json"
+      ],
+      "figures": [
+        "missing_values.png",
+        "missing_values.svg",
+        "per_dataset_counts.png",
+        "per_dataset_counts.svg"
+      ],
+      "exports": [
+        "column_completeness.csv",
+        "dataset_summary.csv"
+      ]
+    },
+    "execution": {
+      "duration_seconds": 55.0,
+      "status": "success",
+      "rows_analyzed": 5338
+    }
+  }
+]
