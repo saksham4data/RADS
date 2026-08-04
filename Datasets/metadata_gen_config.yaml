@@ -1,0 +1,94 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Metadata Generation Pipeline (Pipeline 0) — Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+# Single source of truth for all Pipeline 0 behavior.
+#
+# Usage:
+#   python run_metadata_gen.py --dataset tudat
+#   python run_metadata_gen.py --dataset kaggle --config my_config.yaml
+#
+# To run on a specific dataset, override the dataset/paths section via CLI:
+#   python run_metadata_gen.py --dataset tudat --raw-dir raw/tudat/Final_videos
+# ─────────────────────────────────────────────────────────────────────────────
+
+pipeline:
+  version: "1.0.0"
+
+dataset:
+  name: "tudat"       # tudat | kaggle | <future>
+  version: "1.0.0"
+
+paths:
+  # Root directory containing raw media files for this dataset.
+  # Override per dataset via CLI --raw-dir.
+  raw_dir: "raw/tudat/Final_videos"
+  # Where to write the generated metadata.csv.
+  # Convention: place it next to the raw files so Pipeline 1 can find it.
+  output_dir: "raw/tudat"
+
+media:
+  # "video" — use VideoAnalyzer (OpenCV VideoCapture)
+  # "image" — use ImageAnalyzer (OpenCV imread)
+  type: "video"
+
+  # File extensions scanned during discovery (lower-case, with dot).
+  # Only files matching these extensions are processed; all others are ignored.
+  video_extensions:
+    - ".mp4"
+    - ".avi"
+    - ".mkv"
+    - ".mov"
+    - ".wmv"
+
+  image_extensions:
+    - ".jpg"
+    - ".jpeg"
+    - ".png"
+    - ".bmp"
+    - ".tiff"
+    - ".webp"
+
+analysis:
+  # Attempt to decode the first frame to verify file integrity.
+  # Set to false only for very large datasets where speed matters more.
+  probe_video_integrity: true
+
+  # Number of frames sampled evenly across the video for scene classification.
+  # Higher = more accurate but slower. Recommended: 3–10.
+  scene_sample_frames: 5
+
+scene_classification:
+  # Master switch. Set to false to skip scene classification entirely
+  # and leave weather/day_time as NULL for all rows.
+  enabled: true
+
+  # Minimum confidence score [0.0, 1.0] required before a prediction is
+  # written. Predictions below this threshold are written as NULL.
+  # Tune this upward if you observe too many wrong classifications.
+  confidence_threshold: 0.40
+
+  # Mean pixel brightness (0–255, grayscale) below which a frame is
+  # classified as "night". Dashcam footage at night typically reads < 60.
+  night_brightness_threshold: 60.0
+
+  # Mean HSV saturation (0–255) threshold used in rain detection.
+  # Rainy frames tend to have lower colour saturation.
+  rain_saturation_threshold: 50.0
+
+  # Standard deviation of pixel intensity below which a frame is
+  # classified as "fog" (low contrast, uniform grey appearance).
+  fog_contrast_threshold: 30.0
+
+output:
+  # Name of the generated CSV file written to output_dir.
+  filename: "metadata.csv"
+
+  # Value written to the metadata_source column for every generated row.
+  # "auto_generated" means Pipeline 0 inferred the value via CV/heuristics.
+  # "folder_structure" would be set per-field by the adapter for labels
+  # derived from directory naming conventions.
+  metadata_source: "auto_generated"
+
+logging:
+  console_level: "INFO"   # DEBUG | INFO | WARNING | ERROR | CRITICAL
+  file_level: "DEBUG"     # Written to output_dir/metadata_gen.log

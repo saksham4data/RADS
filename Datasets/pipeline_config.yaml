@@ -1,0 +1,77 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Picek Dataset Preprocessing Pipeline — Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+# This file is the single source of truth for all pipeline behavior.
+# Override via CLI:  python run_picek.py --config my_config.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+pipeline:
+  version: "2.0.0"
+
+dataset:
+  name: "picek"
+  version: "1.0.0"
+
+paths:
+  raw_dir: "raw/picekl"
+  output_dir: "processed/picek"
+
+processing:
+  # reference: store path back to raw/ (0 disk cost, default)
+  # copy:      copy files into processed/ (self-contained, ~20 GB)
+  # symlink:   create symbolic links (0 disk cost, requires admin on Windows)
+  video_mode: "reference"
+
+  compute_hashes: true              # SHA-256 for dedup + integrity
+  hash_algorithm: "sha256"          # sha256 | md5
+  detect_duplicates: true           # flag duplicate videos by hash
+  probe_video_integrity: true       # OpenCV first-frame decode test
+  extract_fps: true                 # read FPS from video via OpenCV
+
+validation:
+  validate_metadata: true
+  bbox_max_value: 1.5               # allow slight bbox overshoot
+  required_fields:
+    - "type"
+    - "accident_time"
+    - "accident_frame"
+    - "no_frames"
+    - "duration"
+    - "height"
+    - "width"
+
+splits:
+  generate_standardized: true
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42                          # deterministic split assignment
+
+logging:
+  console_level: "INFO"             # DEBUG | INFO | WARNING | ERROR
+  file_level: "DEBUG"
+
+aggregation:
+  datasets:
+    - name: "picek"
+      raw_dir: "raw/picekl"
+      processed_dir: "processed/picek"
+    - name: "tudat"
+      raw_dir: "raw/tudat"
+    - name: "kaggle_images"
+      raw_dir: "raw/kaggle_images"
+  required_columns:
+    - "original_path"
+    - "dataset_name"
+  optional_columns:
+    - "type"
+    - "accident_time"
+    - "accident_frame"
+    - "no_frames"
+    - "duration"
+    - "height"
+    - "width"
+    - "video_id"
+  composite_dedupe_keys:
+    - "dataset_name"
+    - "original_path"
