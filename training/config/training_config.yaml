@@ -1,0 +1,92 @@
+# ─────────────────────────────────────────────────────────────
+# RADS Training Module — Configuration
+# ─────────────────────────────────────────────────────────────
+# Central configuration for all training scripts and notebooks.
+# Modify this file to change model, data, hyperparameters,
+# W&B settings, and output preferences without touching code.
+#
+# Pattern: mirrors eda/config/eda_config.yaml
+# ─────────────────────────────────────────────────────────────
+
+project:
+  name: "RADS"
+  training_version: "1.0.0"
+
+# ── Data ────────────────────────────────────────────────────
+data:
+  metadata_path: "Datasets/processed/global_master_metadata.csv"
+  dataset_name: "tudat"                  # tudat | picek | kaggle_images | <future>
+  raw_base_dir: "Datasets/raw"
+  label_column: "type"
+  split_column: "split_in_distribution"  # Column to read splits from
+  class_mapping: null                    # null = auto-detect from data
+                                         # explicit: {"accident": 0, "non-accident": 1}
+  split_ratios:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+
+  frame_sampling:
+    strategy: "uniform"                  # uniform | random | first | middle
+    frames_per_video: 5                  # Configurable — default 5
+
+  image_size: [224, 224]
+
+# ── Model ───────────────────────────────────────────────────
+model:
+  name: "resnet18"                       # resnet18 | efficientnet_b0
+  pretrained: true
+  num_classes: 3                         # Updated by class_mapping / auto-detection
+  freeze_backbone: false
+
+# ── Training ────────────────────────────────────────────────
+training:
+  epochs: 1                              # Sanity check default
+  batch_size: 16
+  num_workers: 2
+  pin_memory: true
+  mixed_precision: false
+
+# ── Optimizer ───────────────────────────────────────────────
+optimizer:
+  name: "adam"                           # adam | sgd | adamw
+  lr: 0.001
+  weight_decay: 0.0001
+
+# ── Scheduler ───────────────────────────────────────────────
+scheduler:
+  name: "step_lr"                        # step_lr | cosine | none
+  step_size: 5
+  gamma: 0.1
+
+# ── Checkpoint ──────────────────────────────────────────────
+checkpoint:
+  save_best: true
+  save_last: true
+  monitor_metric: "val_loss"
+  mode: "min"                            # min | max
+
+# ── Early Stopping ──────────────────────────────────────────
+early_stopping:
+  enabled: false                         # Disabled for sanity checks
+  patience: 5
+  min_delta: 0.001
+
+# ── W&B ─────────────────────────────────────────────────────
+wandb:
+  project: "RADS"
+  entity: null                           # auto-detect from WANDB_API_KEY
+  job_type: "training"
+  group: "baseline-classification"
+  tags: ["pipeline-4", "baseline", "resnet18", "tudat"]
+
+# ── Reproducibility ─────────────────────────────────────────
+reproducibility:
+  seed: 42
+
+# ── Output ──────────────────────────────────────────────────
+output:
+  timestamped: true
+  maintain_latest: true
+  track_run_history: true
+  generate_manifest: true

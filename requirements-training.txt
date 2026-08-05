@@ -1,0 +1,22 @@
+# ─────────────────────────────────────────────────────────────
+# Pipeline 4 — Training Infrastructure Dependencies
+# ─────────────────────────────────────────────────────────────
+# Install:  pip install -r requirements-training.txt
+#
+# NOTE: For GPU support, install PyTorch for your CUDA version
+#       BEFORE running this file.
+#       See https://pytorch.org/get-started/locally/
+#
+# This file is separate from requirements.txt to keep
+# Pipelines 0–3 and EDA dependencies untouched.
+# ─────────────────────────────────────────────────────────────
+
+# ──── Deep Learning Core ────
+torch>=2.0.0
+torchvision>=0.15.0
+
+# ──── Metrics & Evaluation ────
+scikit-learn>=1.3.0
+
+# ──── Progress Bars ────
+tqdm>=4.65.0
