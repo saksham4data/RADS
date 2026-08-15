@@ -12,15 +12,21 @@ project:
   name: "RADS"
   training_version: "1.0.0"
 
+experiment:
+  id: 06                            # E06 — expanded validation metrics
+  name: "E06 Expanded Metrics (accident-class F1 selection)"
+
 # ── Data ────────────────────────────────────────────────────
 data:
   metadata_path: "Datasets/processed/global_master_metadata.csv"
   dataset_name: "tudat"                  # tudat | picek | kaggle_images | <future>
   raw_base_dir: "Datasets/raw"
   label_column: "type"
+  label_mode: "binary"               # multiclass | binary
   split_column: "split_in_distribution"  # Column to read splits from
   class_mapping: null                    # null = auto-detect from data
-                                         # explicit: {"accident": 0, "non-accident": 1}
+                                         # explicit multiclass: {"accident": 0, "challenging": 1, "non-accident": 2}
+                                         # explicit binary: {"accident": 0, "non-accident": 1}
   split_ratios:
     train: 0.70
     val: 0.15
@@ -28,23 +34,47 @@ data:
 
   frame_sampling:
     strategy: "uniform"                  # uniform | random | first | middle
-    frames_per_video: 5                  # Configurable — default 5
+    frames_per_video: 8                  # Configurable — default 5
 
   image_size: [224, 224]
+
+  augmentation:
+    enabled: true
+    preset: "conservative_v1"         # none | conservative_v1 | custom
+    horizontal_flip:
+      enabled: true
+      p: 0.5
+    rotation:
+      enabled: true
+      degrees: 5
+    brightness_contrast:
+      enabled: true
+      brightness: 0.15
+      contrast: 0.15
+    saturation:
+      enabled: false
+      value: 0.0
+    hue:
+      enabled: false
+      value: 0.0
+    gaussian_blur:
+      enabled: false
+      kernel_size: 3
+      sigma: [0.1, 0.5]
 
 # ── Model ───────────────────────────────────────────────────
 model:
   name: "resnet18"                       # resnet18 | efficientnet_b0
   pretrained: true
-  num_classes: 3                         # Updated by class_mapping / auto-detection
+  num_classes: 2                         # Fallback only; resolved from label_mode / class_mapping at runtime
   freeze_backbone: false
 
 # ── Training ────────────────────────────────────────────────
 training:
-  epochs: 1                              # Sanity check default
-  batch_size: 16
-  num_workers: 2
-  pin_memory: true
+  epochs: 50                         # Sanity check default: 1
+  batch_size: 32
+  num_workers: 0
+  pin_memory: false                       # True for GPU
   mixed_precision: false
 
 # ── Optimizer ───────────────────────────────────────────────
@@ -63,14 +93,15 @@ scheduler:
 checkpoint:
   save_best: true
   save_last: true
-  monitor_metric: "val_loss"
-  mode: "min"                            # min | max
+  monitor_metric: "val/f1_accident"  # E06: select best.pt by accident-class F1
+  mode: "max"                        # higher F1 is better
 
 # ── Early Stopping ──────────────────────────────────────────
 early_stopping:
-  enabled: false                         # Disabled for sanity checks
+  enabled: true                         # Keep Disabled for sanity checks
   patience: 5
   min_delta: 0.001
+  mode: "max"                           # E06: monitors val/f1_accident (higher is better)
 
 # ── W&B ─────────────────────────────────────────────────────
 wandb:
@@ -78,7 +109,7 @@ wandb:
   entity: null                           # auto-detect from WANDB_API_KEY
   job_type: "training"
   group: "baseline-classification"
-  tags: ["pipeline-4", "baseline", "resnet18", "tudat"]
+  tags: ["pipeline-5", "baseline-Training", "binary-training", "resnet18", "tudat", "experiment-06", "e06-metrics"]
 
 # ── Reproducibility ─────────────────────────────────────────
 reproducibility:

@@ -129,6 +129,13 @@ class VideoFrameDataset(Dataset):
         )
         return filtered
 
+    def _normalize_label(self, raw_label: Any) -> str:
+        """Map raw dataset labels into the configured label space."""
+        label = str(raw_label).strip()
+        if self.config.label_mode == "binary" and label == "challenging":
+            return "accident"
+        return label
+
     def _assign_or_filter_split(self, df: pd.DataFrame) -> pd.DataFrame:
         """Filter by split column, or generate splits if absent.
 
@@ -188,7 +195,7 @@ class VideoFrameDataset(Dataset):
 
         # First split: train vs (val + test)
         val_test_ratio = ratios["val"] + ratios["test"]
-        labels = df[label_col].astype(str)
+        labels = df[label_col].map(self._normalize_label)
 
         # Handle classes with very few samples
         class_counts = labels.value_counts()
@@ -220,7 +227,7 @@ class VideoFrameDataset(Dataset):
         # Second split: val vs test
         if ratios["test"] > 0 and len(val_test_df) > 1:
             test_fraction = ratios["test"] / val_test_ratio
-            vt_labels = val_test_df[label_col].astype(str)
+            vt_labels = val_test_df[label_col].map(self._normalize_label)
             try:
                 val_df, test_df = train_test_split(
                     val_test_df,
@@ -259,7 +266,10 @@ class VideoFrameDataset(Dataset):
         """Auto-detect class mapping from label column values."""
         label_col = self.config.label_column
         unique_labels = sorted(
-            df[label_col].dropna().astype(str).unique().tolist()
+            {
+                self._normalize_label(label)
+                for label in df[label_col].dropna().tolist()
+            }
         )
         mapping = {label: idx for idx, label in enumerate(unique_labels)}
         logger.info("Auto-detected class mapping: %s", mapping)
@@ -303,7 +313,7 @@ class VideoFrameDataset(Dataset):
                 continue
 
             # ── Get label ──
-            label_str = str(row[label_col])
+            label_str = self._normalize_label(row[label_col])
             if label_str not in self._class_mapping:
                 logger.warning(
                     "Unknown label '%s' in row %d, skipping.",

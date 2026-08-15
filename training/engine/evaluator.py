@@ -145,6 +145,8 @@ class Evaluator:
                 predictions=tracker.predictions,
                 targets=tracker.targets,
                 confidences=all_confidences,
+                class_names=self.class_names,
+                label_mode=getattr(output_manager.config, "label_mode", None),
                 name=f"{split_name}_predictions",
             )
 

@@ -223,9 +223,19 @@ class Trainer:
 
             # ── Early stopping ──
             if self.early_stopping:
-                if self.early_stopping.step(val_loss):
+                # Use the same metric as checkpoint selection when available;
+                # fall back to val_loss so behaviour is identical to before
+                # if the metric has not yet been computed.
+                es_metric_key = (
+                    self.checkpoint_manager.monitor_metric
+                    if self.checkpoint_manager is not None
+                    else "val_loss"
+                )
+                es_value = ckpt_metrics.get(es_metric_key, val_loss)
+                if self.early_stopping.step(es_value):
                     logger.info(
-                        "Early stopping triggered at epoch %d", epoch + 1,
+                        "Early stopping triggered at epoch %d (monitor=%s, value=%.4f)",
+                        epoch + 1, es_metric_key, es_value,
                     )
                     break
 
@@ -343,8 +353,10 @@ class Trainer:
             running_loss += loss.item()
             num_batches += 1
 
+            # Softmax probabilities for AUROC
+            probs = torch.softmax(logits, dim=1)
             preds = logits.argmax(dim=1)
-            metrics_tracker.update(preds, labels)
+            metrics_tracker.update(preds, labels, confidences=probs)
 
             pbar.set_postfix({"loss": f"{loss.item():.4f}"})
 

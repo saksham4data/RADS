@@ -159,6 +159,23 @@ class CheckpointManager:
         logger.info("Checkpoint loaded: %s (epoch %d)", path.name, state["epoch"] + 1)
         return state
 
+    @staticmethod
+    def describe(path: Path, state: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Return metadata describing a loaded checkpoint."""
+        checkpoint_path = path.resolve()
+        checkpoint_state = state if state is not None else CheckpointManager.load(path)
+
+        metadata: Dict[str, Any] = {
+            "path": str(checkpoint_path),
+        }
+        epoch = checkpoint_state.get("epoch")
+        if isinstance(epoch, int):
+            metadata["training_epoch"] = epoch + 1
+        metrics = checkpoint_state.get("metrics")
+        if isinstance(metrics, dict) and metrics:
+            metadata["training_metrics"] = metrics
+        return metadata
+
     def resume_from(
         self,
         path: Path,

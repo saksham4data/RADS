@@ -159,12 +159,7 @@ def main() -> None:
     model = model.to(device)
     model.eval()
 
-    # Get class names from config
-    class_mapping = config.class_mapping
-    if class_mapping:
-        class_names = sorted(class_mapping, key=class_mapping.get)  # type: ignore[arg-type]
-    else:
-        class_names = ["accident", "challenging", "non-accident"]
+    class_names = config.resolved_class_names
 
     transform = get_val_transforms(config.image_size)
 

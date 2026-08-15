@@ -102,13 +102,13 @@ class TrainingLogger:
     def __init__(
         self,
         config: TrainingConfig,
-        run_name: str,
+        run_name: Optional[str] = None,
         *,
         console_level: int = logging.INFO,
         file_level: int = logging.DEBUG,
     ) -> None:
         self.config = config
-        self.run_name = run_name
+        self.run_name = run_name or config.experiment_name
         self.start_time = datetime.now(timezone.utc)
         self._timestamp_str = self.start_time.strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -299,7 +299,7 @@ class TrainingLogger:
     def setup(
         cls,
         config: TrainingConfig,
-        run_name: str,
+        run_name: Optional[str] = None,
         **kwargs: Any,
     ) -> TrainingLogger:
         """Create (or replace) the singleton TrainingLogger."""
