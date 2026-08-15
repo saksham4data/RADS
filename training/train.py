@@ -59,16 +59,15 @@ def main() -> None:
 
     # ── 4. Logger ──
     from training.utils.logger import TrainingLogger
-    run_name = f"{config.model_name}_{config.dataset_name}"
-    tlogger = TrainingLogger.setup(config, run_name=run_name)
+    tlogger = TrainingLogger.setup(config)
 
     # ── 5. Output Manager ──
     from training.utils.output_manager import TrainingOutputManager
-    output_mgr = TrainingOutputManager(config, run_name=run_name)
+    output_mgr = TrainingOutputManager(config, allow_checkpoint_writes=True)
 
     # ── 6. W&B ──
     from training.utils.wandb_manager import TrainingWandbManager
-    wb = TrainingWandbManager(config, run_name=run_name)
+    wb = TrainingWandbManager(config)
     wb.init(git_commit=TrainingLogger.get_git_commit())
 
     # ── 7. System Monitor ──
@@ -117,6 +116,7 @@ def main() -> None:
         early_stop = EarlyStopping(
             patience=es_cfg["patience"],
             min_delta=es_cfg.get("min_delta", 0.001),
+            mode=es_cfg.get("mode", "min"),
         )
 
     lr_monitor = LearningRateMonitor()
@@ -193,6 +193,10 @@ def main() -> None:
         best_metric=ckpt_mgr.best_value,
         best_epoch=ckpt_mgr.best_epoch,
         duration_seconds=duration,
+        extra_manifest={
+            "augmentation": config.augmentation_config,
+            "augmentation_notes": "Validation and test splits use deterministic transforms.",
+        },
     )
 
     wb.finish()

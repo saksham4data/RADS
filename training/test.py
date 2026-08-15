@@ -13,6 +13,7 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import time
 from pathlib import Path
 
 import torch
@@ -50,17 +51,19 @@ def main() -> None:
     config = load_training_config(args.config)
     set_global_seed(config.seed)
     device = get_device()
+    checkpoint_path = Path(args.checkpoint).resolve()
+    test_start = time.time()
 
-    tlogger = TrainingLogger.setup(config, run_name="test")
-    output_mgr = TrainingOutputManager(config, run_name="test")
+    tlogger = TrainingLogger.setup(config)
+    output_mgr = TrainingOutputManager(config, allow_checkpoint_writes=False)
 
     # Build model and load checkpoint
     model = create_model(config)
-    state = CheckpointManager.load(Path(args.checkpoint))
+    state = CheckpointManager.load(checkpoint_path)
     model.load_state_dict(state["model_state_dict"])
     tlogger.info(
         "Loaded checkpoint: %s (epoch %d)",
-        args.checkpoint, state["epoch"] + 1,
+        checkpoint_path, state["epoch"] + 1,
     )
 
     # Build test data loader
@@ -79,8 +82,11 @@ def main() -> None:
     )
 
     output_mgr.finalize(
-        total_epochs=state["epoch"] + 1,
+        duration_seconds=time.time() - test_start,
         status="test",
+        extra_manifest={
+            "checkpoint": CheckpointManager.describe(checkpoint_path, state),
+        },
     )
 
     tlogger.info("Test complete. Results at: %s", output_mgr.run_dir)

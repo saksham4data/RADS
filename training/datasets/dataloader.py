@@ -47,7 +47,7 @@ def create_dataloaders(
     train_dataset = VideoFrameDataset(
         config,
         split="train",
-        transform=get_train_transforms(image_size),
+        transform=get_train_transforms(image_size, aug_config=config.augmentation_config),
     )
     val_dataset = VideoFrameDataset(
         config,

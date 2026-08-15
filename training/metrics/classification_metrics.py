@@ -9,6 +9,9 @@ Accumulates predictions and targets per epoch and computes:
 - **Per-class Recall** — per-class recall
 - **Per-class F1** — per-class harmonic mean
 - **Macro F1** — unweighted mean across classes
+- **Balanced Accuracy** — macro-averaged recall across classes
+- **AUROC** — area under the ROC curve (requires confidences;
+  binary: single score; multiclass: macro-OvR)
 - **Confusion Matrix** — full N x N matrix
 
 Returns a flat dict suitable for ``wandb.log()``.
@@ -23,10 +26,12 @@ import numpy as np
 import torch
 from sklearn.metrics import (
     accuracy_score,
+    balanced_accuracy_score,
     confusion_matrix,
     f1_score,
     precision_score,
     recall_score,
+    roc_auc_score,
 )
 
 logger = logging.getLogger(__name__)
@@ -104,6 +109,13 @@ class MetricsTracker:
         dict[str, Any]
             Flat dict of metric name → value.  Suitable for
             ``wandb.log()`` or ``TrainingLogger``.
+
+        Notes
+        -----
+        AUROC is only included when confidence scores have been
+        supplied via ``update(..., confidences=...)``.  For binary
+        classification the standard positive-class score is used;
+        for multiclass the macro one-vs-rest AUROC is computed.
         """
         if len(self._all_preds) == 0:
             logger.warning("MetricsTracker.compute() called with no data.")
@@ -133,6 +145,9 @@ class MetricsTracker:
             targets, preds, labels=labels, average="macro", zero_division=0,
         )
 
+        # ── Balanced Accuracy ──
+        bal_acc = balanced_accuracy_score(targets, preds)
+
         # ── Confusion Matrix ──
         cm = confusion_matrix(targets, preds, labels=labels)
 
@@ -141,6 +156,7 @@ class MetricsTracker:
         metrics: Dict[str, Any] = {
             f"{p}/top1_accuracy": float(top1_acc),
             f"{p}/macro_f1": float(macro_f1),
+            f"{p}/balanced_accuracy": float(bal_acc),
         }
 
         for i, name in enumerate(self.class_names):
@@ -149,12 +165,32 @@ class MetricsTracker:
             metrics[f"{p}/recall_{safe_name}"] = float(per_recall[i])
             metrics[f"{p}/f1_{safe_name}"] = float(per_f1[i])
 
+        # ── AUROC (requires confidence scores) ──
+        if self._all_confidences:
+            probs = np.array(self._all_confidences)  # [N, C]
+            try:
+                if num_classes == 2:
+                    # Binary: use positive-class (index 0 = accident) probability
+                    auroc = roc_auc_score(targets, probs[:, 0])
+                else:
+                    # Multiclass: macro OvR
+                    auroc = roc_auc_score(
+                        targets, probs,
+                        multi_class="ovr",
+                        average="macro",
+                        labels=labels,
+                    )
+                metrics[f"{p}/auroc"] = float(auroc)
+            except ValueError as exc:
+                # e.g. only one class present in this split
+                logger.warning("AUROC could not be computed: %s", exc)
+
         # Confusion matrix as numpy (not logged to W&B directly — use log_confusion_matrix)
         metrics[f"{p}/confusion_matrix"] = cm
 
         logger.debug(
-            "%s metrics: top1_acc=%.4f macro_f1=%.4f",
-            p, top1_acc, macro_f1,
+            "%s metrics: top1_acc=%.4f macro_f1=%.4f bal_acc=%.4f",
+            p, top1_acc, macro_f1, bal_acc,
         )
 
         return metrics

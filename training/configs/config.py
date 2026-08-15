@@ -26,11 +26,16 @@ _DEFAULTS: Dict[str, Any] = {
         "name": "RADS",
         "training_version": "1.0.0",
     },
+    "experiment": {
+        "id": None,
+        "name": None,
+    },
     "data": {
         "metadata_path": "Datasets/processed/global_master_metadata.csv",
         "dataset_name": "tudat",
         "raw_base_dir": "Datasets/raw",
         "label_column": "type",
+        "label_mode": "multiclass",
         "split_column": "split_in_distribution",
         "class_mapping": None,
         "split_ratios": {
@@ -43,6 +48,16 @@ _DEFAULTS: Dict[str, Any] = {
             "frames_per_video": 5,
         },
         "image_size": [224, 224],
+        "augmentation": {
+            "enabled": False,
+            "preset": "none",
+            "horizontal_flip": {"enabled": True, "p": 0.5},
+            "rotation": {"enabled": True, "degrees": 5},
+            "brightness_contrast": {"enabled": True, "brightness": 0.15, "contrast": 0.15},
+            "saturation": {"enabled": False, "value": 0.0},
+            "hue": {"enabled": False, "value": 0.0},
+            "gaussian_blur": {"enabled": False, "kernel_size": 3, "sigma": [0.1, 0.5]},
+        },
     },
     "model": {
         "name": "resnet18",
@@ -163,6 +178,22 @@ class TrainingConfig:
     def training_version(self) -> str:
         return self._raw["project"]["training_version"]
 
+    # ── Experiment ──────────────────────────────────────────
+
+    @property
+    def experiment_id(self) -> str:
+        exp_id = self._raw.get("experiment", {}).get("id")
+        if exp_id:
+            return exp_id
+        return f"{self.model_name}_{self.dataset_name}"
+
+    @property
+    def experiment_name(self) -> str:
+        exp_name = self._raw.get("experiment", {}).get("name")
+        if exp_name:
+            return exp_name
+        return self.experiment_id
+
     # ── Data ────────────────────────────────────────────────
 
     @property
@@ -190,12 +221,39 @@ class TrainingConfig:
         return self._raw["data"]["label_column"]
 
     @property
+    def label_mode(self) -> str:
+        mode = str(self._raw["data"].get("label_mode", "multiclass")).lower()
+        if mode not in {"multiclass", "binary"}:
+            raise ValueError(
+                f"Unsupported label_mode '{mode}'. "
+                "Expected one of: ['multiclass', 'binary']"
+            )
+        return mode
+
+    @property
     def split_column(self) -> str:
         return self._raw["data"]["split_column"]
 
     @property
     def class_mapping(self) -> Optional[Dict[str, int]]:
         return self._raw["data"]["class_mapping"]
+
+    @property
+    def default_class_mapping(self) -> Dict[str, int]:
+        if self.label_mode == "binary":
+            return {"accident": 0, "non-accident": 1}
+        return {
+            "accident": 0,
+            "challenging": 1,
+            "non-accident": 2,
+        }
+
+    @property
+    def resolved_class_names(self) -> List[str]:
+        mapping = self.class_mapping or self.default_class_mapping
+        return [
+            label for label, _ in sorted(mapping.items(), key=lambda item: item[1])
+        ]
 
     @property
     def split_ratios(self) -> Dict[str, float]:
@@ -218,6 +276,14 @@ class TrainingConfig:
         size = self._raw["data"]["image_size"]
         return (size[0], size[1])
 
+    @property
+    def augmentation_config(self) -> Dict[str, Any]:
+        return self._raw["data"].get("augmentation", {})
+
+    @property
+    def augmentation_enabled(self) -> bool:
+        return self.augmentation_config.get("enabled", False)
+
     # ── Model ───────────────────────────────────────────────
 
     @property
@@ -230,7 +296,10 @@ class TrainingConfig:
 
     @property
     def num_classes(self) -> int:
-        return self._raw["model"]["num_classes"]
+        mapping = self.class_mapping
+        if mapping:
+            return len(set(mapping.values()))
+        return len(self.default_class_mapping)
 
     @property
     def freeze_backbone(self) -> bool:

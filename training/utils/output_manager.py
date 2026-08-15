@@ -41,12 +41,14 @@ class TrainingOutputManager:
     def __init__(
         self,
         config: TrainingConfig,
-        run_name: str,
+        run_name: Optional[str] = None,
         *,
+        allow_checkpoint_writes: bool = True,
         timestamp: Optional[datetime] = None,
     ) -> None:
         self.config = config
-        self.run_name = run_name
+        self.run_name = run_name or config.experiment_name
+        self.allow_checkpoint_writes = allow_checkpoint_writes
         self._ts = timestamp or datetime.now(timezone.utc)
         self._ts_str = self._ts.strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -66,12 +68,10 @@ class TrainingOutputManager:
         self._exported_logs: List[str] = []
 
         # Ensure directories exist
-        for d in (
-            self.checkpoints_dir,
-            self.metrics_dir,
-            self.predictions_dir,
-            self.logs_dir,
-        ):
+        dirs = [self.metrics_dir, self.predictions_dir, self.logs_dir]
+        if self.allow_checkpoint_writes:
+            dirs.insert(0, self.checkpoints_dir)
+        for d in dirs:
             d.mkdir(parents=True, exist_ok=True)
 
     # ── Save methods ────────────────────────────────────────
@@ -118,6 +118,8 @@ class TrainingOutputManager:
         predictions: List[int],
         targets: List[int],
         confidences: Optional[List[List[float]]] = None,
+        class_names: Optional[List[str]] = None,
+        label_mode: Optional[str] = None,
         name: str = "predictions",
     ) -> Path:
         """Save prediction results as JSON.
@@ -141,6 +143,10 @@ class TrainingOutputManager:
         }
         if confidences is not None:
             data["confidences"] = confidences
+        if class_names is not None:
+            data["class_names"] = class_names
+        if label_mode is not None:
+            data["label_mode"] = label_mode
         path.write_text(
             json.dumps(data, indent=2, default=str, ensure_ascii=False),
             encoding="utf-8",
@@ -186,10 +192,18 @@ class TrainingOutputManager:
         name : str
             Checkpoint name (e.g. ``"best"``, ``"last"``).
         """
+        if not self.allow_checkpoint_writes:
+            raise RuntimeError(
+                "Checkpoint writes are disabled for this output manager."
+            )
         return self.checkpoints_dir / f"{name}.pt"
 
     def register_checkpoint(self, filename: str) -> None:
         """Register a saved checkpoint file."""
+        if not self.allow_checkpoint_writes:
+            raise RuntimeError(
+                "Checkpoint registration is disabled for this output manager."
+            )
         self._exported_checkpoints.append(filename)
 
     # ── Manifest & History ──────────────────────────────────
@@ -200,14 +214,26 @@ class TrainingOutputManager:
         wandb_run_id: Optional[str] = None,
         wandb_run_url: Optional[str] = None,
         git_commit: Optional[str] = None,
-        total_epochs: int = 0,
+        total_epochs: Optional[int] = None,
         best_metric: Optional[float] = None,
         best_epoch: Optional[int] = None,
         duration_seconds: float = 0.0,
         status: str = "success",
+        extra_manifest: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Build the manifest dict for this run."""
-        return {
+        execution: Dict[str, Any] = {
+            "duration_seconds": round(duration_seconds, 2),
+            "status": status,
+        }
+        if total_epochs is not None:
+            execution["total_epochs"] = total_epochs
+        if best_metric is not None:
+            execution["best_metric"] = best_metric
+        if best_epoch is not None:
+            execution["best_epoch"] = best_epoch
+
+        manifest = {
             "timestamp": self._ts.isoformat(),
             "run_name": self.run_name,
             "training_version": self.config.training_version,
@@ -223,14 +249,11 @@ class TrainingOutputManager:
                 "predictions": self._exported_predictions,
                 "logs": self._exported_logs,
             },
-            "execution": {
-                "total_epochs": total_epochs,
-                "best_metric": best_metric,
-                "best_epoch": best_epoch,
-                "duration_seconds": round(duration_seconds, 2),
-                "status": status,
-            },
+            "execution": execution,
         }
+        if extra_manifest:
+            manifest.update(extra_manifest)
+        return manifest
 
     def _write_manifest(self, manifest: Dict[str, Any]) -> None:
         """Write manifest.json into the run directory."""
@@ -278,11 +301,12 @@ class TrainingOutputManager:
         wandb_run_id: Optional[str] = None,
         wandb_run_url: Optional[str] = None,
         git_commit: Optional[str] = None,
-        total_epochs: int = 0,
+        total_epochs: Optional[int] = None,
         best_metric: Optional[float] = None,
         best_epoch: Optional[int] = None,
         duration_seconds: float = 0.0,
         status: str = "success",
+        extra_manifest: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Write manifest, update latest, update run_history.
 
@@ -297,10 +321,11 @@ class TrainingOutputManager:
             best_epoch=best_epoch,
             duration_seconds=duration_seconds,
             status=status,
+            extra_manifest=extra_manifest,
         )
         if self.config.output.get("generate_manifest", True):
             self._write_manifest(manifest)
-        if self.config.output.get("maintain_latest", True):
+        if self.allow_checkpoint_writes and self.config.output.get("maintain_latest", True):
             self._update_latest()
         if self.config.output.get("track_run_history", True):
             self._update_run_history(manifest)

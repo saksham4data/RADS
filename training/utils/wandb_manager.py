@@ -26,6 +26,14 @@ import numpy as np
 from training.configs.config import TrainingConfig
 
 logger = logging.getLogger(__name__)
+# Ensure W&B warnings always reach stderr even when no training logger
+# is attached to this module's logger (which caused silent failures in E06).
+if not logger.handlers:
+    _fallback = logging.StreamHandler()
+    _fallback.setLevel(logging.WARNING)
+    _fallback.setFormatter(logging.Formatter("%(levelname)s [%(name)s] %(message)s"))
+    logger.addHandler(_fallback)
+    logger.propagate = True   # also reach root logger if configured
 
 # ── Safe W&B import ─────────────────────────────────────────
 _WANDB_AVAILABLE = False
@@ -57,10 +65,10 @@ class TrainingWandbManager:
     def __init__(
         self,
         config: TrainingConfig,
-        run_name: str,
+        run_name: Optional[str] = None,
     ) -> None:
         self.config = config
-        self.run_name = run_name
+        self.run_name = run_name or config.experiment_name
         self._run: Any = None
         self._enabled = _WANDB_AVAILABLE
 
@@ -77,11 +85,6 @@ class TrainingWandbManager:
             logger.warning("W&B is not available — running without tracking.")
             return None
 
-        # Auth
-        api_key = os.environ.get("WANDB_API_KEY")
-        if api_key:
-            wandb.login(key=api_key, relogin=False)
-
         # Build config
         run_config: Dict[str, Any] = {
             "training_version": self.config.training_version,
@@ -97,14 +100,23 @@ class TrainingWandbManager:
             "frames_per_video": self.config.frames_per_video,
             "seed": self.config.seed,
             "git_commit": git_commit,
+            "augmentation": self.config.augmentation_config,
         }
         if extra_config:
             run_config.update(extra_config)
 
         wb_cfg = self.config.wandb
-        tags = list(wb_cfg.get("tags", [])) + [self.run_name]
+        # W&B enforces a 64-character maximum on tag strings (wandb ≥ 0.18 / pydantic).
+        # Truncate run_name to avoid silent init failure when experiment names are long.
+        run_name_tag = self.run_name[:64] if self.run_name else ""
+        tags = list(wb_cfg.get("tags", [])) + [run_name_tag]
 
         try:
+            # Auth — inside try/except so auth errors are caught and logged
+            api_key = os.environ.get("WANDB_API_KEY")
+            if api_key:
+                wandb.login(key=api_key, relogin=False)
+
             self._run = wandb.init(
                 project=wb_cfg["project"],
                 entity=wb_cfg.get("entity"),
@@ -115,6 +127,17 @@ class TrainingWandbManager:
                 config=run_config,
                 reinit=True,
             )
+
+            # wandb 0.18+ may return a NoopRun if init silently fails
+            if self._run is None or getattr(self._run, "id", None) is None:
+                logger.warning(
+                    "W&B init returned an inactive run (NoopRun or None) — "
+                    "W&B logging disabled for this run."
+                )
+                self._enabled = False
+                self._run = None
+                return None
+
             logger.info(
                 "W&B run initialised: %s (ID: %s)",
                 self._run.name, self._run.id,
@@ -266,8 +289,12 @@ class TrainingWandbManager:
         if self._run is None:
             return
         try:
+            # Artifact names may only contain alphanumeric chars, dashes,
+            # underscores, and dots — sanitize run_name accordingly.
+            import re
+            safe_name = re.sub(r"[^\w.\-]", "-", self.run_name)[:128]
             artifact = wandb.Artifact(
-                name=f"model-{self.run_name}",
+                name=f"model-{safe_name}",
                 type="model",
                 description=f"Checkpoint from {self.run_name}",
                 metadata=metadata or {},
@@ -367,9 +394,15 @@ class TrainingWandbManager:
     @property
     def run_url(self) -> Optional[str]:
         """The W&B run URL, or None."""
-        return self._run.get_url() if self._run else None
+        if self._run is None:
+            return None
+        # run.url is the current API; get_url() is deprecated in 0.18+
+        url = getattr(self._run, "url", None)
+        if url is None and hasattr(self._run, "get_url"):
+            url = self._run.get_url()  # fallback for older SDK versions
+        return url
 
     @property
     def is_active(self) -> bool:
-        """True if a W&B run is active."""
-        return self._run is not None
+        """True if a real W&B run is active (not a NoopRun or None)."""
+        return self._run is not None and getattr(self._run, "id", None) is not None
