@@ -1,9 +1,11 @@
 # ─────────────────────────────────────────────────────────────
-# RADS Training Module — Configuration
+# RADS Training Module — Configuration (TUDAT v1 / E01–E06)
 # ─────────────────────────────────────────────────────────────
-# Central configuration for all training scripts and notebooks.
-# Modify this file to change model, data, hyperparameters,
-# W&B settings, and output preferences without touching code.
+# Central configuration for TUDAT v1 baseline experiments (E01–E06).
+# Points to the original 111-record metadata file.
+#
+# Usage:
+#     python training/train.py --config training/config/training_config_v1.yaml
 #
 # Pattern: mirrors eda/config/eda_config.yaml
 # ─────────────────────────────────────────────────────────────
@@ -106,7 +108,7 @@ early_stopping:
 # ── W&B ─────────────────────────────────────────────────────
 wandb:
   project: "RADS"
-  entity: null                           # auto-detect from WANDB_API_KEY
+  entity: null                           # auto-detect from WANDB_API_KEY / _netrc
   job_type: "training"
   group: "baseline-classification"
   tags: ["pipeline-5", "baseline-Training", "binary-training", "resnet18", "tudat", "experiment-06", "e06-metrics"]

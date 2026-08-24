@@ -26,6 +26,17 @@ from training.utils.wandb_manager import TrainingWandbManager
 logger = logging.getLogger(__name__)
 
 
+def _make_json_safe(value: Any) -> Any:
+    """Convert numpy-containing evaluator outputs into JSON-safe values."""
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, dict):
+        return {k: _make_json_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_make_json_safe(v) for v in value]
+    return value
+
+
 class Evaluator:
     """Standalone evaluation engine for classification models.
 
@@ -141,6 +152,10 @@ class Evaluator:
 
         # ── Save predictions ──
         if output_manager:
+            output_manager.save_metrics(
+                _make_json_safe(metrics),
+                name=f"{split_name}_metrics",
+            )
             output_manager.save_predictions(
                 predictions=tracker.predictions,
                 targets=tracker.targets,

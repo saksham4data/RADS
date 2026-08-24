@@ -1,0 +1,96 @@
+{
+  "dataset_name": "TUDAT",
+  "dataset_version": "2.0",
+  "source_version": "1.0.0",
+  "created_at": "2026-08-15T08:34:55.050316+00:00",
+  "created_by": "RADS pipeline - TUDAT v2 dataset creation",
+  "record_counts": {
+    "original_v1_records": 111,
+    "excluded_duplicate_records": 18,
+    "canonical_v2_records": 93,
+    "train": 65,
+    "val": 13,
+    "test": 15
+  },
+  "class_counts": {
+    "accident": 44,
+    "non-accident": 49
+  },
+  "split_class_counts": {
+    "train": {
+      "accident": 31,
+      "non-accident": 34
+    },
+    "val": {
+      "accident": 6,
+      "non-accident": 7
+    },
+    "test": {
+      "accident": 7,
+      "non-accident": 8
+    }
+  },
+  "split_generation": {
+    "method": "sklearn.model_selection.train_test_split",
+    "seed": 42,
+    "stratified": true,
+    "split_frozen": true,
+    "split_column": "split_in_distribution"
+  },
+  "deduplication": {
+    "duplicate_groups_removed": 18,
+    "label_conflicts": 0,
+    "cross_split_duplicate_leakage": 0,
+    "excluded_records": [
+      "challenging-environment/motorbike2.mov",
+      "challenging-environment/motorbike3.mov",
+      "challenging-environment/motorbike4.mov",
+      "challenging-environment/motorbike5.mov",
+      "challenging-environment/v29.mov",
+      "challenging-environment/v30.mov",
+      "challenging-environment/v31.mov",
+      "challenging-environment/v32.mov",
+      "challenging-environment/v33.mov",
+      "challenging-environment/v34.mov",
+      "challenging-environment/v35.mov",
+      "challenging-environment/v36.mov",
+      "challenging-environment/v37.mov",
+      "challenging-environment/v38.mov",
+      "challenging-environment/v39.mov",
+      "challenging-environment/v40.mov",
+      "challenging-environment/wrong_way2.mov",
+      "Negative_Videos/v4(1).mov"
+    ],
+    "canonical_replacements": {
+      "challenging-environment/motorbike2.mov": "Positive_Vidoes/v44.mov",
+      "challenging-environment/motorbike3.mov": "Positive_Vidoes/v45.mov",
+      "challenging-environment/motorbike4.mov": "Positive_Vidoes/v46.mov",
+      "challenging-environment/motorbike5.mov": "Positive_Vidoes/v47.mov",
+      "challenging-environment/v29.mov": "Positive_Vidoes/v29.mov",
+      "challenging-environment/v30.mov": "Positive_Vidoes/v30.mov",
+      "challenging-environment/v31.mov": "Positive_Vidoes/v31.mov",
+      "challenging-environment/v32.mov": "Positive_Vidoes/v32.mov",
+      "challenging-environment/v33.mov": "Positive_Vidoes/v33.mov",
+      "challenging-environment/v34.mov": "Positive_Vidoes/v34.mov",
+      "challenging-environment/v35.mov": "Positive_Vidoes/v35.mov",
+      "challenging-environment/v36.mov": "Positive_Vidoes/v36.mov",
+      "challenging-environment/v37.mov": "Positive_Vidoes/v37.mov",
+      "challenging-environment/v38.mov": "Positive_Vidoes/v38.mov",
+      "challenging-environment/v39.mov": "Positive_Vidoes/v39.mov",
+      "challenging-environment/v40.mov": "Positive_Vidoes/v40.mov",
+      "challenging-environment/wrong_way2.mov": "Positive_Vidoes/v42.mov",
+      "Negative_Videos/v4(1).mov": "Negative_Videos/v4.mov"
+    }
+  },
+  "files": {
+    "metadata_csv": "Datasets/processed/tudat/v2/global_master_metadata_v2.csv",
+    "manifest_json": "Datasets/processed/tudat/v2/tudat_v2_manifest.json",
+    "integrity_report": "Datasets/processed/tudat/v2/tudat_v2_integrity_report.md",
+    "raw_video_base": "Datasets/raw/tudat/Final_videos"
+  },
+  "backward_compatibility": {
+    "v1_metadata_preserved": "Datasets/processed/global_master_metadata.csv",
+    "e01_e06_unaffected": true,
+    "raw_videos_deleted": false
+  }
+}

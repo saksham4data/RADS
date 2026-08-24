@@ -47,6 +47,7 @@ def main() -> None:
     from training.callbacks.checkpoint import CheckpointManager
     from training.datasets.dataloader import create_test_dataloader
     from training.engine.evaluator import Evaluator
+    from training.utils.experiment_report import generate_experiment_report
 
     config = load_training_config(args.config)
     set_global_seed(config.seed)
@@ -88,6 +89,7 @@ def main() -> None:
             "checkpoint": CheckpointManager.describe(checkpoint_path, state),
         },
     )
+    generate_experiment_report(output_mgr.run_dir, config=config)
 
     tlogger.info("Test complete. Results at: %s", output_mgr.run_dir)
 

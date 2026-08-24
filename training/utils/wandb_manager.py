@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import logging
 import os
+import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -153,8 +154,31 @@ class TrainingWandbManager:
         """Finish the active W&B run."""
         if self._run is not None:
             try:
-                self._run.finish()
-                logger.info("W&B run finished: %s", self._run.id)
+                run_id = self._run.id
+                finish_error: list[Exception] = []
+
+                def _finish_run() -> None:
+                    try:
+                        self._run.finish()
+                    except Exception as exc:
+                        finish_error.append(exc)
+
+                thread = threading.Thread(
+                    target=_finish_run,
+                    name="wandb-finish",
+                    daemon=True,
+                )
+                thread.start()
+                thread.join(timeout=30.0)
+
+                if thread.is_alive():
+                    logger.warning(
+                        "W&B finish timed out after 30s; continuing without waiting for background upload to complete."
+                    )
+                elif finish_error:
+                    logger.warning("Error finishing W&B run: %s", finish_error[0])
+                else:
+                    logger.info("W&B run finished: %s", run_id)
             except Exception as exc:
                 logger.warning("Error finishing W&B run: %s", exc)
             self._run = None
@@ -289,6 +313,14 @@ class TrainingWandbManager:
         if self._run is None:
             return
         try:
+            file_size_mb = checkpoint_path.stat().st_size / (1024 * 1024)
+            if file_size_mb > 100:
+                logger.warning(
+                    "Skipping W&B checkpoint artifact upload for %s (%.1f MB); large uploads can block process shutdown.",
+                    checkpoint_path.name,
+                    file_size_mb,
+                )
+                return
             # Artifact names may only contain alphanumeric chars, dashes,
             # underscores, and dots — sanitize run_name accordingly.
             import re

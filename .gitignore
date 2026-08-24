@@ -88,6 +88,14 @@ Datasets/processed/*
 # Keep README if present
 !Datasets/processed/README.md
 
+# ── TUDAT v2 dataset definition (version-controlled) ──
+# These are dataset-definition files (not large data), and must be tracked.
+!Datasets/processed/tudat/
+!Datasets/processed/tudat/v2/
+!Datasets/processed/tudat/v2/global_master_metadata_v2.csv
+!Datasets/processed/tudat/v2/tudat_v2_manifest.json
+!Datasets/processed/tudat/v2/tudat_v2_integrity_report.md
+
 # ============================================================
 # Large Dataset Files
 # ============================================================

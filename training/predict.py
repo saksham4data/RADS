@@ -24,6 +24,12 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from training.datasets.video_sampling import (
+    compute_sample_indices,
+    probe_decodable_frame_count,
+    read_frame_with_fallback,
+)
+
 logger = logging.getLogger(__name__)
 
 
@@ -57,6 +63,7 @@ def predict_video(
     device: torch.device,
     class_names: List[str],
     frames_per_video: int = 5,
+    sampling_strategy: str = "uniform",
 ) -> Dict:
     """Run inference on a single video.
 
@@ -73,19 +80,20 @@ def predict_video(
     if not cap.isOpened():
         return {"video": str(video_path), "error": "Cannot open video"}
 
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    reported_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    total_frames = probe_decodable_frame_count(video_path, reported_frames)
     if total_frames <= 0:
         cap.release()
         return {"video": str(video_path), "error": "No frames in video"}
 
-    n = min(frames_per_video, total_frames)
-    indices = [int(i * (total_frames - 1) / max(n - 1, 1)) for i in range(n)]
+    indices = compute_sample_indices(
+        total_frames, frames_per_video, sampling_strategy,
+    )
 
     frames = []
     for idx in indices:
-        cap.set(cv2.CAP_PROP_POS_FRAMES, idx)
-        ret, frame = cap.read()
-        if ret and frame is not None:
+        frame = read_frame_with_fallback(video_path, idx)
+        if frame is not None:
             frames.append(frame)
     cap.release()
 
@@ -184,6 +192,7 @@ def main() -> None:
         result = predict_video(
             model, vf, transform, device, class_names,
             frames_per_video=config.frames_per_video,
+            sampling_strategy=config.sampling_strategy,
         )
         results.append(result)
         print(
