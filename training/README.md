@@ -25,7 +25,8 @@ python training/predict.py --checkpoint training/outputs/latest/checkpoints/best
 ```
 training/
 ├── config/                     # YAML configuration files
-│   └── training_config.yaml    # Central configuration
+│   ├── training_config_v1.yaml # TUDAT v1 baseline configuration (E01–E06)
+│   └── training_config_v2.yaml # TUDAT v2 deduplicated configuration (E07+)
 ├── configs/                    # Python config loader
 │   └── config.py               # TrainingConfig dataclass
 ├── datasets/                   # Data pipeline
@@ -75,7 +76,9 @@ training/
 
 ## Configuration
 
-All settings are controlled via `training/config/training_config.yaml`.
+Settings are controlled via YAML config files in `training/config/`:
+- `training/config/training_config_v1.yaml` (TUDAT v1, 111 records, baseline E01–E06)
+- `training/config/training_config_v2.yaml` (TUDAT v2, 93 canonical records, frozen split, E07+)
 Key options:
 
 | Section | Key | Default | Description |

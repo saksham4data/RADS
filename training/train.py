@@ -7,8 +7,8 @@ End-to-end training script for RADS classification models.
 
 Usage::
 
-    python training/train.py
-    python training/train.py --config training/config/training_config.yaml
+    python training/train.py --config training/config/training_config_v1.yaml
+    python training/train.py --config training/config/training_config_v2.yaml
     python training/train.py --resume training/outputs/latest/checkpoints/last.pt
 """
 
@@ -72,6 +72,7 @@ def main() -> None:
 
     # ── 7. System Monitor ──
     from training.utils.system_monitor import SystemMonitor
+    from training.utils.experiment_report import generate_experiment_report
     monitor = SystemMonitor()
     start_snap = monitor.snapshot("training_start")
     if wb.is_active:
@@ -198,6 +199,7 @@ def main() -> None:
             "augmentation_notes": "Validation and test splits use deterministic transforms.",
         },
     )
+    generate_experiment_report(output_mgr.run_dir, config=config)
 
     wb.finish()
     tlogger.info("All outputs saved to: %s", output_mgr.run_dir)

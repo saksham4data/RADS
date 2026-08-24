@@ -28,6 +28,14 @@ import torch
 from torch.utils.data import Dataset
 
 from training.configs.config import TrainingConfig
+from training.datasets.video_sampling import (
+    SAFE_MARGIN_FRAC,
+    compute_sample_indices,
+    probe_decodable_frame_count,
+    probe_reported_frame_count,
+    read_frame_with_fallback,
+    safe_range,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -323,11 +331,9 @@ class VideoFrameDataset(Dataset):
 
             label_idx = self._class_mapping[label_str]
 
-            # ── Probe total frames ──
+            # ── Probe decodable frame range ──
             total_frames = int(row.get("no_frames", 0))
-            if total_frames <= 0:
-                # Probe via OpenCV
-                total_frames = self._probe_frame_count(video_path)
+            total_frames = self._probe_frame_count(video_path, total_frames)
 
             if total_frames <= 0:
                 logger.warning(
@@ -350,14 +356,10 @@ class VideoFrameDataset(Dataset):
                 self._samples.append((vid_idx, fi))
 
     @staticmethod
-    def _probe_frame_count(video_path: Path) -> int:
-        """Probe the total frame count via OpenCV."""
-        cap = cv2.VideoCapture(str(video_path))
-        if not cap.isOpened():
-            return 0
-        count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        cap.release()
-        return count
+    def _probe_frame_count(video_path: Path, reported_frame_count: int = 0) -> int:
+        """Probe the actually decodable frame count for the video."""
+        upper_bound = reported_frame_count if reported_frame_count > 0 else probe_reported_frame_count(video_path)
+        return probe_decodable_frame_count(video_path, upper_bound)
 
     # Boundary margin: avoid the first/last 15% of frames in a video.
     # OpenCV cannot reliably decode frames near the end of many
@@ -365,7 +367,7 @@ class VideoFrameDataset(Dataset):
     # the actual decodable range).  Sampling within [15%, 85%] of
     # the total frame range eliminates virtually all seek/decode
     # failures while preserving good temporal coverage.
-    _SAFE_MARGIN_FRAC = 0.15
+    _SAFE_MARGIN_FRAC = SAFE_MARGIN_FRAC
 
     @staticmethod
     def _safe_range(total_frames: int) -> Tuple[int, int]:
@@ -374,10 +376,7 @@ class VideoFrameDataset(Dataset):
         For very short videos (< 20 frames) the margin is clamped to
         at most 1 frame on each side so we don't exclude too much.
         """
-        margin = max(1, int(total_frames * VideoFrameDataset._SAFE_MARGIN_FRAC))
-        lo = min(margin, total_frames - 1)          # at least frame 1
-        hi = max(lo + 1, total_frames - margin)     # at least one frame
-        return lo, hi
+        return safe_range(total_frames)
 
     @staticmethod
     def _compute_frame_indices(
@@ -403,33 +402,7 @@ class VideoFrameDataset(Dataset):
         to avoid the unreliable first/last frames in compressed .mov
         containers.  ``first`` and ``middle`` are left unchanged.
         """
-        n = min(frames_per_video, total_frames)
-
-        if strategy == "uniform":
-            lo, hi = VideoFrameDataset._safe_range(total_frames)
-            safe_count = hi - lo
-            if n == 1:
-                return [lo + safe_count // 2]
-            return [
-                lo + int(i * (safe_count - 1) / (n - 1))
-                for i in range(n)
-            ]
-        elif strategy == "random":
-            lo, hi = VideoFrameDataset._safe_range(total_frames)
-            safe_count = hi - lo
-            n = min(n, safe_count)
-            rng = np.random.default_rng()
-            return sorted(
-                (lo + rng.choice(safe_count, size=n, replace=False)).tolist()
-            )
-        elif strategy == "first":
-            return list(range(n))
-        elif strategy == "middle":
-            mid = total_frames // 2
-            start = max(0, mid - n // 2)
-            return list(range(start, min(start + n, total_frames)))
-        else:
-            raise ValueError(f"Unknown sampling strategy: '{strategy}'")
+        return compute_sample_indices(total_frames, frames_per_video, strategy)
 
     # ── Dataset interface ───────────────────────────────────
 
@@ -465,74 +438,8 @@ class VideoFrameDataset(Dataset):
 
     @staticmethod
     def _read_frame(video_path: Path, frame_idx: int) -> Optional[np.ndarray]:
-        """Read a specific frame from a video file using a robust fallback mechanism.
-
-        First attempts normal random seeking and verifies the reached position.
-        If the seek lands before the target, we fast-forward seek by calling grab()
-        on intermediate frames. If seeking fails completely, we fall back to
-        reopening the video and grab-seeking from the beginning.
-
-        Returns a BGR numpy array (OpenCV convention), or None if both fail.
-        """
-        cap = cv2.VideoCapture(str(video_path))
-        if not cap.isOpened():
-            logger.warning("Cannot open video for seeking: %s", video_path)
-            return None
-
-        # ── 1. Attempt random seeking ──
-        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
-        actual_idx = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
-
-        if actual_idx == frame_idx:
-            ret, frame = cap.read()
-            if ret and frame is not None:
-                cap.release()
-                return frame
-        elif 0 <= actual_idx < frame_idx:
-            # Fast sequential seek forward from actual_idx using grab()
-            seek_diff = frame_idx - actual_idx
-            success = True
-            for _ in range(seek_diff):
-                ret = cap.grab()
-                if not ret:
-                    success = False
-                    break
-            if success:
-                ret, frame = cap.read()
-                if ret and frame is not None:
-                    cap.release()
-                    return frame
-            
-            # If fast sequential seek forward failed, the video stream has ended.
-            # Do not fall back to 0 because it will fail at the same frame index.
-            cap.release()
-            return None
-
-        # Random seeking or position verification failed (actual_idx < 0 or actual_idx > frame_idx).
-        # Release and try sequential fallback from 0.
-        cap.release()
-
-        # ── 2. Sequential fallback from 0 using grab() ──
-        cap = cv2.VideoCapture(str(video_path))
-        if not cap.isOpened():
-            logger.warning("Cannot open video for sequential read: %s", video_path)
-            return None
-
-        success = True
-        for _ in range(frame_idx):
-            ret = cap.grab()
-            if not ret:
-                success = False
-                break
-
-        frame = None
-        if success:
-            ret, frame = cap.read()
-            if not ret:
-                frame = None
-
-        cap.release()
-        return frame
+        """Read a specific frame using the shared robust decoder."""
+        return read_frame_with_fallback(video_path, frame_idx)
 
     # ── Properties ──────────────────────────────────────────
 

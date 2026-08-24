@@ -2,7 +2,7 @@
 # Training Configuration Loader
 # ─────────────────────────────────────────────────────────────
 """
-Loads ``training_config.yaml`` and provides typed access to all
+Loads ``training_config_v1.yaml`` / ``training_config_v2.yaml`` and provides typed access to all
 configuration sections.  Includes sensible defaults so scripts
 and notebooks work even without a config file present.
 
@@ -457,8 +457,9 @@ def load_training_config(
     ----------
     config_path : str or Path, optional
         Explicit path to a YAML config file.  When *None* the
-        loader looks for ``training/config/training_config.yaml``
-        relative to the detected project root.
+        loader looks for ``training/config/training_config_v1.yaml``
+        (or ``training_config_v2.yaml``) relative to the detected
+        project root.
 
     Returns
     -------
@@ -471,9 +472,13 @@ def load_training_config(
     if config_path is not None:
         cfg_file = Path(config_path)
     else:
-        cfg_file = (
-            project_root / "training" / "config" / "training_config.yaml"
-        )
+        # Default priority: v2 → v1 (backward compatibility) → legacy
+        default_candidates = [
+            project_root / "training" / "config" / "training_config_v2.yaml",
+            project_root / "training" / "config" / "training_config_v1.yaml",
+            project_root / "training" / "config" / "training_config.yaml",
+        ]
+        cfg_file = next((p for p in default_candidates if p.is_file()), default_candidates[0])
 
     # Load YAML (if it exists)
     user_cfg: Dict[str, Any] = {}

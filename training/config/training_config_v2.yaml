@@ -1,0 +1,137 @@
+# ─────────────────────────────────────────────────────────────
+# RADS Training Module — Configuration (TUDAT v2 / E07+)
+# ─────────────────────────────────────────────────────────────
+# Central configuration for TUDAT v2 experiments (E07+).
+# Points to the clean, deduplicated 93-record canonical dataset
+# with frozen train / val / test splits.
+#
+# Usage:
+#     python training/train.py --config training/config/training_config_v2.yaml
+#
+# Changes from v1 (training_config_v1.yaml):
+#   - experiment.id: 07
+#   - experiment.name: "E07 TUDAT v2 Deduplicated (93 canonical records, frozen split)"
+#   - data.metadata_path: "Datasets/processed/tudat/v2/global_master_metadata_v2.csv"
+#   - wandb.tags: updated to reflect v2 and E07
+#
+# UNCHANGED from v1:
+#   - model, optimizer, scheduler, training, checkpoint,
+#     early_stopping, augmentation, frame_sampling, seed,
+#     output settings — all identical to v1 for fair comparison.
+# ─────────────────────────────────────────────────────────────
+
+project:
+  name: "RADS"
+  training_version: "1.0.0"
+
+experiment:
+  id: 07
+  name: "E07 TUDAT v2 Deduplicated (93 canonical records, frozen split)"
+
+# ── Data ────────────────────────────────────────────────────
+data:
+  # TUDAT v2: 93 canonical records, 18 duplicates removed, frozen split
+  metadata_path: "Datasets/processed/tudat/v2/global_master_metadata_v2.csv"
+  dataset_name: "tudat"                  # tudat | picek | kaggle_images | <future>
+  raw_base_dir: "Datasets/raw"
+  label_column: "type"
+  label_mode: "binary"               # multiclass | binary
+  split_column: "split_in_distribution"  # Frozen split: populated in v2 metadata
+  class_mapping: null                    # null = auto-detect from data
+                                         # explicit binary: {"accident": 0, "non-accident": 1}
+  split_ratios:
+    # These ratios are ignored when split_column values are present in the metadata.
+    # Listed here only as a fallback safeguard (should never be used for v2).
+    train: 0.70
+    val: 0.14
+    test: 0.16
+
+  frame_sampling:
+    strategy: "uniform"                  # uniform | random | first | middle
+    frames_per_video: 8
+
+  image_size: [224, 224]
+
+  augmentation:
+    enabled: true
+    preset: "conservative_v1"         # none | conservative_v1 | custom
+    horizontal_flip:
+      enabled: true
+      p: 0.5
+    rotation:
+      enabled: true
+      degrees: 5
+    brightness_contrast:
+      enabled: true
+      brightness: 0.15
+      contrast: 0.15
+    saturation:
+      enabled: false
+      value: 0.0
+    hue:
+      enabled: false
+      value: 0.0
+    gaussian_blur:
+      enabled: false
+      kernel_size: 3
+      sigma: [0.1, 0.5]
+
+# ── Model ───────────────────────────────────────────────────
+model:
+  name: "resnet18"                       # resnet18 | efficientnet_b0
+  pretrained: true
+  num_classes: 2                         # Fallback only; resolved from label_mode / class_mapping at runtime
+  freeze_backbone: false
+
+# ── Training ────────────────────────────────────────────────
+training:
+  epochs: 50
+  batch_size: 32
+  num_workers: 0
+  pin_memory: false                       # True for GPU
+  mixed_precision: false
+
+# ── Optimizer ───────────────────────────────────────────────
+optimizer:
+  name: "adam"                           # adam | sgd | adamw
+  lr: 0.001
+  weight_decay: 0.0001
+
+# ── Scheduler ───────────────────────────────────────────────
+scheduler:
+  name: "step_lr"                        # step_lr | cosine | none
+  step_size: 5
+  gamma: 0.1
+
+# ── Checkpoint ──────────────────────────────────────────────
+checkpoint:
+  save_best: true
+  save_last: true
+  monitor_metric: "val/f1_accident"  # select best.pt by accident-class F1
+  mode: "max"                        # higher F1 is better
+
+# ── Early Stopping ──────────────────────────────────────────
+early_stopping:
+  enabled: true
+  patience: 5
+  min_delta: 0.001
+  mode: "max"                           # monitors val/f1_accident (higher is better)
+
+# ── W&B ─────────────────────────────────────────────────────
+wandb:
+  project: "RADS"
+  entity: null                           # auto-detect from WANDB_API_KEY / _netrc
+  job_type: "training"
+  group: "baseline-classification"
+  tags: ["pipeline-5", "baseline-Training", "binary-training", "resnet18", "tudat", "tudat-v2", "experiment-07", "e07-dedup"]
+
+# ── Reproducibility ─────────────────────────────────────────
+reproducibility:
+  seed: 42
+
+# ── Output ──────────────────────────────────────────────────
+output:
+  timestamped: true
+  maintain_latest: true
+  track_run_history: true
+  generate_manifest: true
