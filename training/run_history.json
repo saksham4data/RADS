@@ -855,5 +855,179 @@
         "val/auroc": 0.7615327380952381
       }
     }
+  },
+  {
+    "timestamp": "2026-08-24T20:12:10.119156+00:00",
+    "run_name": "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)",
+    "training_version": "1.0.0",
+    "model": "resnet18",
+    "dataset": "tudat",
+    "git_commit": "fe1a7f22bc27cac2c430d7f07ae3facd9c09778c",
+    "seed": 42,
+    "wandb_run_id": "q8o10v54",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q8o10v54",
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "training_history.json"
+      ],
+      "predictions": [],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 3442.91,
+      "status": "success",
+      "total_epochs": 6,
+      "best_metric": 0.631578947368421,
+      "best_epoch": 0
+    },
+    "augmentation": {
+      "enabled": true,
+      "preset": "conservative_v1",
+      "horizontal_flip": {
+        "enabled": true,
+        "p": 0.5
+      },
+      "rotation": {
+        "enabled": true,
+        "degrees": 5
+      },
+      "brightness_contrast": {
+        "enabled": true,
+        "brightness": 0.15,
+        "contrast": 0.15
+      },
+      "saturation": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "hue": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "gaussian_blur": {
+        "enabled": false,
+        "kernel_size": 3,
+        "sigma": [
+          0.1,
+          0.5
+        ]
+      }
+    },
+    "augmentation_notes": "Validation and test splits use deterministic transforms."
+  },
+  {
+    "timestamp": "2026-08-25T20:25:45.162486+00:00",
+    "run_name": "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_temporal.yaml",
+    "model": "resnet18",
+    "dataset": "tudat",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 414.7,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-24_20-12-10\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 2.099315643310547,
+        "val/top1_accuracy": 0.46153846153846156,
+        "val/macro_f1": 0.3157894736842105,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_accident": 0.46153846153846156,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.631578947368421,
+        "val/precision_non_accident": 0.0,
+        "val/recall_non_accident": 0.0,
+        "val/f1_non_accident": 0.0,
+        "val/auroc": 0.8333333333333334
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-24_20-12-10",
+      "source_timestamp": "2026-08-24T20:12:10.119156+00:00",
+      "source_wandb_run_id": "q8o10v54",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q8o10v54",
+      "source_git_commit": "fe1a7f22bc27cac2c430d7f07ae3facd9c09778c",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.631578947368421,
+      "source_total_epochs": 6,
+      "best_metric": 0.631578947368421
+    }
+  },
+  {
+    "timestamp": "2026-08-25T20:35:54.430947+00:00",
+    "run_name": "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_temporal.yaml",
+    "model": "resnet18",
+    "dataset": "tudat",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 228.19,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-24_20-12-10\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 2.099315643310547,
+        "val/top1_accuracy": 0.46153846153846156,
+        "val/macro_f1": 0.3157894736842105,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_accident": 0.46153846153846156,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.631578947368421,
+        "val/precision_non_accident": 0.0,
+        "val/recall_non_accident": 0.0,
+        "val/f1_non_accident": 0.0,
+        "val/auroc": 0.8333333333333334
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-24_20-12-10",
+      "source_timestamp": "2026-08-24T20:12:10.119156+00:00",
+      "source_wandb_run_id": "q8o10v54",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q8o10v54",
+      "source_git_commit": "fe1a7f22bc27cac2c430d7f07ae3facd9c09778c",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.631578947368421,
+      "source_total_epochs": 6,
+      "best_metric": 0.631578947368421
+    }
   }
 ]

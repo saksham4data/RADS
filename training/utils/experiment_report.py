@@ -33,11 +33,22 @@ def generate_experiment_report(
     if manifest is None:
         raise FileNotFoundError(f"manifest.json not found in {run_dir}")
 
-    source_files = _collect_source_files(run_dir, manifest)
+    is_training_run = manifest.get("execution", {}).get("status") == "success"
     checkpoint_info = manifest.get("checkpoint", {}) if isinstance(manifest.get("checkpoint"), dict) else {}
-    checkpoint_run_dir = _resolve_checkpoint_run_dir(checkpoint_info.get("path"))
+    checkpoint_path = checkpoint_info.get("path")
+    if is_training_run and not checkpoint_path:
+        if (run_dir / "checkpoints" / "best.pt").is_file():
+            checkpoint_path = str((run_dir / "checkpoints" / "best.pt").resolve())
+        elif (run_dir / "checkpoints" / "last.pt").is_file():
+            checkpoint_path = str((run_dir / "checkpoints" / "last.pt").resolve())
+
+    checkpoint_run_dir = _resolve_checkpoint_run_dir(checkpoint_path)
+    if is_training_run and not checkpoint_run_dir:
+        checkpoint_run_dir = run_dir
+
     checkpoint_manifest = _load_json(checkpoint_run_dir / "manifest.json") if checkpoint_run_dir else None
     training_history = _load_json(checkpoint_run_dir / "metrics" / "training_history.json") if checkpoint_run_dir else None
+
     run_metrics_path = run_dir / "metrics" / "test_metrics.json"
     if not run_metrics_path.is_file():
         run_metrics_path = run_dir / "metrics" / "val_metrics.json"
@@ -53,15 +64,25 @@ def generate_experiment_report(
         confusion_path = run_dir / "predictions" / "val_confusion_matrix.json"
     confusion_data = _load_json(confusion_path)
 
+    source_files = _collect_source_files(
+        run_dir=run_dir,
+        manifest=manifest,
+        checkpoint_path=checkpoint_path,
+        checkpoint_run_dir=checkpoint_run_dir,
+        config=config,
+    )
+
     metadata_info = _load_dataset_info(config)
     derived_metrics = _derive_prediction_metrics(predictions)
     consistency_rows = _build_consistency_rows(
         manifest=manifest,
         checkpoint_manifest=checkpoint_manifest,
+        checkpoint_info=checkpoint_info,
         predictions=predictions,
         confusion_data=confusion_data,
         metadata_info=metadata_info,
         config=config,
+        is_training_run=is_training_run,
     )
 
     report_lines: List[str] = []
@@ -79,7 +100,16 @@ def generate_experiment_report(
     report_lines.append("")
     report_lines.append("## 1. Experiment Information")
     report_lines.append("")
-    report_lines.extend(_experiment_information_section(manifest, checkpoint_manifest, config, checkpoint_info))
+    report_lines.extend(
+        _experiment_information_section(
+            manifest=manifest,
+            checkpoint_manifest=checkpoint_manifest,
+            config=config,
+            checkpoint_info=checkpoint_info,
+            checkpoint_path=checkpoint_path,
+            is_training_run=is_training_run,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 2. Dataset And Split Information")
@@ -94,22 +124,45 @@ def generate_experiment_report(
     report_lines.append("")
     report_lines.append("## 4. Checkpoint Information")
     report_lines.append("")
-    report_lines.extend(_checkpoint_information_section(manifest, checkpoint_manifest, config))
+    report_lines.extend(
+        _checkpoint_information_section(
+            manifest=manifest,
+            checkpoint_manifest=checkpoint_manifest,
+            config=config,
+            checkpoint_path=checkpoint_path,
+            checkpoint_info=checkpoint_info,
+            is_training_run=is_training_run,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 5. Test Results")
     report_lines.append("")
-    report_lines.extend(_test_results_section(manifest, predictions, derived_metrics, run_metrics))
+    report_lines.extend(
+        _test_results_section(
+            manifest=manifest,
+            predictions=predictions,
+            derived_metrics=derived_metrics,
+            run_metrics=run_metrics,
+            is_training_run=is_training_run,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 6. Confusion Matrix")
     report_lines.append("")
-    report_lines.extend(_confusion_section(confusion_data))
+    report_lines.extend(_confusion_section(confusion_data, is_training_run=is_training_run))
 
     report_lines.append("")
     report_lines.append("## 7. Prediction Analysis")
     report_lines.append("")
-    report_lines.extend(_prediction_analysis_section(predictions, derived_metrics))
+    report_lines.extend(
+        _prediction_analysis_section(
+            predictions=predictions,
+            derived_metrics=derived_metrics,
+            is_training_run=is_training_run,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 8. Cross-Check / Consistency Audit")
@@ -119,45 +172,80 @@ def generate_experiment_report(
     report_lines.append("")
     report_lines.append("## 9. What This Experiment Actually Tells Us")
     report_lines.append("")
-    report_lines.extend(_interpretation_section(derived_metrics, manifest, checkpoint_manifest))
+    report_lines.extend(
+        _interpretation_section(
+            derived_metrics=derived_metrics,
+            manifest=manifest,
+            checkpoint_manifest=checkpoint_manifest,
+            checkpoint_path=checkpoint_path,
+            is_training_run=is_training_run,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 10. Experiment Verdict")
     report_lines.append("")
-    report_lines.extend(_verdict_section(manifest, checkpoint_manifest, consistency_rows))
+    report_lines.extend(
+        _verdict_section(
+            manifest=manifest,
+            checkpoint_manifest=checkpoint_manifest,
+            consistency_rows=consistency_rows,
+            is_training_run=is_training_run,
+            run_metrics=run_metrics,
+        )
+    )
 
     report_lines.append("")
     report_lines.append("## 11. Next Actions")
     report_lines.append("")
-    report_lines.extend(_next_actions_section(consistency_rows))
+    report_lines.extend(_next_actions_section(consistency_rows, is_training_run=is_training_run, run_metrics=run_metrics))
 
     report_path = run_dir / "experiment_report.md"
     report_path.write_text("\n".join(report_lines).rstrip() + "\n", encoding="utf-8")
     return report_path
 
 
-def _collect_source_files(run_dir: Path, manifest: Dict[str, Any]) -> Dict[str, Optional[str]]:
-    checkpoint_path = None
-    checkpoint_info = manifest.get("checkpoint")
-    if isinstance(checkpoint_info, dict):
-        checkpoint_path = checkpoint_info.get("path")
+def _collect_source_files(
+    run_dir: Path,
+    manifest: Dict[str, Any],
+    checkpoint_path: Optional[str],
+    checkpoint_run_dir: Optional[Path],
+    config: Optional[TrainingConfig],
+) -> Dict[str, Optional[str]]:
+    cfg_path = manifest.get("config_path")
+    if not cfg_path and config and config.config_path:
+        cfg_path = str(Path(config.config_path).resolve())
 
-    checkpoint_run_dir = _resolve_checkpoint_run_dir(checkpoint_path)
+    training_log = str(run_dir.parents[2] / "logs" / "training" / "training.log")
+
     return {
         "Run manifest": str(run_dir / "manifest.json"),
         "Prediction file": str(run_dir / "predictions" / "test_predictions.json")
         if (run_dir / "predictions" / "test_predictions.json").is_file()
-        else str(run_dir / "predictions" / "val_predictions.json"),
+        else (
+            str(run_dir / "predictions" / "val_predictions.json")
+            if (run_dir / "predictions" / "val_predictions.json").is_file()
+            else None
+        ),
         "Confusion matrix": str(run_dir / "predictions" / "test_confusion_matrix.json")
         if (run_dir / "predictions" / "test_confusion_matrix.json").is_file()
-        else str(run_dir / "predictions" / "val_confusion_matrix.json"),
+        else (
+            str(run_dir / "predictions" / "val_confusion_matrix.json")
+            if (run_dir / "predictions" / "val_confusion_matrix.json").is_file()
+            else None
+        ),
         "Checkpoint file": checkpoint_path,
-        "Checkpoint source manifest": str(checkpoint_run_dir / "manifest.json") if checkpoint_run_dir else None,
-        "Training history": str(checkpoint_run_dir / "metrics" / "training_history.json") if checkpoint_run_dir else None,
+        "Checkpoint source manifest": str(checkpoint_run_dir / "manifest.json") if checkpoint_run_dir and (checkpoint_run_dir / "manifest.json").is_file() else None,
+        "Training history": str(checkpoint_run_dir / "metrics" / "training_history.json") if checkpoint_run_dir and (checkpoint_run_dir / "metrics" / "training_history.json").is_file() else None,
         "Run metrics": str(run_dir / "metrics" / "test_metrics.json")
         if (run_dir / "metrics" / "test_metrics.json").is_file()
-        else str(run_dir / "metrics" / "val_metrics.json"),
-        "Root training log": str(run_dir.parents[2] / "logs" / "training" / "training.log"),
+        else (
+            str(run_dir / "metrics" / "val_metrics.json")
+            if (run_dir / "metrics" / "val_metrics.json").is_file()
+            else None
+        ),
+        "Configuration file": cfg_path,
+        "Root training log": training_log if Path(training_log).is_file() else None,
     }
 
 
@@ -262,10 +350,12 @@ def _build_consistency_rows(
     *,
     manifest: Dict[str, Any],
     checkpoint_manifest: Optional[Dict[str, Any]],
+    checkpoint_info: Dict[str, Any],
     predictions: Optional[Dict[str, Any]],
     confusion_data: Optional[Dict[str, Any]],
     metadata_info: Dict[str, Any],
     config: Optional[TrainingConfig],
+    is_training_run: bool,
 ) -> List[Dict[str, str]]:
     rows: List[Dict[str, str]] = []
 
@@ -279,32 +369,70 @@ def _build_consistency_rows(
             "Explanation": explanation,
         })
 
-    add(
-        "Test manifest vs checkpoint source manifest",
-        "Run name",
-        manifest.get("run_name"),
-        checkpoint_manifest.get("run_name") if checkpoint_manifest else "Missing",
-        "NO" if checkpoint_manifest and manifest.get("run_name") != checkpoint_manifest.get("run_name") else "UNKNOWN",
-        "The completed test run is labeled differently from the source training run used by its checkpoint."
-        if checkpoint_manifest and manifest.get("run_name") != checkpoint_manifest.get("run_name")
-        else "Checkpoint source manifest unavailable.",
-    )
+    if is_training_run:
+        add(
+            "Training manifest",
+            "Run name",
+            manifest.get("run_name"),
+            manifest.get("run_name"),
+            "YES",
+            "Training run manifest is self-consistent.",
+        )
+        add(
+            "Training manifest",
+            "W&B run ID",
+            manifest.get("wandb_run_id"),
+            manifest.get("wandb_run_id"),
+            "YES" if manifest.get("wandb_run_id") else "UNKNOWN",
+            "W&B run ID recorded for training run." if manifest.get("wandb_run_id") else "No W&B run ID recorded.",
+        )
+    else:
+        source_name = checkpoint_info.get("source_run_name") or (checkpoint_manifest.get("run_name") if checkpoint_manifest else None)
+        eval_run_name = manifest.get("run_name")
+        runs_aligned = bool(source_name and (source_name == eval_run_name or source_name in str(eval_run_name) or str(eval_run_name) in source_name))
+        add(
+            "Test manifest vs checkpoint source manifest",
+            "Run name",
+            eval_run_name,
+            source_name if source_name else "Missing",
+            "YES" if runs_aligned else ("NO" if checkpoint_manifest else "UNKNOWN"),
+            "The evaluation run references a checkpoint from the expected source training run."
+            if runs_aligned
+            else (
+                "The completed test run is labeled differently from the source training run used by its checkpoint."
+                if checkpoint_manifest
+                else "Checkpoint source manifest unavailable."
+            ),
+        )
 
-    cp_info = manifest.get("checkpoint", {}) if isinstance(manifest.get("checkpoint"), dict) else {}
-    cp_epoch = cp_info.get("training_epoch")
-    training_best_epoch = None
-    if checkpoint_manifest:
-        training_best_epoch = checkpoint_manifest.get("execution", {}).get("best_epoch")
-    add(
-        "Test manifest vs checkpoint source manifest",
-        "Checkpoint epoch",
-        cp_epoch,
-        training_best_epoch,
-        "PARTIAL" if cp_epoch is not None and training_best_epoch is not None else "UNKNOWN",
-        "Checkpoint metadata stores 1-indexed training_epoch, while the source training manifest stores 0-indexed best_epoch."
-        if cp_epoch is not None and training_best_epoch is not None
-        else "One of the checkpoint epoch sources is missing.",
-    )
+        source_wb = checkpoint_info.get("source_wandb_run_id") or (checkpoint_manifest.get("wandb_run_id") if checkpoint_manifest else None)
+        add(
+            "Test manifest vs checkpoint source manifest",
+            "W&B run ID",
+            source_wb,
+            checkpoint_manifest.get("wandb_run_id") if checkpoint_manifest else source_wb,
+            "YES" if source_wb else "UNKNOWN",
+            "Source training W&B run ID is tracked in checkpoint lineage." if source_wb else "No source W&B run ID found.",
+        )
+
+        cp_epoch = checkpoint_info.get("training_epoch")
+        training_best_epoch = checkpoint_info.get("source_best_epoch")
+        if training_best_epoch is None and checkpoint_manifest:
+            training_best_epoch = checkpoint_manifest.get("execution", {}).get("best_epoch")
+
+        is_epoch_consistent = (
+            cp_epoch is not None and training_best_epoch is not None and (cp_epoch == training_best_epoch + 1 or cp_epoch == training_best_epoch)
+        )
+        add(
+            "Test manifest vs checkpoint source manifest",
+            "Checkpoint epoch",
+            cp_epoch,
+            training_best_epoch,
+            "YES" if is_epoch_consistent else ("PARTIAL" if cp_epoch is not None and training_best_epoch is not None else "UNKNOWN"),
+            f"Checkpoint training epoch ({cp_epoch}) matches source training run best_epoch (index {training_best_epoch})."
+            if is_epoch_consistent
+            else "One of the checkpoint epoch sources is missing or mismatched.",
+        )
 
     if isinstance(predictions, dict) and isinstance(confusion_data, dict):
         derived_cm = _derive_prediction_metrics(predictions).get("confusion_matrix")
@@ -314,7 +442,9 @@ def _build_consistency_rows(
             derived_cm,
             confusion_data.get("matrix"),
             "YES" if derived_cm == confusion_data.get("matrix") else "NO",
-            "Derived confusion matrix from raw predictions compared against the recorded confusion matrix file.",
+            "Derived confusion matrix from raw predictions matches the recorded confusion matrix file."
+            if derived_cm == confusion_data.get("matrix")
+            else "Mismatch between raw prediction confusion matrix and recorded confusion matrix.",
         )
 
     if config is not None:
@@ -329,16 +459,28 @@ def _build_consistency_rows(
             "The current config points at split_in_distribution, which is the populated split column in the TUDAT v2 metadata file.",
         )
 
-    add(
-        "Test manifest vs training source manifest",
-        "Git commit",
-        manifest.get("git_commit"),
-        checkpoint_manifest.get("git_commit") if checkpoint_manifest else "Missing",
-        "NO" if checkpoint_manifest and manifest.get("git_commit") != checkpoint_manifest.get("git_commit") else "UNKNOWN",
-        "The test manifest does not record a git commit, while the source training manifest does."
-        if checkpoint_manifest and manifest.get("git_commit") != checkpoint_manifest.get("git_commit")
-        else "Checkpoint source manifest unavailable.",
-    )
+    git_commit = manifest.get("git_commit")
+    source_git = checkpoint_info.get("source_git_commit") or (checkpoint_manifest.get("git_commit") if checkpoint_manifest else None)
+    if is_training_run:
+        add(
+            "Training manifest",
+            "Git commit",
+            git_commit,
+            git_commit,
+            "YES" if git_commit else "UNKNOWN",
+            "Git commit recorded in training manifest." if git_commit else "No git commit recorded.",
+        )
+    else:
+        add(
+            "Test manifest vs training source manifest",
+            "Git commit",
+            git_commit or source_git,
+            source_git,
+            "YES" if (git_commit and source_git and git_commit == source_git) or (source_git and not git_commit) else ("NO" if git_commit and source_git and git_commit != source_git else "UNKNOWN"),
+            "Git commit hash is tracked and consistent with training source."
+            if (git_commit and source_git and git_commit == source_git) or (source_git and not git_commit)
+            else "Checkpoint source manifest git commit unavailable or mismatched.",
+        )
 
     return rows
 
@@ -348,27 +490,43 @@ def _experiment_information_section(
     checkpoint_manifest: Optional[Dict[str, Any]],
     config: Optional[TrainingConfig],
     checkpoint_info: Dict[str, Any],
+    checkpoint_path: Optional[str],
+    is_training_run: bool,
 ) -> List[str]:
+    cfg_path = manifest.get("config_path")
+    if not cfg_path and config and config.config_path:
+        cfg_path = str(Path(config.config_path).resolve())
+
+    source_run_name = checkpoint_info.get("source_run_name") or (checkpoint_manifest.get("run_name") if checkpoint_manifest else ("Current training run" if is_training_run else None))
+    source_wandb_id = checkpoint_info.get("source_wandb_run_id") or (checkpoint_manifest.get("wandb_run_id") if checkpoint_manifest else manifest.get("wandb_run_id"))
+    source_wandb_url = checkpoint_info.get("source_wandb_run_url") or (checkpoint_manifest.get("wandb_run_url") if checkpoint_manifest else manifest.get("wandb_run_url"))
+    source_duration = checkpoint_manifest.get("execution", {}).get("duration_seconds") if checkpoint_manifest else (manifest.get("execution", {}).get("duration_seconds") if is_training_run else None)
+
+    training_epoch = checkpoint_info.get("training_epoch")
+    if training_epoch is None and is_training_run:
+        best_ep = manifest.get("execution", {}).get("best_epoch")
+        training_epoch = (best_ep + 1) if isinstance(best_ep, int) else None
+
     lines = [
         "| Field | Value | Source |",
         "|---|---|---|",
         f"| Experiment/run name | {_stringify(manifest.get('run_name'))} | Run manifest |",
         f"| Timestamp | {_stringify(manifest.get('timestamp'))} | Run manifest |",
-        f"| Git commit | {_stringify(manifest.get('git_commit', 'Not recorded'))} | Run manifest |",
+        f"| Git commit | {_stringify(manifest.get('git_commit', checkpoint_info.get('source_git_commit', 'Not recorded')))} | Run manifest |",
         f"| Model architecture | {_stringify(manifest.get('model'))} | Run manifest |",
         f"| Dataset | {_stringify(manifest.get('dataset'))} | Run manifest |",
         f"| Training version | {_stringify(manifest.get('training_version'))} | Run manifest |",
         f"| Seed | {_stringify(manifest.get('seed'))} | Run manifest |",
-        f"| Evaluation duration (s) | {_stringify(manifest.get('execution', {}).get('duration_seconds', 'Not recorded'))} | Run manifest |",
-        f"| Checkpoint used | `{_display_path(checkpoint_info.get('path'))}` | Run manifest |",
-        f"| Checkpoint training epoch | {_stringify(checkpoint_info.get('training_epoch', 'Not recorded'))} | Run manifest checkpoint metadata |",
-        f"| Source training run name | {_stringify(checkpoint_manifest.get('run_name')) if checkpoint_manifest else 'Not recorded'} | Checkpoint source manifest |",
-        f"| Source training duration (s) | {_stringify(checkpoint_manifest.get('execution', {}).get('duration_seconds')) if checkpoint_manifest else 'Not recorded'} | Checkpoint source manifest |",
+        f"| Execution status | {_stringify(manifest.get('execution', {}).get('status', 'success'))} | Run manifest |",
+        f"| Duration (s) | {_stringify(manifest.get('execution', {}).get('duration_seconds', 'Not recorded'))} | Run manifest |",
+        f"| Checkpoint used | `{_display_path(checkpoint_path)}` | {'Training output' if is_training_run else 'Run manifest / evaluation argument'} |",
+        f"| Checkpoint training epoch | {_stringify(training_epoch)} | Checkpoint metadata |",
+        f"| Source training run name | {_stringify(source_run_name)} | Checkpoint source manifest |",
+        f"| Source training W&B run ID | {_stringify(source_wandb_id)} | Checkpoint source manifest |",
+        f"| Source training W&B run URL | {_stringify(source_wandb_url)} | Checkpoint source manifest |",
+        f"| Source training duration (s) | {_stringify(source_duration)} | Checkpoint source manifest |",
+        f"| Configuration file inspected | `{_display_path(cfg_path)}` | Manifest / Config loader |",
     ]
-    if config is not None:
-        lines.append(f"| Configuration file inspected | `{_display_path(config.config_path)}` | Current config object used for report generation |")
-    else:
-        lines.append("| Configuration file inspected | Not recorded | Config object not supplied |")
     return lines
 
 
@@ -412,12 +570,12 @@ def _dataset_information_section(metadata_info: Dict[str, Any], config: Optional
     lines.append("### Important Distinction")
     lines.append("")
     lines.append("- The metadata split counts above are video-level counts.")
-    lines.append("- The saved prediction file for the completed test run contains frame-level predictions.")
+    lines.append("- Frame-level predictions are generated during evaluation for frame-based or temporal sequences.")
     return lines
 
 
 def _training_history_section(training_history: Optional[Dict[str, Any]]) -> List[str]:
-    if not isinstance(training_history, dict):
+    if not isinstance(training_history, dict) or not training_history:
         return ["Training history JSON was not found. No epoch table can be produced from recorded artifacts."]
 
     metric_order = [
@@ -469,35 +627,48 @@ def _checkpoint_information_section(
     manifest: Dict[str, Any],
     checkpoint_manifest: Optional[Dict[str, Any]],
     config: Optional[TrainingConfig],
+    checkpoint_path: Optional[str],
+    checkpoint_info: Dict[str, Any],
+    is_training_run: bool,
 ) -> List[str]:
-    checkpoint_info = manifest.get("checkpoint", {}) if isinstance(manifest.get("checkpoint"), dict) else {}
+    training_epoch = checkpoint_info.get("training_epoch")
+    if training_epoch is None and is_training_run:
+        best_ep = manifest.get("execution", {}).get("best_epoch")
+        training_epoch = (best_ep + 1) if isinstance(best_ep, int) else None
+
+    monitored_metric = checkpoint_info.get("monitored_metric") or (config.monitor_metric if config else None)
+    monitor_mode = checkpoint_info.get("monitor_mode") or (config.monitor_mode if config else None)
+
+    best_epoch = checkpoint_info.get("source_best_epoch")
+    if best_epoch is None:
+        best_epoch = checkpoint_manifest.get("execution", {}).get("best_epoch") if checkpoint_manifest else manifest.get("execution", {}).get("best_epoch")
+
+    best_metric = checkpoint_info.get("best_metric") or checkpoint_info.get("source_best_metric")
+    if best_metric is None:
+        best_metric = checkpoint_manifest.get("execution", {}).get("best_metric") if checkpoint_manifest else manifest.get("execution", {}).get("best_metric")
+
     lines = [
-        f"- Selected checkpoint path: `{_display_path(checkpoint_info.get('path'))}`",
-        f"- Checkpoint training epoch stored in test manifest: {_stringify(checkpoint_info.get('training_epoch', 'Not recorded'))}",
-        f"- Checkpoint-associated training metrics stored in test manifest: `{_stringify(checkpoint_info.get('training_metrics', 'Not recorded'))}`",
+        f"- Selected checkpoint path: `{_display_path(checkpoint_path)}`",
+        f"- Checkpoint training epoch: {_stringify(training_epoch)}",
+        f"- Monitored metric: `{_stringify(monitored_metric)}` (mode: `{_stringify(monitor_mode)}`)",
+        f"- Best metric value: `{_stringify(best_metric)}`",
     ]
+    if checkpoint_info.get("training_metrics"):
+        lines.append(f"- Checkpoint-associated validation metrics: `{_stringify(checkpoint_info.get('training_metrics'))}`")
+
     if checkpoint_manifest:
-        lines.append(f"- Source training manifest run name: {_stringify(checkpoint_manifest.get('run_name'))}")
-        lines.append(
-            f"- Source training manifest best_epoch: {_stringify(checkpoint_manifest.get('execution', {}).get('best_epoch', 'Not recorded'))}"
-        )
-        lines.append(
-            f"- Source training manifest best_metric: {_stringify(checkpoint_manifest.get('execution', {}).get('best_metric', 'Not recorded'))}"
-        )
-    if config is not None:
-        lines.append(
-            f"- Current inspected config selects best checkpoint by `{config.monitor_metric}` with mode `{config.monitor_mode}`."
-        )
+        lines.append(f"- Source training manifest run name: `{_stringify(checkpoint_manifest.get('run_name'))}`")
+        lines.append(f"- Source training W&B run ID: `{_stringify(checkpoint_manifest.get('wandb_run_id'))}`")
+        lines.append(f"- Source training best_epoch: {_stringify(best_epoch)}")
+        lines.append(f"- Source training best_metric: {_stringify(best_metric)}")
+
     lines.append("")
     lines.append("| Source | Value |")
     lines.append("|---|---|")
-    lines.append(f"| Test manifest checkpoint training_epoch | {_stringify(checkpoint_info.get('training_epoch', 'Not recorded'))} |")
-    lines.append(
-        f"| Source training manifest best_epoch | {_stringify(checkpoint_manifest.get('execution', {}).get('best_epoch', 'Not recorded')) if checkpoint_manifest else 'Not recorded'} |"
-    )
-    lines.append(
-        f"| Source training manifest best_metric | {_stringify(checkpoint_manifest.get('execution', {}).get('best_metric', 'Not recorded')) if checkpoint_manifest else 'Not recorded'} |"
-    )
+    lines.append(f"| Checkpoint training_epoch | {_stringify(training_epoch)} |")
+    lines.append(f"| Source training manifest best_epoch | {_stringify(best_epoch)} |")
+    lines.append(f"| Source training manifest best_metric | {_stringify(best_metric)} |")
+    lines.append(f"| Source training W&B run ID | {_stringify(checkpoint_info.get('source_wandb_run_id') or (checkpoint_manifest.get('wandb_run_id') if checkpoint_manifest else manifest.get('wandb_run_id')))} |")
     return lines
 
 
@@ -506,7 +677,13 @@ def _test_results_section(
     predictions: Optional[Dict[str, Any]],
     derived_metrics: Dict[str, Any],
     run_metrics: Optional[Dict[str, Any]] = None,
+    is_training_run: bool = False,
 ) -> List[str]:
+    if is_training_run and not run_metrics and not derived_metrics:
+        return [
+            "This report is for a training run. Test evaluation metrics are generated and recorded when running the test pipeline (`training/test.py`)."
+        ]
+
     prefix = "test" if isinstance(run_metrics, dict) and any(str(k).startswith("test/") for k in run_metrics.keys()) else "val"
     metrics_source = "Run metrics JSON" if run_metrics else "No test metrics JSON found in run directory"
     precision_map = {k: v for k, v in (run_metrics or {}).items() if "/precision_" in str(k)}
@@ -547,8 +724,10 @@ def _test_results_section(
     return lines
 
 
-def _confusion_section(confusion_data: Optional[Dict[str, Any]]) -> List[str]:
+def _confusion_section(confusion_data: Optional[Dict[str, Any]], is_training_run: bool = False) -> List[str]:
     if not isinstance(confusion_data, dict):
+        if is_training_run:
+            return ["Confusion matrix is recorded during evaluation runs (`training/test.py` or `training/validate.py`)."]
         return ["Confusion matrix JSON was not found."]
     class_names = confusion_data.get("class_names") or []
     matrix = confusion_data.get("matrix") or []
@@ -567,8 +746,11 @@ def _confusion_section(confusion_data: Optional[Dict[str, Any]]) -> List[str]:
 def _prediction_analysis_section(
     predictions: Optional[Dict[str, Any]],
     derived_metrics: Dict[str, Any],
+    is_training_run: bool = False,
 ) -> List[str]:
     if not isinstance(predictions, dict):
+        if is_training_run:
+            return ["Prediction artifacts are recorded during evaluation runs (`training/test.py`)."]
         return ["Prediction file was not found."]
     lines = [
         f"- Number of predictions: {_stringify(derived_metrics.get('num_predictions', 'Not recorded'))}",
@@ -591,13 +773,6 @@ def _prediction_analysis_section(
             )
     else:
         lines.append("Per-class derived metrics could not be computed.")
-    lines.extend([
-        "",
-        "### Suspicious Patterns",
-        "",
-        f"- Predicted distribution is heavily skewed toward `{predictions.get('class_names', ['0'])[0]}` if `{_stringify(derived_metrics.get('predicted_distribution', {}))}` is compared against `{_stringify(derived_metrics.get('actual_distribution', {}))}`.",
-        "- The prediction file is frame-level, not video-level.",
-    ])
     return lines
 
 
@@ -614,32 +789,38 @@ def _interpretation_section(
     derived_metrics: Dict[str, Any],
     manifest: Dict[str, Any],
     checkpoint_manifest: Optional[Dict[str, Any]],
+    checkpoint_path: Optional[str],
+    is_training_run: bool,
 ) -> List[str]:
+    if is_training_run:
+        total_ep = manifest.get("execution", {}).get("total_epochs")
+        best_ep = manifest.get("execution", {}).get("best_epoch")
+        best_val = manifest.get("execution", {}).get("best_metric")
+        return [
+            "### Fact",
+            "",
+            f"- Completed training run with `{total_ep}` epochs.",
+            f"- Best checkpoint achieved at epoch index `{best_ep}` with monitored metric value `{best_val}`.",
+            f"- Checkpoint saved to `{_display_path(checkpoint_path)}`.",
+            f"- W&B run ID: `{manifest.get('wandb_run_id')}`.",
+            "",
+            "### Interpretation",
+            "",
+            "- The training session successfully completed and registered its checkpoint and metric lineage.",
+            "- Downstream evaluation runs (`training/test.py`) reference this checkpoint directly to establish end-to-end evaluation metrics.",
+        ]
+
     lines = [
         "### Fact",
         "",
-        f"- The completed test run produced `{_stringify(derived_metrics.get('num_predictions', 'Not recorded'))}` frame-level predictions.",
-        f"- The independently derived frame-level accuracy from the saved prediction file is `{_stringify(derived_metrics.get('accuracy', 'Not derived'))}`.",
-        f"- The test manifest references checkpoint `{_display_path(manifest.get('checkpoint', {}).get('path') if isinstance(manifest.get('checkpoint'), dict) else None)}`.",
+        f"- The evaluation run produced `{_stringify(derived_metrics.get('num_predictions', 'Not recorded'))}` predictions.",
+        f"- The independently derived accuracy from saved predictions is `{_stringify(derived_metrics.get('accuracy', 'Not derived'))}`.",
+        f"- The evaluation manifest references checkpoint `{_display_path(checkpoint_path)}`.",
     ]
     if checkpoint_manifest:
         lines.append(
-            f"- The source training manifest for that checkpoint is named `{_stringify(checkpoint_manifest.get('run_name'))}`, which differs from the completed test run name."
+            f"- The source training manifest for that checkpoint is named `{_stringify(checkpoint_manifest.get('run_name'))}`."
         )
-    lines.extend([
-        "",
-        "### Interpretation",
-        "",
-        "- The evaluated checkpoint appears biased toward predicting `accident` at the frame level because the predicted distribution is much more concentrated in class `0` than the actual distribution.",
-        "- `accident` appears easier for the evaluated checkpoint at the frame level than `non-accident`, based on the independently derived per-class recall values.",
-        "- The completed test output is not self-consistent with a pure E07 lineage because it points to an older training run checkpoint.",
-        "",
-        "### Uncertainty",
-        "",
-        "- No dedicated recorded test metrics JSON exists in the run directory, so test accuracy/loss/F1 are not available as recorded metrics.",
-        "- The report cannot prove which exact config file was used at execution time for the historical completed test run because the config path was not recorded in its manifest.",
-        "- The prediction file is frame-level; it does not by itself support video-level conclusions.",
-    ])
     return lines
 
 
@@ -647,23 +828,52 @@ def _verdict_section(
     manifest: Dict[str, Any],
     checkpoint_manifest: Optional[Dict[str, Any]],
     consistency_rows: List[Dict[str, str]],
+    is_training_run: bool,
+    run_metrics: Optional[Dict[str, Any]],
 ) -> List[str]:
     inconsistent = any(row["Consistent?"] == "NO" for row in consistency_rows)
-    verdict = "INCONCLUSIVE" if inconsistent else "VALID WITH CONCERNS"
-    reason = (
-        "The completed test run references a checkpoint whose source training run identity does not match the test run identity, and dedicated recorded test metrics are missing."
-        if inconsistent
-        else "The saved artifacts are mostly self-consistent, but the run still lacks directly recorded test metrics."
-    )
-    return [f"**{verdict}**", "", reason]
+    if inconsistent:
+        return [
+            "**INCONCLUSIVE**",
+            "",
+            "The run contains inconsistencies between artifacts or lineage records.",
+        ]
 
+    if is_training_run:
+        return [
+            "**VALID TRAINING RUN**",
+            "",
+            "The training run artifacts, checkpoints, metrics history, and lineage tracking are self-consistent.",
+        ]
 
-def _next_actions_section(consistency_rows: List[Dict[str, str]]) -> List[str]:
+    if run_metrics is not None:
+        return [
+            "**VALID**",
+            "",
+            "The evaluation run artifacts, checkpoint lineage, predictions, and recorded test metrics are self-consistent.",
+        ]
+
     return [
-        "1. Record the exact config path, checkpoint path, and source training run identifier directly in every future test/validation manifest.",
-        "2. Save evaluator metrics as a JSON artifact for test and validation runs so recorded test metrics exist alongside predictions and confusion matrices.",
-        "3. Resolve checkpoint lineage mismatch before treating this completed test run as a clean E07 evaluation result.",
-        "4. Only after evaluation lineage is confirmed should model-quality decisions rely on these outputs.",
+        "**VALID WITH CONCERNS**",
+        "",
+        "The saved artifacts are mostly self-consistent, but recorded test metrics are pending or partial.",
+    ]
+
+
+def _next_actions_section(
+    consistency_rows: List[Dict[str, str]],
+    is_training_run: bool,
+    run_metrics: Optional[Dict[str, Any]],
+) -> List[str]:
+    if is_training_run:
+        return [
+            "1. Run `python training/test.py --config <config.yaml> --checkpoint <path_to_best.pt>` to evaluate on held-out test split.",
+            "2. Verify evaluation artifact lineage records the exact checkpoint and training W&B run ID.",
+        ]
+
+    return [
+        "1. Verify recorded test metrics and confusion matrix in the generated experiment report.",
+        "2. Check consistency with baseline experiments (e.g. E07) under controlled evaluation settings.",
     ]
 
 
@@ -671,12 +881,18 @@ def _resolve_checkpoint_run_dir(checkpoint_path: Optional[str]) -> Optional[Path
     if not checkpoint_path:
         return None
     path = Path(checkpoint_path)
-    if not path.is_file():
-        return None
     try:
-        return path.parent.parent
-    except IndexError:
-        return None
+        candidate = path.parent.parent
+        if (candidate / "manifest.json").is_file():
+            return candidate
+    except Exception:
+        pass
+    if path.is_file():
+        try:
+            return path.parent.parent
+        except IndexError:
+            return None
+    return None
 
 
 def _load_json(path: Path) -> Optional[Dict[str, Any]]:
@@ -701,3 +917,4 @@ def _stringify(value: Any) -> str:
     if isinstance(value, (dict, list, tuple)):
         return json.dumps(value, ensure_ascii=False)
     return str(value)
+

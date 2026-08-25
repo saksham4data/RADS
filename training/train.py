@@ -15,8 +15,12 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import sys
 import time
 from pathlib import Path
+
+# Add project root to sys.path so 'training' module can be imported
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import torch
 
@@ -79,8 +83,12 @@ def main() -> None:
         wb.log_system_info(start_snap)
 
     # ── 8. Data ──
-    from training.datasets.dataloader import create_dataloaders
-    train_loader, val_loader = create_dataloaders(config)
+    if config.temporal_enabled:
+        from training.datasets.dataloader import create_temporal_dataloaders
+        train_loader, val_loader = create_temporal_dataloaders(config)
+    else:
+        from training.datasets.dataloader import create_dataloaders
+        train_loader, val_loader = create_dataloaders(config)
     class_names = train_loader.dataset.class_names  # type: ignore[attr-defined]
 
     # ── 9. Model ──

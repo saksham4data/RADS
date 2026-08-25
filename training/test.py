@@ -13,8 +13,12 @@ Usage::
 from __future__ import annotations
 
 import argparse
+import sys
 import time
 from pathlib import Path
+
+# Add project root to sys.path so 'training' module can be imported
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import torch
 
@@ -49,10 +53,10 @@ def main() -> None:
     from training.engine.evaluator import Evaluator
     from training.utils.experiment_report import generate_experiment_report
 
-    config = load_training_config(args.config)
+    checkpoint_path = Path(args.checkpoint).resolve()
+    config = load_training_config(args.config, checkpoint_path=checkpoint_path)
     set_global_seed(config.seed)
     device = get_device()
-    checkpoint_path = Path(args.checkpoint).resolve()
     test_start = time.time()
 
     tlogger = TrainingLogger.setup(config)
@@ -68,7 +72,11 @@ def main() -> None:
     )
 
     # Build test data loader
-    test_loader = create_test_dataloader(config)
+    if config.temporal_enabled:
+        from training.datasets.dataloader import create_temporal_test_dataloader
+        test_loader = create_temporal_test_dataloader(config)
+    else:
+        test_loader = create_test_dataloader(config)
     class_names = test_loader.dataset.class_names  # type: ignore[attr-defined]
 
     # Build loss
@@ -86,7 +94,7 @@ def main() -> None:
         duration_seconds=time.time() - test_start,
         status="test",
         extra_manifest={
-            "checkpoint": CheckpointManager.describe(checkpoint_path, state),
+            "checkpoint": CheckpointManager.describe(checkpoint_path, state, config=config),
         },
     )
     generate_experiment_report(output_mgr.run_dir, config=config)

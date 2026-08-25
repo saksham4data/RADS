@@ -164,3 +164,137 @@ def _safe_collate(batch):
     if len(batch) == 0:
         return torch.tensor([]), torch.tensor([])
     return torch.utils.data.dataloader.default_collate(batch)
+
+
+# ─────────────────────────────────────────────────────────────
+# Temporal DataLoader Factory
+# ─────────────────────────────────────────────────────────────
+
+def create_temporal_dataloaders(
+    config: TrainingConfig,
+    *,
+    use_weighted_sampler: bool = True,
+) -> Tuple[DataLoader, DataLoader]:
+    """Build train and validation DataLoaders for temporal modeling.
+
+    Uses :class:`~training.datasets.video_dataset.VideoSequenceDataset`
+    which returns per-video frame sequences ``[T, C, H, W]`` instead
+    of individual frames.
+
+    Parameters
+    ----------
+    config : TrainingConfig
+        Full training configuration.
+    use_weighted_sampler : bool
+        If ``True``, use ``WeightedRandomSampler`` for the training
+        set to handle class imbalance.
+
+    Returns
+    -------
+    tuple[DataLoader, DataLoader]
+        ``(train_loader, val_loader)``
+    """
+    from training.datasets.video_dataset import VideoSequenceDataset
+
+    image_size = config.image_size
+
+    train_dataset = VideoSequenceDataset(
+        config,
+        split="train",
+        transform=get_train_transforms(image_size, aug_config=config.augmentation_config),
+    )
+    val_dataset = VideoSequenceDataset(
+        config,
+        split="val",
+        transform=get_val_transforms(image_size),
+    )
+
+    # ── Training sampler (class-weighted, video-level) ──
+    sampler: Optional[WeightedRandomSampler] = None
+    shuffle = True
+
+    if use_weighted_sampler and len(train_dataset) > 0:
+        class_weights = train_dataset.class_weights
+        sample_weights = []
+        for idx in range(len(train_dataset)):
+            _, label_idx, _ = train_dataset._videos[idx]
+            sample_weights.append(float(class_weights[label_idx]))
+
+        sampler = WeightedRandomSampler(
+            weights=sample_weights,
+            num_samples=len(sample_weights),
+            replacement=True,
+        )
+        shuffle = False
+
+        logger.info(
+            "Temporal WeightedRandomSampler enabled — class weights: %s",
+            {name: f"{w:.3f}" for name, w in
+             zip(train_dataset.class_names, class_weights.tolist())},
+        )
+
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=config.batch_size,
+        shuffle=shuffle,
+        sampler=sampler,
+        num_workers=config.num_workers,
+        pin_memory=config.pin_memory,
+        drop_last=False,
+        collate_fn=_safe_collate,
+    )
+
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=config.batch_size,
+        shuffle=False,
+        num_workers=config.num_workers,
+        pin_memory=config.pin_memory,
+        drop_last=False,
+        collate_fn=_safe_collate,
+    )
+
+    logger.info(
+        "Temporal DataLoaders created — train: %d batches (%d videos), "
+        "val: %d batches (%d videos)",
+        len(train_loader), len(train_dataset),
+        len(val_loader), len(val_dataset),
+    )
+
+    return train_loader, val_loader
+
+
+def create_temporal_test_dataloader(
+    config: TrainingConfig,
+) -> DataLoader:
+    """Build a temporal test DataLoader.
+
+    Returns per-video frame sequences for temporal model evaluation.
+    """
+    from training.datasets.video_dataset import VideoSequenceDataset
+
+    image_size = config.image_size
+
+    test_dataset = VideoSequenceDataset(
+        config,
+        split="test",
+        transform=get_val_transforms(image_size),
+    )
+
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=config.batch_size,
+        shuffle=False,
+        num_workers=config.num_workers,
+        pin_memory=config.pin_memory,
+        drop_last=False,
+        collate_fn=_safe_collate,
+    )
+
+    logger.info(
+        "Temporal Test DataLoader created — %d batches (%d videos)",
+        len(test_loader), len(test_dataset),
+    )
+
+    return test_loader
+

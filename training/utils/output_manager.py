@@ -233,10 +233,15 @@ class TrainingOutputManager:
         if best_epoch is not None:
             execution["best_epoch"] = best_epoch
 
+        config_path_str = None
+        if self.config.config_path:
+            config_path_str = str(Path(self.config.config_path).resolve())
+
         manifest = {
             "timestamp": self._ts.isoformat(),
             "run_name": self.run_name,
             "training_version": self.config.training_version,
+            "config_path": config_path_str,
             "model": self.config.model_name,
             "dataset": self.config.dataset_name,
             "git_commit": git_commit,
@@ -244,10 +249,10 @@ class TrainingOutputManager:
             "wandb_run_id": wandb_run_id,
             "wandb_run_url": wandb_run_url,
             "files": {
-                "checkpoints": self._exported_checkpoints,
-                "metrics": self._exported_metrics,
-                "predictions": self._exported_predictions,
-                "logs": self._exported_logs,
+                "checkpoints": list(dict.fromkeys(self._exported_checkpoints)),
+                "metrics": list(dict.fromkeys(self._exported_metrics)),
+                "predictions": list(dict.fromkeys(self._exported_predictions)),
+                "logs": list(dict.fromkeys(self._exported_logs)),
             },
             "execution": execution,
         }
@@ -295,6 +300,25 @@ class TrainingOutputManager:
             encoding="utf-8",
         )
 
+    def _sync_exported_files(self) -> None:
+        """Scan subdirectories and ensure all saved artifacts are tracked."""
+        if self.allow_checkpoint_writes and self.checkpoints_dir.is_dir():
+            for p in sorted(self.checkpoints_dir.glob("*.pt")):
+                if p.name not in self._exported_checkpoints:
+                    self._exported_checkpoints.append(p.name)
+        if self.metrics_dir.is_dir():
+            for p in sorted(self.metrics_dir.glob("*.json")):
+                if p.name not in self._exported_metrics:
+                    self._exported_metrics.append(p.name)
+        if self.predictions_dir.is_dir():
+            for p in sorted(self.predictions_dir.glob("*.json")):
+                if p.name not in self._exported_predictions:
+                    self._exported_predictions.append(p.name)
+        if self.logs_dir.is_dir():
+            for p in sorted(self.logs_dir.glob("*.log")):
+                if p.name not in self._exported_logs:
+                    self._exported_logs.append(p.name)
+
     def finalize(
         self,
         *,
@@ -312,6 +336,7 @@ class TrainingOutputManager:
 
         Returns the manifest dict for further use (e.g. W&B).
         """
+        self._sync_exported_files()
         manifest = self._generate_manifest(
             wandb_run_id=wandb_run_id,
             wandb_run_url=wandb_run_url,

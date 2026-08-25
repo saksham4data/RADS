@@ -50,10 +50,10 @@ def main() -> None:
     from training.engine.evaluator import Evaluator
     from training.utils.experiment_report import generate_experiment_report
 
-    config = load_training_config(args.config)
+    checkpoint_path = Path(args.checkpoint).resolve()
+    config = load_training_config(args.config, checkpoint_path=checkpoint_path)
     set_global_seed(config.seed)
     device = get_device()
-    checkpoint_path = Path(args.checkpoint).resolve()
     eval_start = time.time()
 
     tlogger = TrainingLogger.setup(config)
@@ -69,7 +69,12 @@ def main() -> None:
     )
 
     # Build data loader (val split only)
-    _, val_loader = create_dataloaders(config)
+    if config.temporal_enabled:
+        from training.datasets.dataloader import create_temporal_dataloaders
+
+        _, val_loader = create_temporal_dataloaders(config)
+    else:
+        _, val_loader = create_dataloaders(config)
     class_names = val_loader.dataset.class_names  # type: ignore[attr-defined]
 
     # Build loss
@@ -87,7 +92,7 @@ def main() -> None:
         duration_seconds=time.time() - eval_start,
         status="validation",
         extra_manifest={
-            "checkpoint": CheckpointManager.describe(checkpoint_path, state),
+            "checkpoint": CheckpointManager.describe(checkpoint_path, state, config=config),
         },
     )
     generate_experiment_report(output_mgr.run_dir, config=config)
