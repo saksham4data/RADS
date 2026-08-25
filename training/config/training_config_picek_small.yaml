@@ -1,0 +1,134 @@
+# ─────────────────────────────────────────────────────────────
+# RADS Training Module — Small PICEK Temporal Experiment P01
+# ─────────────────────────────────────────────────────────────
+# First temporal modeling experiment on the Small PICEK subset (v1_small).
+#
+# Objectives:
+#   - Validate temporal GRU architecture on real-world multi-class collisions
+#   - 100 canonical real videos (20 per class across 5 collision types)
+#   - 70 train / 15 val / 15 test stratified split
+#   - Reuses validated ResNet18 + GRU temporal architecture from T01
+# ─────────────────────────────────────────────────────────────
+
+project:
+  name: "RADS"
+  training_version: "1.0.0"
+
+experiment:
+  id: "P01"
+  name: "P01 Small PICEK Temporal GRU (100 videos, 5 collision types)"
+
+# ── Data ────────────────────────────────────────────────────
+data:
+  metadata_path: "Datasets/processed/picek/v1_small/picek_v1_small_metadata.csv"
+  dataset_name: "picek"
+  raw_base_dir: "Datasets/raw"
+  label_column: "type"
+  label_mode: "multiclass"
+  split_column: "split_in_distribution"
+  class_mapping: null
+
+  split_ratios:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+
+  frame_sampling:
+    strategy: "uniform"
+    frames_per_video: 8
+
+  image_size: [224, 224]
+
+  augmentation:
+    enabled: true
+    preset: "conservative_v1"
+    horizontal_flip:
+      enabled: true
+      p: 0.5
+    rotation:
+      enabled: true
+      degrees: 5
+    brightness_contrast:
+      enabled: true
+      brightness: 0.15
+      contrast: 0.15
+    saturation:
+      enabled: false
+      value: 0.0
+    hue:
+      enabled: false
+      value: 0.0
+    gaussian_blur:
+      enabled: false
+      kernel_size: 3
+      sigma: [0.1, 0.5]
+
+# ── Model ───────────────────────────────────────────────────
+model:
+  name: "resnet18"
+  pretrained: true
+  num_classes: 5
+  freeze_backbone: false
+
+# ── Temporal ────────────────────────────────────────────────
+temporal:
+  enabled: true
+  architecture: "gru"
+  hidden_dim: 256
+  num_layers: 1
+  dropout: 0.0
+  bidirectional: false
+  classifier_dropout: 0.3
+
+# ── Training ────────────────────────────────────────────────
+training:
+  epochs: 50
+  batch_size: 16
+  num_workers: 0
+  pin_memory: false
+  mixed_precision: false
+
+# ── Optimizer ───────────────────────────────────────────────
+optimizer:
+  name: "adam"
+  lr: 0.001
+  weight_decay: 0.0001
+
+# ── Scheduler ───────────────────────────────────────────────
+scheduler:
+  name: "step_lr"
+  step_size: 5
+  gamma: 0.1
+
+# ── Checkpoint ──────────────────────────────────────────────
+checkpoint:
+  save_best: true
+  save_last: true
+  monitor_metric: "val/macro_f1"
+  mode: "max"
+
+# ── Early Stopping ──────────────────────────────────────────
+early_stopping:
+  enabled: true
+  patience: 5
+  min_delta: 0.001
+  mode: "max"
+
+# ── W&B ─────────────────────────────────────────────────────
+wandb:
+  project: "RADS"
+  entity: null
+  job_type: "training"
+  group: "picek-temporal"
+  tags: ["pipeline-5", "temporal", "gru", "resnet18", "picek", "picek-v1-small", "experiment-P01"]
+
+# ── Reproducibility ─────────────────────────────────────────
+reproducibility:
+  seed: 42
+
+# ── Output ──────────────────────────────────────────────────
+output:
+  timestamped: true
+  maintain_latest: true
+  track_run_history: true
+  generate_manifest: true

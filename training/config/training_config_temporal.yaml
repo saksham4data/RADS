@@ -1,0 +1,148 @@
+# ─────────────────────────────────────────────────────────────
+# RADS Training Module — Temporal Experiment T01
+# ─────────────────────────────────────────────────────────────
+# First temporal modeling experiment on TUDAT v2.
+#
+# Changes from E07 (training_config_v2.yaml):
+#   - experiment.id: T01
+#   - experiment.name: updated
+#   - temporal.enabled: true
+#   - temporal.architecture: gru
+#   - wandb.tags: updated
+#
+# UNCHANGED from E07:
+#   - data (same TUDAT v2 metadata, splits, sampling, augmentation)
+#   - model backbone (resnet18, pretrained, unfrozen)
+#   - optimizer, scheduler, checkpoint, early_stopping, seed
+#   - batch_size, epochs, image_size
+#
+# The ONLY experimental variable is the addition of a GRU
+# temporal encoder between the spatial backbone features and
+# the classifier head.
+# ─────────────────────────────────────────────────────────────
+
+project:
+  name: "RADS"
+  training_version: "1.0.0"
+
+experiment:
+  id: "T01"
+  name: "T01 Temporal GRU on TUDAT v2 (controlled comparison vs E07)"
+
+# ── Data ────────────────────────────────────────────────────
+# Identical to E07 for controlled comparison.
+data:
+  metadata_path: "Datasets/processed/tudat/v2/global_master_metadata_v2.csv"
+  dataset_name: "tudat"
+  raw_base_dir: "Datasets/raw"
+  label_column: "type"
+  label_mode: "binary"
+  split_column: "split_in_distribution"
+  class_mapping: null
+
+  split_ratios:
+    train: 0.70
+    val: 0.14
+    test: 0.16
+
+  frame_sampling:
+    strategy: "uniform"
+    frames_per_video: 8
+
+  image_size: [224, 224]
+
+  augmentation:
+    enabled: true
+    preset: "conservative_v1"
+    horizontal_flip:
+      enabled: true
+      p: 0.5
+    rotation:
+      enabled: true
+      degrees: 5
+    brightness_contrast:
+      enabled: true
+      brightness: 0.15
+      contrast: 0.15
+    saturation:
+      enabled: false
+      value: 0.0
+    hue:
+      enabled: false
+      value: 0.0
+    gaussian_blur:
+      enabled: false
+      kernel_size: 3
+      sigma: [0.1, 0.5]
+
+# ── Model ───────────────────────────────────────────────────
+# Same backbone as E07.
+model:
+  name: "resnet18"
+  pretrained: true
+  num_classes: 2
+  freeze_backbone: false
+
+# ── Temporal ────────────────────────────────────────────────
+# This is the only new section relative to E07.
+temporal:
+  enabled: true
+  architecture: "gru"
+  hidden_dim: 256
+  num_layers: 1
+  dropout: 0.0
+  bidirectional: false
+  classifier_dropout: 0.3
+
+# ── Training ────────────────────────────────────────────────
+training:
+  epochs: 50
+  batch_size: 32
+  num_workers: 0
+  pin_memory: false
+  mixed_precision: false
+
+# ── Optimizer ───────────────────────────────────────────────
+optimizer:
+  name: "adam"
+  lr: 0.001
+  weight_decay: 0.0001
+
+# ── Scheduler ───────────────────────────────────────────────
+scheduler:
+  name: "step_lr"
+  step_size: 5
+  gamma: 0.1
+
+# ── Checkpoint ──────────────────────────────────────────────
+checkpoint:
+  save_best: true
+  save_last: true
+  monitor_metric: "val/f1_accident"
+  mode: "max"
+
+# ── Early Stopping ──────────────────────────────────────────
+early_stopping:
+  enabled: true
+  patience: 5
+  min_delta: 0.001
+  mode: "max"
+
+# ── W&B ─────────────────────────────────────────────────────
+wandb:
+  project: "RADS"
+  entity: null
+  job_type: "training"
+  group: "temporal-modeling"
+  tags: ["pipeline-5", "temporal", "gru", "resnet18", "tudat", "tudat-v2", "experiment-T01"]
+
+# ── Reproducibility ─────────────────────────────────────────
+reproducibility:
+  seed: 42
+
+# ── Output ──────────────────────────────────────────────────
+output:
+  timestamped: true
+  maintain_latest: true
+  track_run_history: true
+  generate_manifest: true

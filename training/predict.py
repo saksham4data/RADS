@@ -23,6 +23,10 @@ import cv2
 import numpy as np
 import torch
 import torch.nn as nn
+import sys
+
+# Add project root to sys.path so 'training' module can be imported
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from training.datasets.video_sampling import (
     compute_sample_indices,

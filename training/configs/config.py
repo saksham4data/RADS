@@ -296,6 +296,9 @@ class TrainingConfig:
 
     @property
     def num_classes(self) -> int:
+        explicit_nc = self._raw.get("model", {}).get("num_classes")
+        if explicit_nc is not None:
+            return int(explicit_nc)
         mapping = self.class_mapping
         if mapping:
             return len(set(mapping.values()))
@@ -304,6 +307,40 @@ class TrainingConfig:
     @property
     def freeze_backbone(self) -> bool:
         return self._raw["model"]["freeze_backbone"]
+
+    # ── Temporal ────────────────────────────────────────────
+
+    @property
+    def temporal_config(self) -> Dict[str, Any]:
+        return self._raw.get("temporal", {})
+
+    @property
+    def temporal_enabled(self) -> bool:
+        return self.temporal_config.get("enabled", False)
+
+    @property
+    def temporal_architecture(self) -> str:
+        return self.temporal_config.get("architecture", "gru")
+
+    @property
+    def temporal_hidden_dim(self) -> int:
+        return self.temporal_config.get("hidden_dim", 256)
+
+    @property
+    def temporal_num_layers(self) -> int:
+        return self.temporal_config.get("num_layers", 1)
+
+    @property
+    def temporal_dropout(self) -> float:
+        return float(self.temporal_config.get("dropout", 0.0))
+
+    @property
+    def temporal_bidirectional(self) -> bool:
+        return self.temporal_config.get("bidirectional", False)
+
+    @property
+    def temporal_classifier_dropout(self) -> float:
+        return float(self.temporal_config.get("classifier_dropout", 0.3))
 
     # ── Training ────────────────────────────────────────────
 

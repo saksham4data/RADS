@@ -109,6 +109,8 @@ class CheckpointManager:
                 scheduler.state_dict() if scheduler is not None else None
             ),
             "metrics": metrics,
+            "monitor_metric": self.monitor_metric,
+            "mode": self.mode,
         }
 
         result = {"saved_best": False, "saved_last": False}
@@ -160,20 +162,60 @@ class CheckpointManager:
         return state
 
     @staticmethod
-    def describe(path: Path, state: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Return metadata describing a loaded checkpoint."""
+    def describe(
+        path: Path,
+        state: Optional[Dict[str, Any]] = None,
+        config: Optional[Any] = None,
+    ) -> Dict[str, Any]:
+        """Return metadata describing a loaded checkpoint and its source lineage."""
+        import json
+
         checkpoint_path = path.resolve()
-        checkpoint_state = state if state is not None else CheckpointManager.load(path)
+        checkpoint_state = state if state is not None else CheckpointManager.load(checkpoint_path)
 
         metadata: Dict[str, Any] = {
             "path": str(checkpoint_path),
         }
         epoch = checkpoint_state.get("epoch")
         if isinstance(epoch, int):
+            metadata["epoch"] = epoch
             metadata["training_epoch"] = epoch + 1
         metrics = checkpoint_state.get("metrics")
         if isinstance(metrics, dict) and metrics:
             metadata["training_metrics"] = metrics
+
+        monitored_metric = getattr(config, "monitor_metric", None) or checkpoint_state.get("monitor_metric")
+        monitor_mode = getattr(config, "monitor_mode", None) or checkpoint_state.get("mode")
+        if monitored_metric:
+            metadata["monitored_metric"] = monitored_metric
+        if monitor_mode:
+            metadata["monitor_mode"] = monitor_mode
+
+        # Attempt to resolve source training run manifest from checkpoint directory
+        try:
+            source_run_dir = checkpoint_path.parent.parent
+            source_manifest_path = source_run_dir / "manifest.json"
+            if source_manifest_path.is_file():
+                source_manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
+                metadata["source_run_name"] = source_manifest.get("run_name")
+                metadata["source_run_dir"] = str(source_run_dir.resolve())
+                metadata["source_timestamp"] = source_manifest.get("timestamp")
+                metadata["source_wandb_run_id"] = source_manifest.get("wandb_run_id")
+                metadata["source_wandb_run_url"] = source_manifest.get("wandb_run_url")
+                metadata["source_git_commit"] = source_manifest.get("git_commit")
+                exec_info = source_manifest.get("execution", {})
+                if isinstance(exec_info, dict):
+                    metadata["source_best_epoch"] = exec_info.get("best_epoch")
+                    metadata["source_best_metric"] = exec_info.get("best_metric")
+                    metadata["source_total_epochs"] = exec_info.get("total_epochs")
+                    if "best_metric" not in metadata and exec_info.get("best_metric") is not None:
+                        metadata["best_metric"] = exec_info.get("best_metric")
+        except Exception as err:
+            logger.debug("Failed to resolve source manifest for checkpoint %s: %s", checkpoint_path, err)
+
+        if "best_metric" not in metadata and metrics and monitored_metric:
+            metadata["best_metric"] = metrics.get(monitored_metric)
+
         return metadata
 
     def resume_from(
