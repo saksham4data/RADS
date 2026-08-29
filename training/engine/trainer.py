@@ -297,8 +297,9 @@ class Trainer:
 
             # Track metrics
             with torch.no_grad():
+                probs = torch.softmax(logits, dim=1)
                 preds = logits.argmax(dim=1)
-                metrics_tracker.update(preds, labels)
+                metrics_tracker.update(preds, labels, confidences=probs)
 
             pbar.set_postfix({"loss": f"{loss.item():.4f}"})
 

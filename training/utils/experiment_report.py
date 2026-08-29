@@ -514,6 +514,17 @@ def _experiment_information_section(
         f"| Timestamp | {_stringify(manifest.get('timestamp'))} | Run manifest |",
         f"| Git commit | {_stringify(manifest.get('git_commit', checkpoint_info.get('source_git_commit', 'Not recorded')))} | Run manifest |",
         f"| Model architecture | {_stringify(manifest.get('model'))} | Run manifest |",
+    ]
+    if config:
+        lines.extend([
+            f"| Temporal architecture | {_stringify(config.temporal_architecture)} | Config |",
+            f"| Temporal hidden dim | {_stringify(config.temporal_hidden_dim)} | Config |",
+            f"| Optimizer | {_stringify(config.optimizer_name)} | Config |",
+            f"| Learning rate | {_stringify(config.learning_rate)} | Config |",
+            f"| Weight decay | {_stringify(config.weight_decay)} | Config |",
+            f"| Batch size | {_stringify(config.batch_size)} | Config |",
+        ])
+    lines.extend([
         f"| Dataset | {_stringify(manifest.get('dataset'))} | Run manifest |",
         f"| Training version | {_stringify(manifest.get('training_version'))} | Run manifest |",
         f"| Seed | {_stringify(manifest.get('seed'))} | Run manifest |",
@@ -526,7 +537,7 @@ def _experiment_information_section(
         f"| Source training W&B run URL | {_stringify(source_wandb_url)} | Checkpoint source manifest |",
         f"| Source training duration (s) | {_stringify(source_duration)} | Checkpoint source manifest |",
         f"| Configuration file inspected | `{_display_path(cfg_path)}` | Manifest / Config loader |",
-    ]
+    ])
     return lines
 
 

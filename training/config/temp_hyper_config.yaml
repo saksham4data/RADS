@@ -1,0 +1,115 @@
+checkpoint:
+  mode: max
+  monitor_metric: val/f1_accident
+  save_best: true
+  save_last: true
+data:
+  augmentation:
+    brightness_contrast:
+      brightness: 0.15
+      contrast: 0.15
+      enabled: true
+    enabled: true
+    gaussian_blur:
+      enabled: false
+      kernel_size: 3
+      sigma:
+      - 0.1
+      - 0.5
+    horizontal_flip:
+      enabled: true
+      p: 0.5
+    hue:
+      enabled: false
+      value: 0.0
+    preset: conservative_v1
+    rotation:
+      degrees: 5
+      enabled: true
+    saturation:
+      enabled: false
+      value: 0.0
+  class_mapping:
+    accident: 1
+    normal: 0
+  dataset_name: picek_p01
+  frame_sampling:
+    frames_per_video: 8
+    strategy: uniform
+  image_size:
+  - 224
+  - 224
+  label_column: type
+  label_mode: binary
+  metadata_path: Datasets/processed/picek/p01_small_binary/picek_p01_small_binary_metadata.csv
+  raw_base_dir: Datasets
+  split_column: split_in_distribution
+  split_ratios:
+    test: 0.15
+    train: 0.7
+    val: 0.15
+early_stopping:
+  enabled: true
+  min_delta: 0.001
+  patience: 5
+experiment:
+  id: P01
+  name: 'P01 Hyperopt: sgd lr=0.001 wd=0.0001'
+logging:
+  csv: true
+  log_every_n_steps: 5
+  tensorboard: false
+model:
+  freeze_backbone: false
+  name: resnet18
+  num_classes: 2
+  pretrained: true
+optimizer:
+  lr: 0.001
+  name: sgd
+  weight_decay: 0.0001
+output:
+  generate_manifest: true
+  maintain_latest: true
+  timestamped: true
+  track_run_history: true
+project:
+  name: RADS
+  training_version: 1.0.0
+reproducibility:
+  seed: 42
+scheduler:
+  gamma: 0.1
+  name: step_lr
+  step_size: 5
+temporal:
+  architecture: gru
+  bidirectional: false
+  classifier_dropout: 0.3
+  dropout: 0.0
+  enabled: true
+  hidden_dim: 256
+  num_layers: 1
+training:
+  batch_size: 16
+  epochs: 50
+  mixed_precision: false
+  num_workers: 0
+  pin_memory: false
+wandb:
+  enabled: true
+  entity: null
+  group: picek-small-binary-temporal
+  job_type: training
+  log_model: false
+  project: RADS
+  tags:
+  - picek
+  - small_subset
+  - binary
+  - temporal
+  - gru
+  - p01
+  - opt_sgd
+  - lr_0.001
+  - wd_0.0001

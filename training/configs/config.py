@@ -487,6 +487,7 @@ class TrainingConfig:
 
 def load_training_config(
     config_path: Optional[str | Path] = None,
+    checkpoint_path: Optional[str | Path] = None,
 ) -> TrainingConfig:
     """Load and validate the training configuration.
 
@@ -494,9 +495,13 @@ def load_training_config(
     ----------
     config_path : str or Path, optional
         Explicit path to a YAML config file.  When *None* the
-        loader looks for ``training/config/training_config_v1.yaml``
-        (or ``training_config_v2.yaml``) relative to the detected
-        project root.
+        loader attempts to discover the config used from the checkpoint's
+        manifest.json (if *checkpoint_path* is provided), or looks for
+        ``training/config/training_config_v1.yaml`` (or ``training_config_v2.yaml``)
+        relative to the detected project root.
+    checkpoint_path : str or Path, optional
+        Path to a checkpoint (.pt). Used to infer the config used
+        for that training run if *config_path* is not specified.
 
     Returns
     -------
@@ -506,9 +511,33 @@ def load_training_config(
     project_root = _find_project_root()
 
     # Resolve config file
+    cfg_file: Optional[Path] = None
     if config_path is not None:
         cfg_file = Path(config_path)
-    else:
+    elif checkpoint_path is not None:
+        chk = Path(checkpoint_path).resolve()
+        candidate_manifests = [
+            chk.parent.parent / "manifest.json",
+            chk.parent / "manifest.json",
+        ]
+        for m_path in candidate_manifests:
+            if m_path.is_file():
+                try:
+                    import json
+                    with open(m_path, "r", encoding="utf-8") as fh:
+                        manifest_data = json.load(fh)
+                    manifest_cfg = manifest_data.get("config_path")
+                    if manifest_cfg:
+                        candidate_cfg = Path(manifest_cfg)
+                        if not candidate_cfg.is_file():
+                            candidate_cfg = project_root / candidate_cfg
+                        if candidate_cfg.is_file():
+                            cfg_file = candidate_cfg
+                            break
+                except Exception:
+                    pass
+
+    if cfg_file is None:
         # Default priority: v2 → v1 (backward compatibility) → legacy
         default_candidates = [
             project_root / "training" / "config" / "training_config_v2.yaml",

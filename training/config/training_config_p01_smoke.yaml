@@ -1,12 +1,14 @@
 # ─────────────────────────────────────────────────────────────
-# RADS Training Module — Small PICEK Temporal Experiment P01
+# RADS Training Module — Small PICEK Binary Temporal Experiment P01
 # ─────────────────────────────────────────────────────────────
-# First temporal modeling experiment on the Small PICEK subset (v1_small).
+# Binary accident vs non-accident temporal classification on the
+# controlled Small PICEK dataset (200 clips: 100 pos + 100 neg).
 #
 # Objectives:
-#   - Validate temporal GRU architecture on real-world multi-class collisions
-#   - 100 canonical real videos (20 per class across 5 collision types)
-#   - 70 train / 15 val / 15 test stratified split
+#   - Validate temporal GRU architecture on balanced binary collision detection
+#   - 200 balanced clips (100 real positive + 100 paired pre-accident negative)
+#   - 70 train (140 clips) / 15 val (30 clips) / 15 test (30 clips) stratified split
+#   - Strict zero source-video leakage across splits
 #   - Reuses validated ResNet18 + GRU temporal architecture from T01
 # ─────────────────────────────────────────────────────────────
 
@@ -16,17 +18,19 @@ project:
 
 experiment:
   id: "P01"
-  name: "P01 Small PICEK Temporal GRU (100 videos, 5 collision types)"
+  name: "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)"
 
 # ── Data ────────────────────────────────────────────────────
 data:
-  metadata_path: "Datasets/processed/picek/v1_small/picek_v1_small_metadata.csv"
-  dataset_name: "picek"
-  raw_base_dir: "Datasets/raw"
+  metadata_path: "Datasets/processed/picek/p01_small_binary/picek_p01_small_binary_metadata.csv"
+  dataset_name: "picek_p01"
+  raw_base_dir: "Datasets"
   label_column: "type"
-  label_mode: "multiclass"
+  label_mode: "binary"
   split_column: "split_in_distribution"
-  class_mapping: null
+  class_mapping:
+    normal: 0
+    accident: 1
 
   split_ratios:
     train: 0.70
@@ -67,7 +71,7 @@ data:
 model:
   name: "resnet18"
   pretrained: true
-  num_classes: 5
+  num_classes: 2
   freeze_backbone: false
 
 # ── Temporal ────────────────────────────────────────────────
@@ -82,7 +86,7 @@ temporal:
 
 # ── Training ────────────────────────────────────────────────
 training:
-  epochs: 50
+  epochs: 2
   batch_size: 32
   num_workers: 0
   pin_memory: false
@@ -100,7 +104,7 @@ scheduler:
   step_size: 5
   gamma: 0.1
 
-# ── Checkpoint ──────────────────────────────────────────────
+# ── Checkpointing ───────────────────────────────────────────
 checkpoint:
   save_best: true
   save_last: true
@@ -112,15 +116,22 @@ early_stopping:
   enabled: true
   patience: 5
   min_delta: 0.001
-  mode: "max"
 
-# ── W&B ─────────────────────────────────────────────────────
+# ── Logging ─────────────────────────────────────────────────
+logging:
+  tensorboard: false
+  csv: true
+  log_every_n_steps: 5
+
+# ── Weights & Biases ────────────────────────────────────────
 wandb:
   project: "RADS"
   entity: null
   job_type: "training"
-  group: "picek-temporal"
-  tags: ["pipeline-5", "temporal", "gru", "resnet18", "picek", "picek-v1-small", "experiment-P01"]
+  group: "picek-small-binary-temporal"
+  tags: ["picek", "small_subset", "binary", "temporal", "gru", "p01"]
+  enabled: true
+  log_model: false
 
 # ── Reproducibility ─────────────────────────────────────────
 reproducibility:
