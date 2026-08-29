@@ -170,8 +170,8 @@ class MetricsTracker:
             probs = np.array(self._all_confidences)  # [N, C]
             try:
                 if num_classes == 2:
-                    # Binary: use positive-class (index 0 = accident) probability
-                    auroc = roc_auc_score(targets, probs[:, 0])
+                    # Binary: use positive-class (index 1) probability by default
+                    auroc = roc_auc_score(targets, probs[:, 1])
                 else:
                     # Multiclass: macro OvR
                     auroc = roc_auc_score(

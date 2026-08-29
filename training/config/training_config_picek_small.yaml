@@ -83,7 +83,7 @@ temporal:
 # ── Training ────────────────────────────────────────────────
 training:
   epochs: 50
-  batch_size: 16
+  batch_size: 32
   num_workers: 0
   pin_memory: false
   mixed_precision: false
@@ -104,7 +104,7 @@ scheduler:
 checkpoint:
   save_best: true
   save_last: true
-  monitor_metric: "val/macro_f1"
+  monitor_metric: "val/f1_accident"
   mode: "max"
 
 # ── Early Stopping ──────────────────────────────────────────
