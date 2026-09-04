@@ -111,13 +111,15 @@ def predict_video(
         tensor = transform(frame_rgb)
         tensors.append(tensor)
 
-    batch = torch.stack(tensors).to(device)
+    batch = torch.stack(tensors).unsqueeze(0).to(device)
 
     # Inference
     model.eval()
     with torch.no_grad():
         logits = model(batch)
         probs = torch.softmax(logits, dim=1)
+        # Replicate the clip-level prediction for each frame so the rest of the script works
+        probs = probs.repeat(len(frames), 1)
 
     # Aggregate: average confidence across frames
     avg_probs = probs.mean(dim=0).cpu().numpy()

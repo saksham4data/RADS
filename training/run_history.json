@@ -1655,5 +1655,1330 @@
       }
     },
     "augmentation_notes": "Validation and test splits use deterministic transforms."
+  },
+  {
+    "timestamp": "2026-08-30T11:16:50.347224+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 36.21,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9704554080963135,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.4666666666666667
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19",
+      "source_timestamp": "2026-08-29T15:12:19.292970+00:00",
+      "source_wandb_run_id": "duln9pdr",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/duln9pdr",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:17:52.078892+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 33.48,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7263416051864624,
+        "val/top1_accuracy": 0.5666666666666667,
+        "val/macro_f1": 0.4993581514762516,
+        "val/balanced_accuracy": 0.5666666666666667,
+        "val/precision_normal": 0.75,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3157894736842105,
+        "val/precision_accident": 0.5384615384615384,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6829268292682927,
+        "val/auroc": 0.49777777777777776
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.0001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54",
+      "source_timestamp": "2026-08-29T16:13:54.866845+00:00",
+      "source_wandb_run_id": "xi6hz7dg",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/xi6hz7dg",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6829268292682927,
+      "source_total_epochs": 8,
+      "best_metric": 0.6829268292682927
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:18:47.076136+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 33.06,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9894329905509949,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.47111111111111115
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08",
+      "source_timestamp": "2026-08-29T17:02:08.227633+00:00",
+      "source_wandb_run_id": "2ntnbj0v",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/2ntnbj0v",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:19:40.426713+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 33.15,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7260690331459045,
+        "val/top1_accuracy": 0.5333333333333333,
+        "val/macro_f1": 0.475,
+        "val/balanced_accuracy": 0.5333333333333333,
+        "val/precision_normal": 0.6,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3,
+        "val/precision_accident": 0.52,
+        "val/recall_accident": 0.8666666666666667,
+        "val/f1_accident": 0.65,
+        "val/auroc": 0.4933333333333333
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.0001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28",
+      "source_timestamp": "2026-08-29T17:41:28.611685+00:00",
+      "source_wandb_run_id": "q5vh1h9f",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q5vh1h9f",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.65,
+      "source_total_epochs": 8,
+      "best_metric": 0.65
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:20:32.277616+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 33.95,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9312801659107208,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.5022222222222222
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.01 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48",
+      "source_timestamp": "2026-08-29T18:25:48.036073+00:00",
+      "source_wandb_run_id": "go2ny8w2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/go2ny8w2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 10,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:21:34.749354+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 34.13,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19\\checkpoints\\best.pt",
+      "epoch": 4,
+      "training_epoch": 5,
+      "training_metrics": {
+        "val_loss": 0.7258739173412323,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.38440492476060195,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.5,
+        "val/recall_normal": 0.06666666666666667,
+        "val/f1_normal": 0.11764705882352941,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6511627906976745,
+        "val/auroc": 0.48444444444444446
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19",
+      "source_timestamp": "2026-08-29T19:21:19.586027+00:00",
+      "source_wandb_run_id": "fsjq9fh2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/fsjq9fh2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 4,
+      "source_best_metric": 0.6511627906976745,
+      "source_total_epochs": 8,
+      "best_metric": 0.6511627906976745
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:27:48.322941+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 52.57,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9704554080963135,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.4666666666666667
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19",
+      "source_timestamp": "2026-08-29T15:12:19.292970+00:00",
+      "source_wandb_run_id": "duln9pdr",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/duln9pdr",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:29:27.551204+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 69.99,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7263416051864624,
+        "val/top1_accuracy": 0.5666666666666667,
+        "val/macro_f1": 0.4993581514762516,
+        "val/balanced_accuracy": 0.5666666666666667,
+        "val/precision_normal": 0.75,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3157894736842105,
+        "val/precision_accident": 0.5384615384615384,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6829268292682927,
+        "val/auroc": 0.49777777777777776
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.0001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54",
+      "source_timestamp": "2026-08-29T16:13:54.866845+00:00",
+      "source_wandb_run_id": "xi6hz7dg",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/xi6hz7dg",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6829268292682927,
+      "source_total_epochs": 8,
+      "best_metric": 0.6829268292682927
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:31:07.532232+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 36.8,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9894329905509949,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.47111111111111115
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08",
+      "source_timestamp": "2026-08-29T17:02:08.227633+00:00",
+      "source_wandb_run_id": "2ntnbj0v",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/2ntnbj0v",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:32:19.408648+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 31.34,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7260690331459045,
+        "val/top1_accuracy": 0.5333333333333333,
+        "val/macro_f1": 0.475,
+        "val/balanced_accuracy": 0.5333333333333333,
+        "val/precision_normal": 0.6,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3,
+        "val/precision_accident": 0.52,
+        "val/recall_accident": 0.8666666666666667,
+        "val/f1_accident": 0.65,
+        "val/auroc": 0.4933333333333333
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.0001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28",
+      "source_timestamp": "2026-08-29T17:41:28.611685+00:00",
+      "source_wandb_run_id": "q5vh1h9f",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q5vh1h9f",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.65,
+      "source_total_epochs": 8,
+      "best_metric": 0.65
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:33:13.675890+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 28.16,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9312801659107208,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.5022222222222222
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.01 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48",
+      "source_timestamp": "2026-08-29T18:25:48.036073+00:00",
+      "source_wandb_run_id": "go2ny8w2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/go2ny8w2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 10,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:34:01.032639+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 27.66,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19\\checkpoints\\best.pt",
+      "epoch": 4,
+      "training_epoch": 5,
+      "training_metrics": {
+        "val_loss": 0.7258739173412323,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.38440492476060195,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.5,
+        "val/recall_normal": 0.06666666666666667,
+        "val/f1_normal": 0.11764705882352941,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6511627906976745,
+        "val/auroc": 0.48444444444444446
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19",
+      "source_timestamp": "2026-08-29T19:21:19.586027+00:00",
+      "source_wandb_run_id": "fsjq9fh2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/fsjq9fh2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 4,
+      "source_best_metric": 0.6511627906976745,
+      "source_total_epochs": 8,
+      "best_metric": 0.6511627906976745
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:38:10.283700+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 30.12,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9704554080963135,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.4666666666666667
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19",
+      "source_timestamp": "2026-08-29T15:12:19.292970+00:00",
+      "source_wandb_run_id": "duln9pdr",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/duln9pdr",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:39:31.850491+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 27.55,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9704554080963135,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.4666666666666667
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_15-12-19",
+      "source_timestamp": "2026-08-29T15:12:19.292970+00:00",
+      "source_wandb_run_id": "duln9pdr",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/duln9pdr",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:40:16.417637+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 27.73,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7263416051864624,
+        "val/top1_accuracy": 0.5666666666666667,
+        "val/macro_f1": 0.4993581514762516,
+        "val/balanced_accuracy": 0.5666666666666667,
+        "val/precision_normal": 0.75,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3157894736842105,
+        "val/precision_accident": 0.5384615384615384,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6829268292682927,
+        "val/auroc": 0.49777777777777776
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adam lr=0.0001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_16-13-54",
+      "source_timestamp": "2026-08-29T16:13:54.866845+00:00",
+      "source_wandb_run_id": "xi6hz7dg",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/xi6hz7dg",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6829268292682927,
+      "source_total_epochs": 8,
+      "best_metric": 0.6829268292682927
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:41:01.813058+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 26.79,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9894329905509949,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.47111111111111115
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-02-08",
+      "source_timestamp": "2026-08-29T17:02:08.227633+00:00",
+      "source_wandb_run_id": "2ntnbj0v",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/2ntnbj0v",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 7,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:41:45.863479+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 26.41,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.7260690331459045,
+        "val/top1_accuracy": 0.5333333333333333,
+        "val/macro_f1": 0.475,
+        "val/balanced_accuracy": 0.5333333333333333,
+        "val/precision_normal": 0.6,
+        "val/recall_normal": 0.2,
+        "val/f1_normal": 0.3,
+        "val/precision_accident": 0.52,
+        "val/recall_accident": 0.8666666666666667,
+        "val/f1_accident": 0.65,
+        "val/auroc": 0.4933333333333333
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: adamw lr=0.0001 wd=0.01",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_17-41-28",
+      "source_timestamp": "2026-08-29T17:41:28.611685+00:00",
+      "source_wandb_run_id": "q5vh1h9f",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/q5vh1h9f",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.65,
+      "source_total_epochs": 8,
+      "best_metric": 0.65
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:42:29.396373+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 25.91,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48\\checkpoints\\best.pt",
+      "epoch": 0,
+      "training_epoch": 1,
+      "training_metrics": {
+        "val_loss": 0.9312801659107208,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.3333333333333333,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.0,
+        "val/recall_normal": 0.0,
+        "val/f1_normal": 0.0,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 1.0,
+        "val/f1_accident": 0.6666666666666666,
+        "val/auroc": 0.5022222222222222
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.01 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_18-25-48",
+      "source_timestamp": "2026-08-29T18:25:48.036073+00:00",
+      "source_wandb_run_id": "go2ny8w2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/go2ny8w2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 0,
+      "source_best_metric": 0.6666666666666666,
+      "source_total_epochs": 10,
+      "best_metric": 0.6666666666666666
+    }
+  },
+  {
+    "timestamp": "2026-08-30T11:43:12.350525+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 26.48,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19\\checkpoints\\best.pt",
+      "epoch": 4,
+      "training_epoch": 5,
+      "training_metrics": {
+        "val_loss": 0.7258739173412323,
+        "val/top1_accuracy": 0.5,
+        "val/macro_f1": 0.38440492476060195,
+        "val/balanced_accuracy": 0.5,
+        "val/precision_normal": 0.5,
+        "val/recall_normal": 0.06666666666666667,
+        "val/f1_normal": 0.11764705882352941,
+        "val/precision_accident": 0.5,
+        "val/recall_accident": 0.9333333333333333,
+        "val/f1_accident": 0.6511627906976745,
+        "val/auroc": 0.48444444444444446
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Hyperopt: sgd lr=0.001 wd=0.0001",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-29_19-21-19",
+      "source_timestamp": "2026-08-29T19:21:19.586027+00:00",
+      "source_wandb_run_id": "fsjq9fh2",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/fsjq9fh2",
+      "source_git_commit": "b65a1d22482e42a5e4c7f42382badb73a2583d3f",
+      "source_best_epoch": 4,
+      "source_best_metric": 0.6511627906976745,
+      "source_total_epochs": 8,
+      "best_metric": 0.6511627906976745
+    }
+  },
+  {
+    "timestamp": "2026-08-31T15:16:38.634980+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": "708ff58d4f8b0cdc427b87d0fa48270fef7b85b0",
+    "seed": 42,
+    "wandb_run_id": "ydknttgk",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/ydknttgk",
+    "files": {
+      "checkpoints": [
+        "best.pt",
+        "last.pt"
+      ],
+      "metrics": [
+        "training_history.json"
+      ],
+      "predictions": [],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 3601.32,
+      "status": "success",
+      "total_epochs": 13,
+      "best_metric": 0.6190476190476191,
+      "best_epoch": 2
+    },
+    "augmentation": {
+      "enabled": true,
+      "preset": "conservative_v1",
+      "horizontal_flip": {
+        "enabled": true,
+        "p": 0.5
+      },
+      "rotation": {
+        "enabled": true,
+        "degrees": 5
+      },
+      "brightness_contrast": {
+        "enabled": true,
+        "brightness": 0.15,
+        "contrast": 0.15
+      },
+      "saturation": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "hue": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "gaussian_blur": {
+        "enabled": false,
+        "kernel_size": 3,
+        "sigma": [
+          0.1,
+          0.5
+        ]
+      }
+    },
+    "augmentation_notes": "Validation and test splits use deterministic transforms."
+  },
+  {
+    "timestamp": "2026-08-31T16:20:59.622355+00:00",
+    "run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p01_small.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p01",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 61.83,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-31_15-16-38\\checkpoints\\best.pt",
+      "epoch": 2,
+      "training_epoch": 3,
+      "training_metrics": {
+        "val_loss": 0.7301630973815918,
+        "val/top1_accuracy": 0.4666666666666667,
+        "val/macro_f1": 0.3650793650793651,
+        "val/balanced_accuracy": 0.4666666666666667,
+        "val/precision_normal": 0.3333333333333333,
+        "val/recall_normal": 0.06666666666666667,
+        "val/f1_normal": 0.1111111111111111,
+        "val/precision_accident": 0.48148148148148145,
+        "val/recall_accident": 0.8666666666666667,
+        "val/f1_accident": 0.6190476190476191,
+        "val/auroc": 0.4844444444444444
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-31_15-16-38",
+      "source_timestamp": "2026-08-31T15:16:38.634980+00:00",
+      "source_wandb_run_id": "ydknttgk",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/ydknttgk",
+      "source_git_commit": "708ff58d4f8b0cdc427b87d0fa48270fef7b85b0",
+      "source_best_epoch": 2,
+      "source_best_metric": 0.6190476190476191,
+      "source_total_epochs": 13,
+      "best_metric": 0.6190476190476191
+    }
+  },
+  {
+    "timestamp": "2026-08-31T16:57:50.204781+00:00",
+    "run_name": "P02 PICEK Binary Temporal GRU (500 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p02.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p02",
+    "git_commit": "708ff58d4f8b0cdc427b87d0fa48270fef7b85b0",
+    "seed": 42,
+    "wandb_run_id": "hgjds88c",
+    "wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/hgjds88c",
+    "files": {
+      "checkpoints": [
+        "best.pt",
+        "last.pt"
+      ],
+      "metrics": [
+        "training_history.json"
+      ],
+      "predictions": [],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 10552.49,
+      "status": "success",
+      "total_epochs": 23,
+      "best_metric": 0.631578947368421,
+      "best_epoch": 12
+    },
+    "augmentation": {
+      "enabled": true,
+      "preset": "conservative_v1",
+      "horizontal_flip": {
+        "enabled": true,
+        "p": 0.5
+      },
+      "rotation": {
+        "enabled": true,
+        "degrees": 5
+      },
+      "brightness_contrast": {
+        "enabled": true,
+        "brightness": 0.15,
+        "contrast": 0.15
+      },
+      "saturation": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "hue": {
+        "enabled": false,
+        "value": 0.0
+      },
+      "gaussian_blur": {
+        "enabled": false,
+        "kernel_size": 3,
+        "sigma": [
+          0.1,
+          0.5
+        ]
+      }
+    },
+    "augmentation_notes": "Validation and test splits use deterministic transforms."
+  },
+  {
+    "timestamp": "2026-08-31T19:55:16.587376+00:00",
+    "run_name": "P02 PICEK Binary Temporal GRU (500 clips, balanced)",
+    "training_version": "1.0.0",
+    "config_path": "E:\\Rads\\training\\config\\training_config_p02.yaml",
+    "model": "resnet18",
+    "dataset": "picek_p02",
+    "git_commit": null,
+    "seed": 42,
+    "wandb_run_id": null,
+    "wandb_run_url": null,
+    "files": {
+      "checkpoints": [],
+      "metrics": [
+        "test_metrics.json"
+      ],
+      "predictions": [
+        "test_predictions.json",
+        "test_confusion_matrix.json"
+      ],
+      "logs": []
+    },
+    "execution": {
+      "duration_seconds": 84.03,
+      "status": "test"
+    },
+    "checkpoint": {
+      "path": "E:\\Rads\\training\\outputs\\2026-08-31_16-57-50\\checkpoints\\best.pt",
+      "epoch": 12,
+      "training_epoch": 13,
+      "training_metrics": {
+        "val_loss": 0.7036549925804139,
+        "val/top1_accuracy": 0.5394736842105263,
+        "val/macro_f1": 0.5087719298245614,
+        "val/balanced_accuracy": 0.5394736842105263,
+        "val/precision_normal": 0.5789473684210527,
+        "val/recall_normal": 0.2894736842105263,
+        "val/f1_normal": 0.38596491228070173,
+        "val/precision_accident": 0.5263157894736842,
+        "val/recall_accident": 0.7894736842105263,
+        "val/f1_accident": 0.631578947368421,
+        "val/auroc": 0.5193905817174516
+      },
+      "monitored_metric": "val/f1_accident",
+      "monitor_mode": "max",
+      "source_run_name": "P02 PICEK Binary Temporal GRU (500 clips, balanced)",
+      "source_run_dir": "E:\\Rads\\training\\outputs\\2026-08-31_16-57-50",
+      "source_timestamp": "2026-08-31T16:57:50.204781+00:00",
+      "source_wandb_run_id": "hgjds88c",
+      "source_wandb_run_url": "https://wandb.ai/saksham4data-vinkura/RADS/runs/hgjds88c",
+      "source_git_commit": "708ff58d4f8b0cdc427b87d0fa48270fef7b85b0",
+      "source_best_epoch": 12,
+      "source_best_metric": 0.631578947368421,
+      "source_total_epochs": 23,
+      "best_metric": 0.631578947368421
+    }
   }
 ]

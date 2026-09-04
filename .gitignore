@@ -174,7 +174,7 @@ eda/exports/*
 # ============================================================
 
 scratch/
-docs/
+reports/
 
 # ============================================================
 # Secrets
@@ -189,8 +189,20 @@ docs/
 
 !README.md
 !LICENSE
+!docs/
 !docs/**
 !*.drawio
 !*.drawio.png
 !*.svg
 !*.pdf
+
+# ============================================================
+# Training Outputs
+# ============================================================
+
+# Training/evaluation runs are generated artifacts. Keep the
+# reproducible configs and summarize important results under docs/research.
+training/outputs/
+training/wandb/
+training/p02_prediction.json
+training/prediction_result.json

@@ -125,7 +125,7 @@ def main() -> None:
         early_stop = EarlyStopping(
             patience=es_cfg["patience"],
             min_delta=es_cfg.get("min_delta", 0.001),
-            mode=es_cfg.get("mode", "min"),
+            mode=es_cfg.get("mode", config.monitor_mode),
         )
 
     lr_monitor = LearningRateMonitor()

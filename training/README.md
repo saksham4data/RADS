@@ -8,7 +8,7 @@ before moving to object detection.
 
 ```bash
 # 1. Install training dependencies
-pip install -r requirements-training.txt
+pip install -r requirements.txt
 
 # 2. Run training (1-epoch sanity check by default)
 python training/train.py
