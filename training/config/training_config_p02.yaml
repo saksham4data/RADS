@@ -17,13 +17,13 @@ project:
   training_version: "1.0.0"
 
 experiment:
-  id: "P01"
-  name: "P01 Small PICEK Binary Temporal GRU (200 clips, balanced)"
+  id: "P02"
+  name: "P02 PICEK Binary Temporal GRU (500 clips, balanced)"
 
 # ── Data ────────────────────────────────────────────────────
 data:
-  metadata_path: "Datasets/processed/picek/p01_small_binary/picek_p01_small_binary_metadata.csv"
-  dataset_name: "picek_p01"
+  metadata_path: "Datasets/processed/picek/p02_binary/picek_p02_binary_metadata.csv"
+  dataset_name: "picek_p02"
   raw_base_dir: "Datasets"
   label_column: "type"
   label_mode: "binary"
@@ -86,7 +86,7 @@ temporal:
 
 # ── Training ────────────────────────────────────────────────
 training:
-  epochs: 1
+  epochs: 50
   batch_size: 16
   num_workers: 0
   pin_memory: false
@@ -128,7 +128,7 @@ wandb:
   entity: null
   job_type: "training"
   group: "picek-small-binary-temporal"
-  tags: ["picek", "small_subset", "binary", "temporal", "gru", "p01"]
+  tags: ["picek", "p02", "500_subset", "binary", "temporal", "gru"]
   enabled: true
   log_model: false
 

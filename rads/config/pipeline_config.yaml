@@ -1,0 +1,9 @@
+detector:
+  model: "yolo11n.pt"        # smallest model for initial testing
+  confidence: 0.25
+  iou: 0.45
+  classes: [0, 1, 2, 3, 5, 7]  # COCO: person, bicycle, car, motorcycle, bus, truck
+tracker:
+  type: "bytetrack"
+pipeline:
+  frame_skip: 1              # process every frame (1 = no skip)
