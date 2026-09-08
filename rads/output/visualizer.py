@@ -100,16 +100,23 @@ class Visualizer:
         self.release()
 
 def extract_evidence_clip(video_path: str, output_path: str, event_result: Dict[str, Any], pad_seconds: float = 2.0):
-    """Extracts a short clip around the accident impact time."""
+    """Extracts a short clip around the entire accident event window."""
     if not event_result.get('accident'):
         return
         
-    impact_time = event_result.get('event', {}).get('impact_time')
-    if impact_time is None:
-        return
+    event = event_result.get('event', {})
+    start_time = event.get('start_time')
+    end_time = event.get('end_time')
+    
+    if start_time is None or end_time is None:
+        impact_time = event.get('impact_time')
+        if impact_time is None:
+            return
+        start_time = impact_time
+        end_time = impact_time
         
-    start_sec = max(0.0, impact_time - pad_seconds)
-    end_sec = impact_time + pad_seconds
+    start_sec = max(0.0, start_time - pad_seconds)
+    end_sec = end_time + pad_seconds
     
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
