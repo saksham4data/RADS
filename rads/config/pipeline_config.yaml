@@ -11,7 +11,7 @@ interaction:
   # Proximity threshold is relative to the size (diagonal) of the largest object in the pair
   normalized_proximity_threshold: 1.5  
   # Minimum consecutive frames the interaction evidence must be present to be a candidate
-  min_persistence_frames: 5
+  min_persistence_frames: 3
   # Minimum Intersection over Union (IoU) of bounding boxes to consider overlap
   overlap_iou_threshold: 0.1
   # Multiplier for relative velocity threshold (pixels per frame)

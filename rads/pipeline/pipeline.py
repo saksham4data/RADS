@@ -96,7 +96,7 @@ class Pipeline:
         
         # Phase 5 & 6: Reasoning and Severity
         print("Evaluating accident likelihood...")
-        accident_result = evaluate_accident(interaction_candidates)
+        accident_result = evaluate_accident(interaction_candidates, track_history)
         severity = estimate_severity(accident_result, track_history)
         accident_result['severity'] = severity
         
