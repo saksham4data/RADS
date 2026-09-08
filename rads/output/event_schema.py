@@ -25,5 +25,5 @@ def get_stub_event_result(video_path: str, tracks_summary: Dict[int, Any] = None
         "interaction_candidates": [],
         "severity": None,            # 'LOW', 'MEDIUM', 'HIGH', or None
         "tracks_summary": tracks_summary,
-        "status": "PHASE_4_STUB"     # Indicates this is an incomplete vertical slice
+        "status": "PHASE_5_COMPLETE"     # Indicates this includes reasoning and severity
     }

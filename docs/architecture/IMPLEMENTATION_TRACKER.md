@@ -15,9 +15,9 @@ Updated after every implementation phase.
 | 2 | Visual Verification & Profiling | Completed | 2026-09-06 | 2026-09-06 | Visualizer built, performance tested |
 | 3 | Track Histories & Motion Features | Completed | 2026-09-06 | 2026-09-06 | Trajectory memory and kinematics derived |
 | 4 | Pairwise & Interaction Detection | Completed | 2026-09-08 | 2026-09-08 | Detected interactions using normalized proximity, relative velocity, and bbox overlap |
-| 5 | Accident Reasoning & Localization | Not Started | — | — | |
-| 6 | Severity Heuristic | Not Started | — | — | |
-| 7 | Visualization Finalization | Not Started | — | — | |
+| 5 | Accident Reasoning & Localization | Completed | 2026-09-08 | 2026-09-08 | Implemented rule-based reasoning engine |
+| 6 | Severity Heuristic | Completed | 2026-09-08 | 2026-09-08 | Rule-based heuristic based on objects and class |
+| 7 | Visualization Finalization | Completed | 2026-09-08 | 2026-09-08 | Two-pass rendering and clip extraction |
 | 8 | Evaluation & MVP Completion | Not Started | — | — | |
 
 ---
@@ -146,8 +146,38 @@ Updated after every implementation phase.
 
 ---
 
-### Phase N — [Name]
-**Date:** YYYY-MM-DD
+### Phases 5, 6, and 7 — Reasoning, Severity, and Visualization
+
+**Date:** 2026-09-08
+**Files created/modified:**
+- `rads/reasoning/__init__.py`
+- `rads/reasoning/accident_reasoner.py`
+- `rads/severity/__init__.py`
+- `rads/severity/severity_engine.py`
+- `rads/output/visualizer.py`
+- `rads/output/event_schema.py`
+- `rads/motion/trajectory.py`
+- `rads/pipeline/pipeline.py`
+
+**Verification outcome:**
+- [x] Logic evaluates candidates, assigns accident confidence, and localizes event bounds (impact time).
+- [x] Severity assigned based on number and class type of involved objects.
+- [x] Two-pass pipeline architecture implemented successfully for rendering downstream reasoning info onto the video frames.
+- [x] Event-evidence clip automatically sliced and exported.
+- [x] Visually verified: The annotated video overlays accident status, confidence, severity, and visually highlights involved objects during the event window.
+
+**Blockers / Deviations:**
+- Visualization moved to a post-processing second pass since reasoning relies on full-video temporal context.
+- Used OpenCV for evidence clip slicing rather than subprocess ffmpeg to minimize external dependencies.
+
+**MVP Definition of Done status:**
+- Implemented Accident Event detection (MVP §5.8).
+- Implemented Confidence & Severity output (MVP §5.8).
+- Visually verifiable output pipeline completed.
+
+---
+
+### Phase 8 — Evaluation & MVP Completion
 **Files created/modified:**
 - `rads/...`
 

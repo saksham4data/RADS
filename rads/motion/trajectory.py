@@ -28,7 +28,9 @@ class TrackHistory:
                 'cy': cy,
                 'w': w,
                 'h': h,
-                'bbox_xyxy': [x1, y1, x2, y2]
+                'bbox_xyxy': [x1, y1, x2, y2],
+                'class_name': obj.get('class_name', 'unknown'),
+                'confidence': obj.get('confidence', 0.0)
             })
 
     def get_trajectory(self, track_id: int) -> List[Dict[str, Any]]:
