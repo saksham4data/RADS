@@ -117,13 +117,37 @@ def evaluate_accident(interaction_candidates: List[Dict[str, Any]], track_histor
     # Threshold for reporting a confident accident
     if best_candidate and best_score >= 0.5:
         confidence = min(best_score, 1.0)
+        
+        # --- Dynamic Temporal Clustering ---
+        # Find all candidates within +/- 3.0 seconds that share at least one ID
+        cluster_cands = []
+        target_ids = {best_candidate['object_a_id'], best_candidate['object_b_id']}
+        peak_time = best_candidate.get('peak_time', 0.0)
+        
+        for cand in interaction_candidates:
+            # We look for related interactions within a short temporal window
+            if abs(cand.get('peak_time', 0.0) - peak_time) <= 3.0:
+                cand_ids = {cand['object_a_id'], cand['object_b_id']}
+                if cand_ids.intersection(target_ids):
+                    cluster_cands.append(cand)
+                    
+        # Update event bounds based on the entire cluster of interactions
+        start_time = min((c.get('start_time', best_candidate.get('start_time')) for c in cluster_cands))
+        end_time = max((c.get('end_time', best_candidate.get('end_time')) for c in cluster_cands))
+        
+        # Include all uniquely involved objects from the cluster
+        involved_ids = set()
+        for c in cluster_cands:
+            involved_ids.add(c['object_a_id'])
+            involved_ids.add(c['object_b_id'])
+            
         return {
             "accident": True,
             "confidence": round(confidence, 2),
-            "start_time": best_candidate.get('start_time'),
+            "start_time": start_time,
             "impact_time": best_candidate.get('peak_time'),
-            "end_time": best_candidate.get('end_time'),
-            "involved_object_ids": [best_candidate['object_a_id'], best_candidate['object_b_id']],
+            "end_time": end_time,
+            "involved_object_ids": list(involved_ids),
             "evidence_list": best_candidate.get('evidence_list', [])
         }
         
