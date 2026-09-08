@@ -43,7 +43,7 @@ class Visualizer:
                 cv2.polylines(annotated_frame, [pts], isClosed=False, color=color, thickness=2)
 
         # 3. Draw current bounding boxes
-        involved_ids = event_result.get('involved_object_ids', [])
+        involved_ids = event_result.get('objects_involved', [])
         
         for t_id in track_history.get_all_track_ids():
             traj = track_history.get_trajectory(t_id)
