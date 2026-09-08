@@ -11,10 +11,10 @@ Updated after every implementation phase.
 | Phase | Name | Status | Date Started | Date Completed | Notes |
 |---|---|---|---|---|---|
 | 0 | Scaffolding | Completed | 2026-09-05 | 2026-09-05 | Dependencies and skeleton added |
-| 1 | First Vertical Slice | Not Started | — | — | |
-| 2 | Visual Verification & Profiling | Not Started | — | — | |
-| 3 | Track Histories & Motion Features | Not Started | — | — | |
-| 4 | Pairwise & Interaction Detection | Not Started | — | — | |
+| 1 | First Vertical Slice | Completed | 2026-09-06 | 2026-09-06 | YOLO detection + tracker integration |
+| 2 | Visual Verification & Profiling | Completed | 2026-09-06 | 2026-09-06 | Visualizer built, performance tested |
+| 3 | Track Histories & Motion Features | Completed | 2026-09-06 | 2026-09-06 | Trajectory memory and kinematics derived |
+| 4 | Pairwise & Interaction Detection | Completed | 2026-09-08 | 2026-09-08 | Detected interactions using normalized proximity, relative velocity, and bbox overlap |
 | 5 | Accident Reasoning & Localization | Not Started | — | — | |
 | 6 | Severity Heuristic | Not Started | — | — | |
 | 7 | Visualization Finalization | Not Started | — | — | |
@@ -49,8 +49,104 @@ Updated after every implementation phase.
 
 ---
 
-### Phase N — [Name]
+### Phase 1 — First Vertical Slice
 
+**Date:** 2026-09-06
+**Files created/modified:**
+- `rads/config/config_loader.py`
+- `rads/video/video_reader.py`
+- `rads/detection/detector.py`
+- `rads/tracking/tracker.py`
+- `rads/output/event_schema.py`
+- `rads/pipeline/pipeline.py`
+- `run_pipeline.py`
+
+**Verification outcome:**
+- [x] `run_pipeline.py` executes without error on a test video: PASS
+- [x] `results.json` contains tracked objects with consistent `track_id` values: PASS
+- [x] No existing file modified: PASS
+
+**Blockers / Deviations:**
+- None.
+
+**MVP Definition of Done status:**
+- Video input pipeline (MVP §5.1) — foundational pieces implemented.
+- YOLO object detection (MVP §5.2) — implemented via ultralytics.
+- Multi-object tracking (MVP §5.3) — implemented via ultralytics track().
+
+---
+
+### Phase 2 — Visual Verification & Profiling
+
+**Date:** 2026-09-06
+**Files created/modified:**
+- `rads/output/visualizer.py`
+- `rads/pipeline/pipeline.py`
+- `run_pipeline.py`
+
+**Verification outcome:**
+- [x] Annotated video shows correct bounding boxes with stable IDs: PASS
+- [x] Per-frame processing time is logged: PASS
+- [x] FPS is sufficient for MVP logic testing: PASS (approx. 7 FPS on CPU/standard hardware with YOLO11n)
+
+**Blockers / Deviations:**
+- None. YOLO11n provides adequate performance and tracking stability for this phase.
+
+**MVP Definition of Done status:**
+- Progressed tracking (MVP §5.3) and visual verification capabilities.
+
+### Phase 3 — Track Histories & Motion Features
+
+**Date:** 2026-09-06
+**Files created/modified:**
+- `rads/motion/trajectory.py`
+- `rads/motion/motion_features.py`
+- `rads/pipeline/pipeline.py`
+- `rads/output/visualizer.py`
+
+**Verification outcome:**
+- [x] Kinematics (velocity, acceleration, direction) are successfully computed in image-space (pixels/sec): PASS
+- [x] Light smoothing reduces detection jitter in velocity gradients: PASS
+- [x] Visualizer renders historic trailing trajectories correctly behind moving vehicles: PASS
+
+**Blockers / Deviations:**
+- Note: Computations are strictly in image-space coordinates. No world-coordinate scaling (pixels to meters) is applied per the MVP scope constraint.
+
+**MVP Definition of Done status:**
+- Implemented Track history storage (MVP §5.4).
+- Implemented Trajectory extraction (MVP §5.5).
+- Implemented Motion feature extraction (MVP §5.6).
+
+---
+
+### Phase 4 — Pairwise Relationships & Interaction Detection
+
+**Date:** 2026-09-08
+**Files created/modified:**
+- `rads/interaction/__init__.py`
+- `rads/interaction/pairwise.py`
+- `rads/interaction/interaction_engine.py`
+- `rads/interaction/test_interactions.py`
+- `rads/pipeline/pipeline.py`
+- `rads/output/event_schema.py`
+- `rads/config/pipeline_config.yaml`
+
+**Verification outcome:**
+- [x] Tested against 3 positive and 3 negative clips from `picek_sorted`: PASS
+- [x] Identified interaction candidates correctly based on normalized proximity, relative velocity, trajectory convergence, and bbox overlap: PASS
+- [x] Extracted evidence such as distance, normalized proximity, and relative velocity per pair per frame: PASS
+
+**Blockers / Deviations:**
+- No arbitrary fixed pixel thresholds used for proximity; utilized normalized metrics (relative to object size bounding box).
+- Convergence angle was simplified to `relative_velocity` (rate of change of distance) as a sufficient indicator of trajectory convergence for the MVP.
+
+**MVP Definition of Done status:**
+- Implemented Pairwise object relationships (MVP §5.7 partial).
+- Implemented Interaction detection (MVP §5.7).
+
+---
+
+### Phase N — [Name]
 **Date:** YYYY-MM-DD
 **Files created/modified:**
 - `rads/...`
@@ -70,8 +166,8 @@ Updated after every implementation phase.
 ## Configuration Snapshot
 
 Record key configuration decisions here:
-- YOLO model: (to be decided at Phase 1)
-- Tracker: (to be decided at Phase 1)
+- YOLO model: `yolo11n.pt` (Phase 1)
+- Tracker: ByteTrack (Phase 1)
 - Severity thresholds: (to be decided at Phase 6)
 
 ---
@@ -80,4 +176,6 @@ Record key configuration decisions here:
 
 | Phase | Video | Resolution | FPS | Frames | Pipeline Time (s) | Per-Frame (ms) | GPU Mem (MB) |
 |---|---|---|---|---|---|---|---|
-| 2 | (first test) | | | | | | |
+| 2 | `-2UPLUV7JLg_00.mp4` | Unknown | 7.20 | 299 | 41.54 | ~138 | CPU |
+| 2 | `-6SQSDj8cYU_00.mp4` | Unknown | 6.60 | 450 | 68.23 | ~151 | CPU |
+| 2 | `022uvRkRJ8E_00.mp4` | Unknown | 7.15 | 596 | 83.38 | ~140 | CPU |

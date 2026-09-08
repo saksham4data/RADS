@@ -7,3 +7,14 @@ tracker:
   type: "bytetrack"
 pipeline:
   frame_skip: 1              # process every frame (1 = no skip)
+interaction:
+  # Proximity threshold is relative to the size (diagonal) of the largest object in the pair
+  normalized_proximity_threshold: 1.5  
+  # Minimum consecutive frames the interaction evidence must be present to be a candidate
+  min_persistence_frames: 5
+  # Minimum Intersection over Union (IoU) of bounding boxes to consider overlap
+  overlap_iou_threshold: 0.1
+  # Multiplier for relative velocity threshold (pixels per frame)
+  relative_velocity_threshold: 5.0
+  # Convergence angle threshold (in degrees) - if vectors point towards each other within this angle
+  convergence_angle_threshold: 45.0
