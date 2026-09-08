@@ -206,3 +206,10 @@ training/outputs/
 training/wandb/
 training/p02_prediction.json
 training/prediction_result.json
+
+# ============================================================
+# Pipeline Outputs
+# ============================================================
+
+output/
+output_results/
