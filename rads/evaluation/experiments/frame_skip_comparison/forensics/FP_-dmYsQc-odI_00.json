@@ -1,0 +1,4616 @@
+{
+  "video_name": "-dmYsQc-odI_00.mp4",
+  "video_path": "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-dmYsQc-odI_00.mp4",
+  "ground_truth": "normal",
+  "failure_type": "FP",
+  "video_meta": {
+    "total_frames": 38,
+    "fps": 8.033,
+    "duration_seconds": 4.73
+  },
+  "tracking": {
+    "total_unique_tracks": 12,
+    "track_summaries": {
+      "1": {
+        "class_name": "car",
+        "first_frame": 0,
+        "last_frame": 37,
+        "frame_count": 36,
+        "lifespan_frames": 37
+      },
+      "2": {
+        "class_name": "truck",
+        "first_frame": 0,
+        "last_frame": 37,
+        "frame_count": 34,
+        "lifespan_frames": 37
+      },
+      "3": {
+        "class_name": "truck",
+        "first_frame": 0,
+        "last_frame": 23,
+        "frame_count": 20,
+        "lifespan_frames": 23
+      },
+      "4": {
+        "class_name": "car",
+        "first_frame": 0,
+        "last_frame": 36,
+        "frame_count": 26,
+        "lifespan_frames": 36
+      },
+      "7": {
+        "class_name": "truck",
+        "first_frame": 3,
+        "last_frame": 37,
+        "frame_count": 34,
+        "lifespan_frames": 34
+      },
+      "8": {
+        "class_name": "truck",
+        "first_frame": 3,
+        "last_frame": 12,
+        "frame_count": 10,
+        "lifespan_frames": 9
+      },
+      "11": {
+        "class_name": "truck",
+        "first_frame": 5,
+        "last_frame": 7,
+        "frame_count": 3,
+        "lifespan_frames": 2
+      },
+      "20": {
+        "class_name": "car",
+        "first_frame": 9,
+        "last_frame": 9,
+        "frame_count": 1,
+        "lifespan_frames": 0
+      },
+      "25": {
+        "class_name": "truck",
+        "first_frame": 12,
+        "last_frame": 28,
+        "frame_count": 15,
+        "lifespan_frames": 16
+      },
+      "33": {
+        "class_name": "truck",
+        "first_frame": 15,
+        "last_frame": 18,
+        "frame_count": 4,
+        "lifespan_frames": 3
+      },
+      "49": {
+        "class_name": "truck",
+        "first_frame": 24,
+        "last_frame": 28,
+        "frame_count": 5,
+        "lifespan_frames": 4
+      },
+      "61": {
+        "class_name": "bus",
+        "first_frame": 32,
+        "last_frame": 37,
+        "frame_count": 6,
+        "lifespan_frames": 5
+      }
+    }
+  },
+  "motion_features": {
+    "1": {
+      "total_displacement": 347.51094314351764,
+      "net_displacement": 339.4582161657948,
+      "mean_velocity": 71.33574602069086,
+      "max_velocity": 103.00788350105817,
+      "mean_acceleration": 37.960069893475485,
+      "max_acceleration": 95.05710044853622,
+      "mean_direction": [
+        0.7949240672601093,
+        0.6067089312764773
+      ]
+    },
+    "2": {
+      "total_displacement": 166.67469719633792,
+      "net_displacement": 163.42436605083077,
+      "mean_velocity": 34.47630579997643,
+      "max_velocity": 45.23419239173766,
+      "mean_acceleration": 22.94092849641736,
+      "max_acceleration": 66.95307356329636,
+      "mean_direction": [
+        0.640159593757948,
+        0.7682419505075592
+      ]
+    },
+    "3": {
+      "total_displacement": 181.85870141559965,
+      "net_displacement": 167.58498707040104,
+      "mean_velocity": 57.67111433091024,
+      "max_velocity": 79.9297371916687,
+      "mean_acceleration": 57.9698229016771,
+      "max_acceleration": 161.41223065227564,
+      "mean_direction": [
+        0.8877987275718681,
+        0.4602319190601323
+      ]
+    },
+    "4": {
+      "total_displacement": 40.82611470223766,
+      "net_displacement": 39.315566022458945,
+      "mean_velocity": 8.193918277192099,
+      "max_velocity": 11.933332963418547,
+      "mean_acceleration": 9.43914941184869,
+      "max_acceleration": 15.775814393077471,
+      "mean_direction": [
+        0.6397898930885939,
+        0.7685498635102902
+      ]
+    },
+    "7": {
+      "total_displacement": 179.0159796921253,
+      "net_displacement": 176.41926435337476,
+      "mean_velocity": 40.87696435615182,
+      "max_velocity": 55.410011209779356,
+      "mean_acceleration": 23.385990576926474,
+      "max_acceleration": 59.01164963682626,
+      "mean_direction": [
+        0.7729033561254496,
+        0.6345237600673566
+      ]
+    },
+    "8": {
+      "total_displacement": 137.89533909972744,
+      "net_displacement": 133.6340113432454,
+      "mean_velocity": 113.49370314183882,
+      "max_velocity": 132.92630324820863,
+      "mean_acceleration": 97.98611236729862,
+      "max_acceleration": 155.03853695706556,
+      "mean_direction": [
+        0.8844081722218229,
+        0.46671424330874484
+      ]
+    },
+    "11": {
+      "total_displacement": 5.103308942308146,
+      "net_displacement": 4.246806620985677,
+      "mean_velocity": 13.161710936434392,
+      "max_velocity": 17.057298793188973,
+      "mean_acceleration": 90.22117176728123,
+      "max_acceleration": 90.22117176728123,
+      "mean_direction": [
+        0.9749793375554435,
+        -0.222295504542823
+      ]
+    },
+    "20": {
+      "total_displacement": 0.0,
+      "net_displacement": 0.0,
+      "mean_velocity": 0.0,
+      "max_velocity": 0.0,
+      "mean_acceleration": 0.0,
+      "max_acceleration": 0.0,
+      "mean_direction": [
+        0.0,
+        0.0
+      ]
+    },
+    "25": {
+      "total_displacement": 229.77607493348717,
+      "net_displacement": 221.21205649493064,
+      "mean_velocity": 109.33658167739809,
+      "max_velocity": 140.3294793216598,
+      "mean_acceleration": 91.25804776749743,
+      "max_acceleration": 208.07825735462984,
+      "mean_direction": [
+        -0.9407587499153512,
+        -0.33907664982671065
+      ]
+    },
+    "33": {
+      "total_displacement": 12.116679342422806,
+      "net_displacement": 6.811418955285299,
+      "mean_velocity": 12.148776970626125,
+      "max_velocity": 18.238709489268913,
+      "mean_acceleration": 31.123456096723775,
+      "max_acceleration": 39.0475088632162,
+      "mean_direction": [
+        0.7160593707584471,
+        0.6980393810874977
+      ]
+    },
+    "49": {
+      "total_displacement": 38.8585051111539,
+      "net_displacement": 38.74993072590577,
+      "mean_velocity": 65.0750329010004,
+      "max_velocity": 81.08548327619617,
+      "mean_acceleration": 54.12861878651984,
+      "max_acceleration": 82.74302646704594,
+      "mean_direction": [
+        -0.9738936576304292,
+        -0.22700472159676385
+      ]
+    },
+    "61": {
+      "total_displacement": 92.0122466364006,
+      "net_displacement": 90.89724983757993,
+      "mean_velocity": 133.28791076639112,
+      "max_velocity": 178.32762293726358,
+      "mean_acceleration": 192.91913914441113,
+      "max_acceleration": 266.82848865626937,
+      "mean_direction": [
+        -0.9338218272738879,
+        -0.3577384448264644
+      ]
+    }
+  },
+  "pairwise_pairs_count": 46,
+  "pairwise_detail": {
+    "1_2": {
+      "id_a": 1,
+      "id_b": 2,
+      "co_existing_frames": 33,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 91.1,
+          "norm_prox": 0.718,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 1,
+          "timestamp": 0.124,
+          "distance": 91.9,
+          "norm_prox": 0.736,
+          "iou": 0.0,
+          "rel_vel": -6.54,
+          "conv_angle": 5.3
+        },
+        {
+          "frame": 2,
+          "timestamp": 0.249,
+          "distance": 95.9,
+          "norm_prox": 0.769,
+          "iou": 0.0,
+          "rel_vel": -31.89,
+          "conv_angle": 19.7
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 100.5,
+          "norm_prox": 0.779,
+          "iou": 0.0,
+          "rel_vel": -36.92,
+          "conv_angle": 36.5
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 101.9,
+          "norm_prox": 0.779,
+          "iou": 0.0,
+          "rel_vel": -11.92,
+          "conv_angle": 14.5
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 103.9,
+          "norm_prox": 0.786,
+          "iou": 0.0,
+          "rel_vel": -15.63,
+          "conv_angle": 22.8
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 106.2,
+          "norm_prox": 0.803,
+          "iou": 0.0,
+          "rel_vel": -18.5,
+          "conv_angle": 7.0
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 108.6,
+          "norm_prox": 0.791,
+          "iou": 0.0,
+          "rel_vel": -19.51,
+          "conv_angle": 8.0
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 111.0,
+          "norm_prox": 0.803,
+          "iou": 0.0,
+          "rel_vel": -18.86,
+          "conv_angle": 9.7
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 113.0,
+          "norm_prox": 0.814,
+          "iou": 0.0,
+          "rel_vel": -16.65,
+          "conv_angle": 1.6
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 117.9,
+          "norm_prox": 0.824,
+          "iou": 0.0,
+          "rel_vel": -38.68,
+          "conv_angle": 12.8
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 123.6,
+          "norm_prox": 0.845,
+          "iou": 0.0,
+          "rel_vel": -46.52,
+          "conv_angle": 15.8
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 125.0,
+          "norm_prox": 0.841,
+          "iou": 0.0,
+          "rel_vel": -11.25,
+          "conv_angle": 9.5
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 128.5,
+          "norm_prox": 0.85,
+          "iou": 0.0,
+          "rel_vel": -27.88,
+          "conv_angle": 12.7
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 133.8,
+          "norm_prox": 0.868,
+          "iou": 0.0,
+          "rel_vel": -42.19,
+          "conv_angle": 9.9
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 138.7,
+          "norm_prox": 0.883,
+          "iou": 0.0,
+          "rel_vel": -39.99,
+          "conv_angle": 36.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 146.3,
+          "norm_prox": 0.901,
+          "iou": 0.0,
+          "rel_vel": -60.39,
+          "conv_angle": 6.1
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 151.0,
+          "norm_prox": 0.917,
+          "iou": 0.0,
+          "rel_vel": -37.92,
+          "conv_angle": 11.2
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 157.3,
+          "norm_prox": 0.934,
+          "iou": 0.0,
+          "rel_vel": -50.69,
+          "conv_angle": 28.7
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 161.0,
+          "norm_prox": 0.953,
+          "iou": 0.0,
+          "rel_vel": -29.72,
+          "conv_angle": 4.4
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 165.3,
+          "norm_prox": 0.967,
+          "iou": 0.0,
+          "rel_vel": -34.33,
+          "conv_angle": 7.3
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 166.9,
+          "norm_prox": 0.975,
+          "iou": 0.0,
+          "rel_vel": -13.06,
+          "conv_angle": 34.2
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 175.6,
+          "norm_prox": 1.007,
+          "iou": 0.0,
+          "rel_vel": -69.55,
+          "conv_angle": 11.5
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 181.1,
+          "norm_prox": 1.017,
+          "iou": 0.0,
+          "rel_vel": -44.58,
+          "conv_angle": 22.0
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 184.9,
+          "norm_prox": 1.023,
+          "iou": 0.0,
+          "rel_vel": -30.41,
+          "conv_angle": 35.7
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 193.3,
+          "norm_prox": 1.049,
+          "iou": 0.0,
+          "rel_vel": -67.56,
+          "conv_angle": 4.2
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 206.1,
+          "norm_prox": 1.057,
+          "iou": 0.0,
+          "rel_vel": -51.37,
+          "conv_angle": 0.1
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 212.9,
+          "norm_prox": 1.077,
+          "iou": 0.0,
+          "rel_vel": -54.96,
+          "conv_angle": 3.2
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 216.1,
+          "norm_prox": 1.048,
+          "iou": 0.0,
+          "rel_vel": -25.15,
+          "conv_angle": 2.9
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 238.3,
+          "norm_prox": 1.11,
+          "iou": 0.0,
+          "rel_vel": -59.42,
+          "conv_angle": 14.1
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 241.8,
+          "norm_prox": 1.12,
+          "iou": 0.0,
+          "rel_vel": -28.22,
+          "conv_angle": 24.9
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 267.3,
+          "norm_prox": 1.184,
+          "iou": 0.0,
+          "rel_vel": -68.34,
+          "conv_angle": 5.2
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 273.0,
+          "norm_prox": 1.135,
+          "iou": 0.0,
+          "rel_vel": -45.74,
+          "conv_angle": 55.2
+        }
+      ]
+    },
+    "1_3": {
+      "id_a": 1,
+      "id_b": 3,
+      "co_existing_frames": 20,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 103.9,
+          "norm_prox": 0.431,
+          "iou": 0.0073,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 1,
+          "timestamp": 0.124,
+          "distance": 106.4,
+          "norm_prox": 0.406,
+          "iou": 0.0139,
+          "rel_vel": -20.17,
+          "conv_angle": 2.6
+        },
+        {
+          "frame": 2,
+          "timestamp": 0.249,
+          "distance": 107.5,
+          "norm_prox": 0.407,
+          "iou": 0.0147,
+          "rel_vel": -8.91,
+          "conv_angle": 28.0
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 108.3,
+          "norm_prox": 0.42,
+          "iou": 0.0111,
+          "rel_vel": -6.54,
+          "conv_angle": 1.2
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 110.6,
+          "norm_prox": 0.423,
+          "iou": 0.0094,
+          "rel_vel": -17.9,
+          "conv_angle": 27.1
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 114.4,
+          "norm_prox": 0.426,
+          "iou": 0.0074,
+          "rel_vel": -30.9,
+          "conv_angle": 24.2
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 115.4,
+          "norm_prox": 0.42,
+          "iou": 0.0074,
+          "rel_vel": -8.37,
+          "conv_angle": 1.5
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 116.2,
+          "norm_prox": 0.422,
+          "iou": 0.0061,
+          "rel_vel": -5.7,
+          "conv_angle": 4.7
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 116.6,
+          "norm_prox": 0.425,
+          "iou": 0.0056,
+          "rel_vel": -3.42,
+          "conv_angle": 13.0
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 115.3,
+          "norm_prox": 0.424,
+          "iou": 0.0074,
+          "rel_vel": 10.17,
+          "conv_angle": 12.3
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 113.8,
+          "norm_prox": 0.422,
+          "iou": 0.0068,
+          "rel_vel": 11.95,
+          "conv_angle": 14.4
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 110.4,
+          "norm_prox": 0.417,
+          "iou": 0.0081,
+          "rel_vel": 27.4,
+          "conv_angle": 13.5
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 108.7,
+          "norm_prox": 0.416,
+          "iou": 0.0096,
+          "rel_vel": 13.9,
+          "conv_angle": 36.9
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 106.0,
+          "norm_prox": 0.41,
+          "iou": 0.0106,
+          "rel_vel": 21.82,
+          "conv_angle": 124.5
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 101.7,
+          "norm_prox": 0.398,
+          "iou": 0.0166,
+          "rel_vel": 34.17,
+          "conv_angle": 2.7
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 83.7,
+          "norm_prox": 0.357,
+          "iou": 0.0648,
+          "rel_vel": 28.9,
+          "conv_angle": 21.0
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 79.3,
+          "norm_prox": 0.341,
+          "iou": 0.0826,
+          "rel_vel": 35.79,
+          "conv_angle": 34.1
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 82.1,
+          "norm_prox": 0.352,
+          "iou": 0.0407,
+          "rel_vel": -22.36,
+          "conv_angle": 37.1
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 76.7,
+          "norm_prox": 0.329,
+          "iou": 0.0676,
+          "rel_vel": 43.39,
+          "conv_angle": 29.8
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 75.1,
+          "norm_prox": 0.328,
+          "iou": 0.0659,
+          "rel_vel": 12.88,
+          "conv_angle": 18.2
+        }
+      ]
+    },
+    "1_4": {
+      "id_a": 1,
+      "id_b": 4,
+      "co_existing_frames": 25,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 230.4,
+          "norm_prox": 4.22,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 245.9,
+          "norm_prox": 4.255,
+          "iou": 0.0,
+          "rel_vel": -41.66,
+          "conv_angle": 6.2
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 250.9,
+          "norm_prox": 4.313,
+          "iou": 0.0,
+          "rel_vel": -39.91,
+          "conv_angle": 19.5
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 255.3,
+          "norm_prox": 4.397,
+          "iou": 0.0,
+          "rel_vel": -35.31,
+          "conv_angle": 33.5
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 260.6,
+          "norm_prox": 4.693,
+          "iou": 0.0,
+          "rel_vel": -42.64,
+          "conv_angle": 38.7
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 266.2,
+          "norm_prox": 4.902,
+          "iou": 0.0,
+          "rel_vel": -44.87,
+          "conv_angle": 13.2
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 272.0,
+          "norm_prox": 5.025,
+          "iou": 0.0,
+          "rel_vel": -46.55,
+          "conv_angle": 12.2
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 277.0,
+          "norm_prox": 4.809,
+          "iou": 0.0,
+          "rel_vel": -40.45,
+          "conv_angle": 16.7
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 285.2,
+          "norm_prox": 5.131,
+          "iou": 0.0,
+          "rel_vel": -65.57,
+          "conv_angle": 78.9
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 294.8,
+          "norm_prox": 5.269,
+          "iou": 0.0,
+          "rel_vel": -77.46,
+          "conv_angle": 42.8
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 301.0,
+          "norm_prox": 5.359,
+          "iou": 0.0,
+          "rel_vel": -49.19,
+          "conv_angle": 18.1
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 307.4,
+          "norm_prox": 5.106,
+          "iou": 0.0,
+          "rel_vel": -51.37,
+          "conv_angle": 21.0
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 315.5,
+          "norm_prox": 4.84,
+          "iou": 0.0,
+          "rel_vel": -65.6,
+          "conv_angle": 3.3
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 381.0,
+          "norm_prox": 4.068,
+          "iou": 0.0,
+          "rel_vel": -65.78,
+          "conv_angle": 9.9
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 387.8,
+          "norm_prox": 4.114,
+          "iou": 0.0,
+          "rel_vel": -54.56,
+          "conv_angle": 24.3
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 393.6,
+          "norm_prox": 5.124,
+          "iou": 0.0,
+          "rel_vel": -46.35,
+          "conv_angle": 38.6
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 407.7,
+          "norm_prox": 3.822,
+          "iou": 0.0,
+          "rel_vel": -113.44,
+          "conv_angle": 35.9
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 428.4,
+          "norm_prox": 3.484,
+          "iou": 0.0,
+          "rel_vel": -82.94,
+          "conv_angle": 16.5
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 437.3,
+          "norm_prox": 3.812,
+          "iou": 0.0,
+          "rel_vel": -71.84,
+          "conv_angle": 44.9
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 446.5,
+          "norm_prox": 3.765,
+          "iou": 0.0,
+          "rel_vel": -73.68,
+          "conv_angle": 6.9
+        },
+        {
+          "frame": 30,
+          "timestamp": 3.735,
+          "distance": 459.6,
+          "norm_prox": 3.679,
+          "iou": 0.0,
+          "rel_vel": -105.39,
+          "conv_angle": 6.7
+        },
+        {
+          "frame": 31,
+          "timestamp": 3.859,
+          "distance": 468.8,
+          "norm_prox": 3.612,
+          "iou": 0.0,
+          "rel_vel": -73.97,
+          "conv_angle": 12.6
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 478.4,
+          "norm_prox": 3.713,
+          "iou": 0.0,
+          "rel_vel": -76.63,
+          "conv_angle": 9.5
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 484.4,
+          "norm_prox": 4.41,
+          "iou": 0.0,
+          "rel_vel": -48.27,
+          "conv_angle": 38.5
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 521.4,
+          "norm_prox": 4.196,
+          "iou": 0.0,
+          "rel_vel": -99.27,
+          "conv_angle": 3.2
+        }
+      ]
+    },
+    "2_3": {
+      "id_a": 2,
+      "id_b": 3,
+      "co_existing_frames": 20,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 158.0,
+          "norm_prox": 0.655,
+          "iou": 0.0083,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 1,
+          "timestamp": 0.124,
+          "distance": 161.9,
+          "norm_prox": 0.618,
+          "iou": 0.011,
+          "rel_vel": -30.61,
+          "conv_angle": 2.6
+        },
+        {
+          "frame": 2,
+          "timestamp": 0.249,
+          "distance": 164.6,
+          "norm_prox": 0.624,
+          "iou": 0.0098,
+          "rel_vel": -22.34,
+          "conv_angle": 8.3
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 168.9,
+          "norm_prox": 0.654,
+          "iou": 0.0056,
+          "rel_vel": -34.38,
+          "conv_angle": 37.7
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 170.1,
+          "norm_prox": 0.65,
+          "iou": 0.0067,
+          "rel_vel": -9.09,
+          "conv_angle": 12.6
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 173.9,
+          "norm_prox": 0.647,
+          "iou": 0.0068,
+          "rel_vel": -30.83,
+          "conv_angle": 1.4
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 178.1,
+          "norm_prox": 0.649,
+          "iou": 0.0059,
+          "rel_vel": -33.71,
+          "conv_angle": 8.5
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 181.0,
+          "norm_prox": 0.658,
+          "iou": 0.0055,
+          "rel_vel": -23.1,
+          "conv_angle": 3.3
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 185.5,
+          "norm_prox": 0.676,
+          "iou": 0.0024,
+          "rel_vel": -36.36,
+          "conv_angle": 22.7
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 186.8,
+          "norm_prox": 0.687,
+          "iou": 0.0013,
+          "rel_vel": -10.76,
+          "conv_angle": 13.9
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 191.0,
+          "norm_prox": 0.708,
+          "iou": 0.0,
+          "rel_vel": -33.4,
+          "conv_angle": 27.3
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 192.7,
+          "norm_prox": 0.727,
+          "iou": 0.0,
+          "rel_vel": -13.85,
+          "conv_angle": 29.3
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 197.0,
+          "norm_prox": 0.754,
+          "iou": 0.0,
+          "rel_vel": -34.81,
+          "conv_angle": 46.4
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 191.9,
+          "norm_prox": 0.743,
+          "iou": 0.0,
+          "rel_vel": 40.95,
+          "conv_angle": 111.8
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 191.3,
+          "norm_prox": 0.749,
+          "iou": 0.0,
+          "rel_vel": 5.37,
+          "conv_angle": 7.2
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 205.8,
+          "norm_prox": 0.878,
+          "iou": 0.0,
+          "rel_vel": -23.36,
+          "conv_angle": 36.6
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 211.9,
+          "norm_prox": 0.911,
+          "iou": 0.0,
+          "rel_vel": -49.08,
+          "conv_angle": 26.8
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 212.8,
+          "norm_prox": 0.914,
+          "iou": 0.0,
+          "rel_vel": -7.37,
+          "conv_angle": 2.9
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 221.1,
+          "norm_prox": 0.949,
+          "iou": 0.0,
+          "rel_vel": -66.48,
+          "conv_angle": 41.3
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 227.3,
+          "norm_prox": 0.995,
+          "iou": 0.0,
+          "rel_vel": -49.81,
+          "conv_angle": 40.1
+        }
+      ]
+    },
+    "2_4": {
+      "id_a": 2,
+      "id_b": 4,
+      "co_existing_frames": 24,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 152.0,
+          "norm_prox": 1.198,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 159.8,
+          "norm_prox": 1.239,
+          "iou": 0.0,
+          "rel_vel": -21.01,
+          "conv_angle": 19.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 163.9,
+          "norm_prox": 1.253,
+          "iou": 0.0,
+          "rel_vel": -33.16,
+          "conv_angle": 5.0
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 167.1,
+          "norm_prox": 1.264,
+          "iou": 0.0,
+          "rel_vel": -25.35,
+          "conv_angle": 10.7
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 169.5,
+          "norm_prox": 1.282,
+          "iou": 0.0,
+          "rel_vel": -19.66,
+          "conv_angle": 31.7
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 172.8,
+          "norm_prox": 1.259,
+          "iou": 0.0,
+          "rel_vel": -26.04,
+          "conv_angle": 21.2
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 176.5,
+          "norm_prox": 1.276,
+          "iou": 0.0,
+          "rel_vel": -29.63,
+          "conv_angle": 21.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 179.2,
+          "norm_prox": 1.291,
+          "iou": 0.0,
+          "rel_vel": -22.3,
+          "conv_angle": 18.3
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 182.6,
+          "norm_prox": 1.277,
+          "iou": 0.0,
+          "rel_vel": -27.33,
+          "conv_angle": 66.0
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 186.7,
+          "norm_prox": 1.276,
+          "iou": 0.0,
+          "rel_vel": -32.29,
+          "conv_angle": 27.0
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 191.9,
+          "norm_prox": 1.29,
+          "iou": 0.0,
+          "rel_vel": -41.77,
+          "conv_angle": 8.6
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 195.0,
+          "norm_prox": 1.29,
+          "iou": 0.0,
+          "rel_vel": -25.25,
+          "conv_angle": 8.3
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 197.7,
+          "norm_prox": 1.283,
+          "iou": 0.0,
+          "rel_vel": -21.69,
+          "conv_angle": 6.6
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 221.7,
+          "norm_prox": 1.272,
+          "iou": 0.0,
+          "rel_vel": -24.05,
+          "conv_angle": 1.7
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 223.1,
+          "norm_prox": 1.253,
+          "iou": 0.0,
+          "rel_vel": -11.77,
+          "conv_angle": 2.3
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 226.3,
+          "norm_prox": 1.252,
+          "iou": 0.0,
+          "rel_vel": -25.53,
+          "conv_angle": 3.0
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 230.6,
+          "norm_prox": 1.252,
+          "iou": 0.0,
+          "rel_vel": -34.85,
+          "conv_angle": 31.7
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 234.0,
+          "norm_prox": 1.238,
+          "iou": 0.0,
+          "rel_vel": -26.59,
+          "conv_angle": 8.4
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 237.1,
+          "norm_prox": 1.216,
+          "iou": 0.0,
+          "rel_vel": -25.64,
+          "conv_angle": 24.7
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 238.6,
+          "norm_prox": 1.207,
+          "iou": 0.0,
+          "rel_vel": -11.32,
+          "conv_angle": 48.2
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 244.6,
+          "norm_prox": 1.187,
+          "iou": 0.0,
+          "rel_vel": -48.38,
+          "conv_angle": 4.0
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 254.8,
+          "norm_prox": 1.188,
+          "iou": 0.0,
+          "rel_vel": -27.46,
+          "conv_angle": 13.2
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 258.0,
+          "norm_prox": 1.195,
+          "iou": 0.0,
+          "rel_vel": -25.23,
+          "conv_angle": 13.6
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 268.5,
+          "norm_prox": 1.189,
+          "iou": 0.0,
+          "rel_vel": -28.21,
+          "conv_angle": 2.0
+        }
+      ]
+    },
+    "3_4": {
+      "id_a": 3,
+      "id_b": 4,
+      "co_existing_frames": 15,
+      "frames": [
+        {
+          "frame": 0,
+          "timestamp": 0.0,
+          "distance": 310.0,
+          "norm_prox": 1.285,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 328.7,
+          "norm_prox": 1.273,
+          "iou": 0.0,
+          "rel_vel": -50.03,
+          "conv_angle": 3.3
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 334.0,
+          "norm_prox": 1.277,
+          "iou": 0.0,
+          "rel_vel": -42.39,
+          "conv_angle": 7.6
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 341.0,
+          "norm_prox": 1.269,
+          "iou": 0.0,
+          "rel_vel": -56.21,
+          "conv_angle": 9.3
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 347.6,
+          "norm_prox": 1.266,
+          "iou": 0.0,
+          "rel_vel": -53.38,
+          "conv_angle": 40.2
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 353.7,
+          "norm_prox": 1.286,
+          "iou": 0.0,
+          "rel_vel": -49.1,
+          "conv_angle": 17.9
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 361.9,
+          "norm_prox": 1.319,
+          "iou": 0.0,
+          "rel_vel": -65.49,
+          "conv_angle": 0.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 366.0,
+          "norm_prox": 1.346,
+          "iou": 0.0,
+          "rel_vel": -32.86,
+          "conv_angle": 4.4
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 373.4,
+          "norm_prox": 1.385,
+          "iou": 0.0,
+          "rel_vel": -59.85,
+          "conv_angle": 93.3
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 379.1,
+          "norm_prox": 1.431,
+          "iou": 0.0,
+          "rel_vel": -45.23,
+          "conv_angle": 56.3
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 388.1,
+          "norm_prox": 1.486,
+          "iou": 0.0,
+          "rel_vel": -72.81,
+          "conv_angle": 55.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 386.5,
+          "norm_prox": 1.497,
+          "iou": 0.0,
+          "rel_vel": 13.37,
+          "conv_angle": 103.5
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 388.5,
+          "norm_prox": 1.522,
+          "iou": 0.0,
+          "rel_vel": -16.08,
+          "conv_angle": 0.6
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 439.0,
+          "norm_prox": 1.884,
+          "iou": 0.0,
+          "rel_vel": -50.72,
+          "conv_angle": 30.4
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 446.0,
+          "norm_prox": 1.951,
+          "iou": 0.0,
+          "rel_vel": -56.2,
+          "conv_angle": 42.4
+        }
+      ]
+    },
+    "1_7": {
+      "id_a": 1,
+      "id_b": 7,
+      "co_existing_frames": 32,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 96.5,
+          "norm_prox": 0.949,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 99.5,
+          "norm_prox": 0.987,
+          "iou": 0.0,
+          "rel_vel": -23.58,
+          "conv_angle": 10.7
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 100.9,
+          "norm_prox": 1.013,
+          "iou": 0.0,
+          "rel_vel": -11.89,
+          "conv_angle": 26.6
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 102.4,
+          "norm_prox": 1.005,
+          "iou": 0.0,
+          "rel_vel": -11.5,
+          "conv_angle": 18.7
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 103.8,
+          "norm_prox": 1.007,
+          "iou": 0.0,
+          "rel_vel": -11.7,
+          "conv_angle": 14.9
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 107.8,
+          "norm_prox": 1.011,
+          "iou": 0.0,
+          "rel_vel": -31.69,
+          "conv_angle": 19.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 110.9,
+          "norm_prox": 1.028,
+          "iou": 0.0,
+          "rel_vel": -25.13,
+          "conv_angle": 5.1
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 114.2,
+          "norm_prox": 1.029,
+          "iou": 0.0,
+          "rel_vel": -26.47,
+          "conv_angle": 3.5
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 118.8,
+          "norm_prox": 1.044,
+          "iou": 0.0,
+          "rel_vel": -18.67,
+          "conv_angle": 2.9
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 121.2,
+          "norm_prox": 1.057,
+          "iou": 0.0,
+          "rel_vel": -19.09,
+          "conv_angle": 19.4
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 125.6,
+          "norm_prox": 1.1,
+          "iou": 0.0,
+          "rel_vel": -34.84,
+          "conv_angle": 15.4
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 127.6,
+          "norm_prox": 1.067,
+          "iou": 0.0,
+          "rel_vel": -16.5,
+          "conv_angle": 29.9
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 136.4,
+          "norm_prox": 1.113,
+          "iou": 0.0,
+          "rel_vel": -70.97,
+          "conv_angle": 5.3
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 140.9,
+          "norm_prox": 1.129,
+          "iou": 0.0,
+          "rel_vel": -36.16,
+          "conv_angle": 0.4
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 144.7,
+          "norm_prox": 1.14,
+          "iou": 0.0,
+          "rel_vel": -30.08,
+          "conv_angle": 11.1
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 147.8,
+          "norm_prox": 1.146,
+          "iou": 0.0,
+          "rel_vel": -24.68,
+          "conv_angle": 2.2
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 153.5,
+          "norm_prox": 1.17,
+          "iou": 0.0,
+          "rel_vel": -46.14,
+          "conv_angle": 1.2
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 154.6,
+          "norm_prox": 1.174,
+          "iou": 0.0,
+          "rel_vel": -8.99,
+          "conv_angle": 35.2
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 162.8,
+          "norm_prox": 1.187,
+          "iou": 0.0,
+          "rel_vel": -66.02,
+          "conv_angle": 2.2
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 165.3,
+          "norm_prox": 1.14,
+          "iou": 0.0,
+          "rel_vel": -19.44,
+          "conv_angle": 4.7
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 165.8,
+          "norm_prox": 1.138,
+          "iou": 0.0,
+          "rel_vel": -4.54,
+          "conv_angle": 29.9
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 175.7,
+          "norm_prox": 1.176,
+          "iou": 0.0,
+          "rel_vel": -79.27,
+          "conv_angle": 22.3
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 186.7,
+          "norm_prox": 1.188,
+          "iou": 0.0,
+          "rel_vel": -44.02,
+          "conv_angle": 0.5
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 191.5,
+          "norm_prox": 1.202,
+          "iou": 0.0,
+          "rel_vel": -38.75,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 196.9,
+          "norm_prox": 1.204,
+          "iou": 0.0,
+          "rel_vel": -43.85,
+          "conv_angle": 8.7
+        },
+        {
+          "frame": 30,
+          "timestamp": 3.735,
+          "distance": 205.5,
+          "norm_prox": 1.223,
+          "iou": 0.0,
+          "rel_vel": -68.48,
+          "conv_angle": 2.2
+        },
+        {
+          "frame": 31,
+          "timestamp": 3.859,
+          "distance": 209.9,
+          "norm_prox": 1.232,
+          "iou": 0.0,
+          "rel_vel": -35.83,
+          "conv_angle": 13.5
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 214.5,
+          "norm_prox": 1.222,
+          "iou": 0.0,
+          "rel_vel": -36.86,
+          "conv_angle": 6.7
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 216.4,
+          "norm_prox": 1.211,
+          "iou": 0.0,
+          "rel_vel": -14.73,
+          "conv_angle": 37.5
+        },
+        {
+          "frame": 34,
+          "timestamp": 4.233,
+          "distance": 224.9,
+          "norm_prox": 1.246,
+          "iou": 0.0,
+          "rel_vel": -68.38,
+          "conv_angle": 2.6
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 238.2,
+          "norm_prox": 1.253,
+          "iou": 0.0,
+          "rel_vel": -53.53,
+          "conv_angle": 10.4
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 242.2,
+          "norm_prox": 1.247,
+          "iou": 0.0,
+          "rel_vel": -32.03,
+          "conv_angle": 12.1
+        }
+      ]
+    },
+    "1_8": {
+      "id_a": 1,
+      "id_b": 8,
+      "co_existing_frames": 10,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 202.9,
+          "norm_prox": 0.986,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 209.2,
+          "norm_prox": 0.989,
+          "iou": 0.0,
+          "rel_vel": -50.6,
+          "conv_angle": 1.5
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 224.1,
+          "norm_prox": 0.929,
+          "iou": 0.0,
+          "rel_vel": -119.47,
+          "conv_angle": 20.2
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 233.1,
+          "norm_prox": 0.906,
+          "iou": 0.0,
+          "rel_vel": -72.71,
+          "conv_angle": 3.2
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 237.2,
+          "norm_prox": 0.932,
+          "iou": 0.0,
+          "rel_vel": -32.74,
+          "conv_angle": 18.7
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 243.1,
+          "norm_prox": 1.001,
+          "iou": 0.0,
+          "rel_vel": -47.22,
+          "conv_angle": 16.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 252.2,
+          "norm_prox": 1.102,
+          "iou": 0.0,
+          "rel_vel": -73.14,
+          "conv_angle": 20.6
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 256.9,
+          "norm_prox": 1.188,
+          "iou": 0.0,
+          "rel_vel": -38.04,
+          "conv_angle": 8.3
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 264.4,
+          "norm_prox": 1.301,
+          "iou": 0.0,
+          "rel_vel": -59.61,
+          "conv_angle": 16.6
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 273.9,
+          "norm_prox": 1.42,
+          "iou": 0.0,
+          "rel_vel": -76.5,
+          "conv_angle": 31.6
+        }
+      ]
+    },
+    "2_7": {
+      "id_a": 2,
+      "id_b": 7,
+      "co_existing_frames": 30,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 52.4,
+          "norm_prox": 0.407,
+          "iou": 0.1797,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 54.8,
+          "norm_prox": 0.419,
+          "iou": 0.1693,
+          "rel_vel": -19.26,
+          "conv_angle": 25.1
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 58.4,
+          "norm_prox": 0.442,
+          "iou": 0.1472,
+          "rel_vel": -28.72,
+          "conv_angle": 49.4
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 59.2,
+          "norm_prox": 0.448,
+          "iou": 0.1428,
+          "rel_vel": -6.56,
+          "conv_angle": 11.7
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 58.3,
+          "norm_prox": 0.425,
+          "iou": 0.1542,
+          "rel_vel": 7.22,
+          "conv_angle": 6.9
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 58.3,
+          "norm_prox": 0.422,
+          "iou": 0.1651,
+          "rel_vel": 0.15,
+          "conv_angle": 10.1
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 58.3,
+          "norm_prox": 0.42,
+          "iou": 0.1698,
+          "rel_vel": -0.06,
+          "conv_angle": 3.5
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 59.6,
+          "norm_prox": 0.417,
+          "iou": 0.1695,
+          "rel_vel": -10.51,
+          "conv_angle": 16.3
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 61.4,
+          "norm_prox": 0.413,
+          "iou": 0.1663,
+          "rel_vel": -7.09,
+          "conv_angle": 11.3
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 60.8,
+          "norm_prox": 0.402,
+          "iou": 0.1727,
+          "rel_vel": 4.71,
+          "conv_angle": 6.7
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 62.6,
+          "norm_prox": 0.407,
+          "iou": 0.1628,
+          "rel_vel": -14.77,
+          "conv_angle": 25.3
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 62.5,
+          "norm_prox": 0.398,
+          "iou": 0.1718,
+          "rel_vel": 1.06,
+          "conv_angle": 6.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 63.4,
+          "norm_prox": 0.391,
+          "iou": 0.1775,
+          "rel_vel": -7.26,
+          "conv_angle": 11.3
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 64.3,
+          "norm_prox": 0.39,
+          "iou": 0.1777,
+          "rel_vel": -7.01,
+          "conv_angle": 11.6
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 65.2,
+          "norm_prox": 0.387,
+          "iou": 0.1761,
+          "rel_vel": -6.98,
+          "conv_angle": 17.6
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 65.8,
+          "norm_prox": 0.389,
+          "iou": 0.1751,
+          "rel_vel": -5.26,
+          "conv_angle": 6.6
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 65.3,
+          "norm_prox": 0.382,
+          "iou": 0.1836,
+          "rel_vel": 4.25,
+          "conv_angle": 6.1
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 65.1,
+          "norm_prox": 0.38,
+          "iou": 0.1873,
+          "rel_vel": 1.44,
+          "conv_angle": 1.0
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 65.9,
+          "norm_prox": 0.378,
+          "iou": 0.1916,
+          "rel_vel": -6.33,
+          "conv_angle": 13.7
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 67.0,
+          "norm_prox": 0.376,
+          "iou": 0.1953,
+          "rel_vel": -8.57,
+          "conv_angle": 17.3
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 67.6,
+          "norm_prox": 0.374,
+          "iou": 0.1933,
+          "rel_vel": -4.92,
+          "conv_angle": 5.8
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 69.7,
+          "norm_prox": 0.378,
+          "iou": 0.1899,
+          "rel_vel": -17.38,
+          "conv_angle": 26.5
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 70.7,
+          "norm_prox": 0.374,
+          "iou": 0.1925,
+          "rel_vel": -7.76,
+          "conv_angle": 12.3
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 69.8,
+          "norm_prox": 0.358,
+          "iou": 0.2051,
+          "rel_vel": 7.27,
+          "conv_angle": 11.2
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 70.1,
+          "norm_prox": 0.355,
+          "iou": 0.2064,
+          "rel_vel": -2.7,
+          "conv_angle": 3.2
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 71.3,
+          "norm_prox": 0.346,
+          "iou": 0.2152,
+          "rel_vel": -9.72,
+          "conv_angle": 11.6
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 75.9,
+          "norm_prox": 0.354,
+          "iou": 0.2102,
+          "rel_vel": -12.27,
+          "conv_angle": 15.5
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 75.1,
+          "norm_prox": 0.348,
+          "iou": 0.2185,
+          "rel_vel": 6.79,
+          "conv_angle": 12.6
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 75.2,
+          "norm_prox": 0.333,
+          "iou": 0.2353,
+          "rel_vel": -0.44,
+          "conv_angle": 0.2
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 80.8,
+          "norm_prox": 0.336,
+          "iou": 0.2256,
+          "rel_vel": -44.82,
+          "conv_angle": 43.1
+        }
+      ]
+    },
+    "2_8": {
+      "id_a": 2,
+      "id_b": 8,
+      "co_existing_frames": 10,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 296.9,
+          "norm_prox": 1.442,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 304.2,
+          "norm_prox": 1.438,
+          "iou": 0.0,
+          "rel_vel": -58.74,
+          "conv_angle": 13.0
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 319.6,
+          "norm_prox": 1.325,
+          "iou": 0.0,
+          "rel_vel": -123.22,
+          "conv_angle": 2.6
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 331.3,
+          "norm_prox": 1.287,
+          "iou": 0.0,
+          "rel_vel": -94.39,
+          "conv_angle": 3.8
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 338.3,
+          "norm_prox": 1.329,
+          "iou": 0.0,
+          "rel_vel": -56.53,
+          "conv_angle": 26.7
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 347.0,
+          "norm_prox": 1.429,
+          "iou": 0.0,
+          "rel_vel": -69.61,
+          "conv_angle": 26.5
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 358.9,
+          "norm_prox": 1.568,
+          "iou": 0.0,
+          "rel_vel": -95.81,
+          "conv_angle": 22.2
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 368.7,
+          "norm_prox": 1.704,
+          "iou": 0.0,
+          "rel_vel": -78.26,
+          "conv_angle": 21.2
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 382.5,
+          "norm_prox": 1.883,
+          "iou": 0.0,
+          "rel_vel": -110.97,
+          "conv_angle": 32.4
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 394.0,
+          "norm_prox": 2.043,
+          "iou": 0.0,
+          "rel_vel": -92.66,
+          "conv_angle": 41.1
+        }
+      ]
+    },
+    "3_7": {
+      "id_a": 3,
+      "id_b": 7,
+      "co_existing_frames": 16,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 191.8,
+          "norm_prox": 0.743,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 196.0,
+          "norm_prox": 0.749,
+          "iou": 0.0,
+          "rel_vel": -33.87,
+          "conv_angle": 37.8
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 201.5,
+          "norm_prox": 0.75,
+          "iou": 0.0,
+          "rel_vel": -44.38,
+          "conv_angle": 50.8
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 204.6,
+          "norm_prox": 0.745,
+          "iou": 0.0,
+          "rel_vel": -24.81,
+          "conv_angle": 20.2
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 206.1,
+          "norm_prox": 0.749,
+          "iou": 0.0,
+          "rel_vel": -11.85,
+          "conv_angle": 10.2
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 210.9,
+          "norm_prox": 0.769,
+          "iou": 0.0,
+          "rel_vel": -38.69,
+          "conv_angle": 32.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 212.6,
+          "norm_prox": 0.782,
+          "iou": 0.0,
+          "rel_vel": -13.43,
+          "conv_angle": 17.4
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 214.8,
+          "norm_prox": 0.797,
+          "iou": 0.0,
+          "rel_vel": -17.89,
+          "conv_angle": 10.9
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 216.3,
+          "norm_prox": 0.828,
+          "iou": 0.0,
+          "rel_vel": -5.97,
+          "conv_angle": 28.4
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 211.8,
+          "norm_prox": 0.82,
+          "iou": 0.0,
+          "rel_vel": 35.78,
+          "conv_angle": 105.1
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 210.6,
+          "norm_prox": 0.825,
+          "iou": 0.0,
+          "rel_vel": 9.69,
+          "conv_angle": 18.0
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 215.0,
+          "norm_prox": 0.917,
+          "iou": 0.0,
+          "rel_vel": -7.03,
+          "conv_angle": 27.1
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 219.5,
+          "norm_prox": 0.943,
+          "iou": 0.0,
+          "rel_vel": -36.12,
+          "conv_angle": 32.9
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 221.1,
+          "norm_prox": 0.95,
+          "iou": 0.0,
+          "rel_vel": -13.14,
+          "conv_angle": 1.9
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 226.4,
+          "norm_prox": 0.972,
+          "iou": 0.0,
+          "rel_vel": -42.06,
+          "conv_angle": 27.6
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 228.4,
+          "norm_prox": 1.0,
+          "iou": 0.0,
+          "rel_vel": -16.63,
+          "conv_angle": 22.8
+        }
+      ]
+    },
+    "3_8": {
+      "id_a": 3,
+      "id_b": 8,
+      "co_existing_frames": 10,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 151.1,
+          "norm_prox": 0.585,
+          "iou": 0.0293,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 158.1,
+          "norm_prox": 0.604,
+          "iou": 0.0201,
+          "rel_vel": -55.75,
+          "conv_angle": 25.6
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 167.3,
+          "norm_prox": 0.623,
+          "iou": 0.0339,
+          "rel_vel": -74.47,
+          "conv_angle": 4.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 174.4,
+          "norm_prox": 0.635,
+          "iou": 0.0358,
+          "rel_vel": -56.73,
+          "conv_angle": 4.6
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 179.5,
+          "norm_prox": 0.653,
+          "iou": 0.0227,
+          "rel_vel": -40.78,
+          "conv_angle": 23.4
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 182.7,
+          "norm_prox": 0.666,
+          "iou": 0.0056,
+          "rel_vel": -26.04,
+          "conv_angle": 3.8
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 193.2,
+          "norm_prox": 0.711,
+          "iou": 0.0,
+          "rel_vel": -84.28,
+          "conv_angle": 8.3
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 197.0,
+          "norm_prox": 0.731,
+          "iou": 0.0,
+          "rel_vel": -30.51,
+          "conv_angle": 6.1
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 208.4,
+          "norm_prox": 0.786,
+          "iou": 0.0,
+          "rel_vel": -91.32,
+          "conv_angle": 3.1
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 213.0,
+          "norm_prox": 0.815,
+          "iou": 0.0,
+          "rel_vel": -37.3,
+          "conv_angle": 5.3
+        }
+      ]
+    },
+    "4_7": {
+      "id_a": 4,
+      "id_b": 7,
+      "co_existing_frames": 24,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 150.4,
+          "norm_prox": 1.479,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 152.6,
+          "norm_prox": 1.514,
+          "iou": 0.0,
+          "rel_vel": -17.58,
+          "conv_angle": 30.2
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 156.0,
+          "norm_prox": 1.565,
+          "iou": 0.0,
+          "rel_vel": -27.1,
+          "conv_angle": 60.1
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 160.2,
+          "norm_prox": 1.573,
+          "iou": 0.0,
+          "rel_vel": -33.34,
+          "conv_angle": 20.0
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 163.9,
+          "norm_prox": 1.589,
+          "iou": 0.0,
+          "rel_vel": -30.18,
+          "conv_angle": 28.0
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 165.5,
+          "norm_prox": 1.553,
+          "iou": 0.0,
+          "rel_vel": -12.86,
+          "conv_angle": 32.0
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 167.3,
+          "norm_prox": 1.551,
+          "iou": 0.0,
+          "rel_vel": -14.73,
+          "conv_angle": 21.8
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 172.3,
+          "norm_prox": 1.553,
+          "iou": 0.0,
+          "rel_vel": -39.76,
+          "conv_angle": 82.4
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 183.3,
+          "norm_prox": 1.61,
+          "iou": 0.0,
+          "rel_vel": -44.13,
+          "conv_angle": 28.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 187.0,
+          "norm_prox": 1.631,
+          "iou": 0.0,
+          "rel_vel": -30.14,
+          "conv_angle": 1.6
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 191.1,
+          "norm_prox": 1.674,
+          "iou": 0.0,
+          "rel_vel": -32.39,
+          "conv_angle": 18.6
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 218.7,
+          "norm_prox": 1.594,
+          "iou": 0.0,
+          "rel_vel": -27.78,
+          "conv_angle": 4.3
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 223.1,
+          "norm_prox": 1.538,
+          "iou": 0.0,
+          "rel_vel": -34.92,
+          "conv_angle": 19.6
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 228.1,
+          "norm_prox": 1.565,
+          "iou": 0.0,
+          "rel_vel": -40.14,
+          "conv_angle": 8.8
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 232.7,
+          "norm_prox": 1.557,
+          "iou": 0.0,
+          "rel_vel": -36.8,
+          "conv_angle": 58.2
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 237.5,
+          "norm_prox": 1.548,
+          "iou": 0.0,
+          "rel_vel": -39.06,
+          "conv_angle": 20.7
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 242.4,
+          "norm_prox": 1.543,
+          "iou": 0.0,
+          "rel_vel": -39.15,
+          "conv_angle": 13.5
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 246.6,
+          "norm_prox": 1.547,
+          "iou": 0.0,
+          "rel_vel": -33.53,
+          "conv_angle": 45.0
+        },
+        {
+          "frame": 29,
+          "timestamp": 3.61,
+          "distance": 250.4,
+          "norm_prox": 1.531,
+          "iou": 0.0,
+          "rel_vel": -30.81,
+          "conv_angle": 15.6
+        },
+        {
+          "frame": 30,
+          "timestamp": 3.735,
+          "distance": 255.0,
+          "norm_prox": 1.518,
+          "iou": 0.0,
+          "rel_vel": -36.53,
+          "conv_angle": 4.5
+        },
+        {
+          "frame": 31,
+          "timestamp": 3.859,
+          "distance": 259.9,
+          "norm_prox": 1.525,
+          "iou": 0.0,
+          "rel_vel": -39.37,
+          "conv_angle": 0.9
+        },
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 264.7,
+          "norm_prox": 1.508,
+          "iou": 0.0,
+          "rel_vel": -38.97,
+          "conv_angle": 2.8
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 268.6,
+          "norm_prox": 1.503,
+          "iou": 0.0,
+          "rel_vel": -31.01,
+          "conv_angle": 1.1
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 283.7,
+          "norm_prox": 1.492,
+          "iou": 0.0,
+          "rel_vel": -40.42,
+          "conv_angle": 2.2
+        }
+      ]
+    },
+    "4_8": {
+      "id_a": 4,
+      "id_b": 8,
+      "co_existing_frames": 10,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 448.8,
+          "norm_prox": 2.18,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 460.1,
+          "norm_prox": 2.175,
+          "iou": 0.0,
+          "rel_vel": -90.45,
+          "conv_angle": 18.0
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 479.2,
+          "norm_prox": 1.987,
+          "iou": 0.0,
+          "rel_vel": -153.69,
+          "conv_angle": 13.3
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 493.6,
+          "norm_prox": 1.918,
+          "iou": 0.0,
+          "rel_vel": -115.54,
+          "conv_angle": 35.6
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 503.4,
+          "norm_prox": 1.977,
+          "iou": 0.0,
+          "rel_vel": -78.24,
+          "conv_angle": 5.5
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 515.1,
+          "norm_prox": 2.121,
+          "iou": 0.0,
+          "rel_vel": -94.15,
+          "conv_angle": 4.6
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 529.2,
+          "norm_prox": 2.312,
+          "iou": 0.0,
+          "rel_vel": -113.63,
+          "conv_angle": 3.9
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 542.1,
+          "norm_prox": 2.506,
+          "iou": 0.0,
+          "rel_vel": -103.58,
+          "conv_angle": 87.2
+        },
+        {
+          "frame": 11,
+          "timestamp": 1.369,
+          "distance": 559.1,
+          "norm_prox": 2.753,
+          "iou": 0.0,
+          "rel_vel": -136.65,
+          "conv_angle": 59.4
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 574.6,
+          "norm_prox": 2.98,
+          "iou": 0.0,
+          "rel_vel": -124.18,
+          "conv_angle": 49.7
+        }
+      ]
+    },
+    "7_8": {
+      "id_a": 7,
+      "id_b": 8,
+      "co_existing_frames": 9,
+      "frames": [
+        {
+          "frame": 3,
+          "timestamp": 0.373,
+          "distance": 299.1,
+          "norm_prox": 1.453,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 4,
+          "timestamp": 0.498,
+          "distance": 308.3,
+          "norm_prox": 1.458,
+          "iou": 0.0,
+          "rel_vel": -73.99,
+          "conv_angle": 12.1
+        },
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 324.8,
+          "norm_prox": 1.347,
+          "iou": 0.0,
+          "rel_vel": -131.84,
+          "conv_angle": 46.8
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 335.1,
+          "norm_prox": 1.302,
+          "iou": 0.0,
+          "rel_vel": -83.31,
+          "conv_angle": 15.6
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 340.7,
+          "norm_prox": 1.338,
+          "iou": 0.0,
+          "rel_vel": -44.37,
+          "conv_angle": 33.5
+        },
+        {
+          "frame": 8,
+          "timestamp": 0.996,
+          "distance": 350.4,
+          "norm_prox": 1.443,
+          "iou": 0.0,
+          "rel_vel": -78.64,
+          "conv_angle": 36.6
+        },
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 362.5,
+          "norm_prox": 1.584,
+          "iou": 0.0,
+          "rel_vel": -96.99,
+          "conv_angle": 25.7
+        },
+        {
+          "frame": 10,
+          "timestamp": 1.245,
+          "distance": 370.5,
+          "norm_prox": 1.712,
+          "iou": 0.0,
+          "rel_vel": -63.97,
+          "conv_angle": 4.8
+        },
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 391.6,
+          "norm_prox": 2.031,
+          "iou": 0.0,
+          "rel_vel": -84.66,
+          "conv_angle": 25.8
+        }
+      ]
+    },
+    "1_11": {
+      "id_a": 1,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 175.8,
+          "norm_prox": 1.554,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 181.1,
+          "norm_prox": 1.515,
+          "iou": 0.0,
+          "rel_vel": -42.12,
+          "conv_angle": 93.1
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 184.7,
+          "norm_prox": 1.439,
+          "iou": 0.0,
+          "rel_vel": -29.12,
+          "conv_angle": 24.2
+        }
+      ]
+    },
+    "2_11": {
+      "id_a": 2,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 82.7,
+          "norm_prox": 0.625,
+          "iou": 0.0542,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 86.0,
+          "norm_prox": 0.65,
+          "iou": 0.0523,
+          "rel_vel": -26.49,
+          "conv_angle": 86.1
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 87.7,
+          "norm_prox": 0.639,
+          "iou": 0.0614,
+          "rel_vel": -14.09,
+          "conv_angle": 32.2
+        }
+      ]
+    },
+    "3_11": {
+      "id_a": 3,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 256.6,
+          "norm_prox": 0.955,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 264.0,
+          "norm_prox": 0.962,
+          "iou": 0.0,
+          "rel_vel": -60.12,
+          "conv_angle": 94.5
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 268.6,
+          "norm_prox": 0.977,
+          "iou": 0.0,
+          "rel_vel": -36.94,
+          "conv_angle": 28.9
+        }
+      ]
+    },
+    "4_11": {
+      "id_a": 4,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 84.4,
+          "norm_prox": 0.747,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 83.6,
+          "norm_prox": 0.699,
+          "iou": 0.0,
+          "rel_vel": 7.02,
+          "conv_angle": 54.4
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 85.1,
+          "norm_prox": 0.663,
+          "iou": 0.0,
+          "rel_vel": -12.18,
+          "conv_angle": 11.1
+        }
+      ]
+    },
+    "7_11": {
+      "id_a": 7,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 83.3,
+          "norm_prox": 0.736,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 86.7,
+          "norm_prox": 0.726,
+          "iou": 0.0,
+          "rel_vel": -27.57,
+          "conv_angle": 74.3
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 87.6,
+          "norm_prox": 0.683,
+          "iou": 0.0,
+          "rel_vel": -7.24,
+          "conv_angle": 39.1
+        }
+      ]
+    },
+    "8_11": {
+      "id_a": 8,
+      "id_b": 11,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 5,
+          "timestamp": 0.622,
+          "distance": 398.2,
+          "norm_prox": 1.651,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 6,
+          "timestamp": 0.747,
+          "distance": 412.8,
+          "norm_prox": 1.604,
+          "iou": 0.0,
+          "rel_vel": -117.44,
+          "conv_angle": 89.9
+        },
+        {
+          "frame": 7,
+          "timestamp": 0.871,
+          "distance": 420.9,
+          "norm_prox": 1.653,
+          "iou": 0.0,
+          "rel_vel": -64.77,
+          "conv_angle": 5.5
+        }
+      ]
+    },
+    "1_20": {
+      "id_a": 1,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 466.0,
+          "norm_prox": 5.852,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "2_20": {
+      "id_a": 2,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 577.6,
+          "norm_prox": 4.161,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "3_20": {
+      "id_a": 3,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 461.6,
+          "norm_prox": 1.698,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "4_20": {
+      "id_a": 4,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 712.7,
+          "norm_prox": 8.949,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "7_20": {
+      "id_a": 7,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 554.9,
+          "norm_prox": 5.144,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "8_20": {
+      "id_a": 8,
+      "id_b": 20,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 9,
+          "timestamp": 1.12,
+          "distance": 291.3,
+          "norm_prox": 1.273,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "1_25": {
+      "id_a": 1,
+      "id_b": 25,
+      "co_existing_frames": 14,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 506.0,
+          "norm_prox": 4.803,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 491.8,
+          "norm_prox": 3.804,
+          "iou": 0.0,
+          "rel_vel": 113.67,
+          "conv_angle": 110.4
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 475.4,
+          "norm_prox": 3.33,
+          "iou": 0.0,
+          "rel_vel": 132.22,
+          "conv_angle": 147.9
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 458.0,
+          "norm_prox": 3.23,
+          "iou": 0.0,
+          "rel_vel": 139.63,
+          "conv_angle": 173.3
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 439.8,
+          "norm_prox": 3.147,
+          "iou": 0.0,
+          "rel_vel": 146.35,
+          "conv_angle": 170.6
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 411.8,
+          "norm_prox": 2.993,
+          "iou": 0.0,
+          "rel_vel": 112.6,
+          "conv_angle": 178.2
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 389.1,
+          "norm_prox": 2.978,
+          "iou": 0.0,
+          "rel_vel": 181.65,
+          "conv_angle": 161.3
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 367.1,
+          "norm_prox": 2.9,
+          "iou": 0.0,
+          "rel_vel": 176.83,
+          "conv_angle": 146.7
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 349.7,
+          "norm_prox": 2.784,
+          "iou": 0.0,
+          "rel_vel": 139.99,
+          "conv_angle": 157.9
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 329.8,
+          "norm_prox": 2.668,
+          "iou": 0.0,
+          "rel_vel": 160.23,
+          "conv_angle": 156.2
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 315.0,
+          "norm_prox": 2.57,
+          "iou": 0.0,
+          "rel_vel": 118.2,
+          "conv_angle": 166.5
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 295.5,
+          "norm_prox": 2.375,
+          "iou": 0.0,
+          "rel_vel": 157.19,
+          "conv_angle": 170.5
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 264.1,
+          "norm_prox": 2.114,
+          "iou": 0.0,
+          "rel_vel": 83.91,
+          "conv_angle": 146.3
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 257.1,
+          "norm_prox": 1.888,
+          "iou": 0.0,
+          "rel_vel": 56.19,
+          "conv_angle": 179.3
+        }
+      ]
+    },
+    "2_25": {
+      "id_a": 2,
+      "id_b": 25,
+      "co_existing_frames": 15,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 627.6,
+          "norm_prox": 4.218,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 617.1,
+          "norm_prox": 4.081,
+          "iou": 0.0,
+          "rel_vel": 84.52,
+          "conv_angle": 97.7
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 604.9,
+          "norm_prox": 3.926,
+          "iou": 0.0,
+          "rel_vel": 97.49,
+          "conv_angle": 138.0
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 592.1,
+          "norm_prox": 3.767,
+          "iou": 0.0,
+          "rel_vel": 103.33,
+          "conv_angle": 150.8
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 578.9,
+          "norm_prox": 3.565,
+          "iou": 0.0,
+          "rel_vel": 105.71,
+          "conv_angle": 164.6
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 558.0,
+          "norm_prox": 3.312,
+          "iou": 0.0,
+          "rel_vel": 83.79,
+          "conv_angle": 162.0
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 536.6,
+          "norm_prox": 3.175,
+          "iou": 0.0,
+          "rel_vel": 172.53,
+          "conv_angle": 156.9
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 514.7,
+          "norm_prox": 3.012,
+          "iou": 0.0,
+          "rel_vel": 175.88,
+          "conv_angle": 154.0
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 498.6,
+          "norm_prox": 2.912,
+          "iou": 0.0,
+          "rel_vel": 129.16,
+          "conv_angle": 168.0
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 481.0,
+          "norm_prox": 2.759,
+          "iou": 0.0,
+          "rel_vel": 141.2,
+          "conv_angle": 144.8
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 467.6,
+          "norm_prox": 2.625,
+          "iou": 0.0,
+          "rel_vel": 107.74,
+          "conv_angle": 144.5
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 449.5,
+          "norm_prox": 2.487,
+          "iou": 0.0,
+          "rel_vel": 145.12,
+          "conv_angle": 153.9
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 419.5,
+          "norm_prox": 2.22,
+          "iou": 0.0,
+          "rel_vel": 120.8,
+          "conv_angle": 136.6
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 406.5,
+          "norm_prox": 2.085,
+          "iou": 0.0,
+          "rel_vel": 103.88,
+          "conv_angle": 164.7
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 391.2,
+          "norm_prox": 1.979,
+          "iou": 0.0,
+          "rel_vel": 122.91,
+          "conv_angle": 177.5
+        }
+      ]
+    },
+    "3_25": {
+      "id_a": 3,
+      "id_b": 25,
+      "co_existing_frames": 8,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 499.4,
+          "norm_prox": 1.912,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 494.2,
+          "norm_prox": 1.914,
+          "iou": 0.0,
+          "rel_vel": 41.6,
+          "conv_angle": 14.1
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 483.5,
+          "norm_prox": 1.894,
+          "iou": 0.0,
+          "rel_vel": 85.97,
+          "conv_angle": 145.3
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 408.7,
+          "norm_prox": 1.743,
+          "iou": 0.0,
+          "rel_vel": 120.12,
+          "conv_angle": 165.1
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 384.3,
+          "norm_prox": 1.651,
+          "iou": 0.0,
+          "rel_vel": 196.34,
+          "conv_angle": 179.3
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 372.1,
+          "norm_prox": 1.598,
+          "iou": 0.0,
+          "rel_vel": 97.91,
+          "conv_angle": 165.0
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 352.0,
+          "norm_prox": 1.511,
+          "iou": 0.0,
+          "rel_vel": 161.66,
+          "conv_angle": 173.9
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 338.1,
+          "norm_prox": 1.479,
+          "iou": 0.0,
+          "rel_vel": 111.82,
+          "conv_angle": 175.4
+        }
+      ]
+    },
+    "4_25": {
+      "id_a": 4,
+      "id_b": 25,
+      "co_existing_frames": 9,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 766.2,
+          "norm_prox": 7.273,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 759.8,
+          "norm_prox": 5.876,
+          "iou": 0.0,
+          "rel_vel": 51.61,
+          "conv_angle": 89.4
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 749.2,
+          "norm_prox": 5.248,
+          "iou": 0.0,
+          "rel_vel": 84.75,
+          "conv_angle": 144.7
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 628.0,
+          "norm_prox": 5.08,
+          "iou": 0.0,
+          "rel_vel": 121.77,
+          "conv_angle": 158.2
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 613.2,
+          "norm_prox": 5.003,
+          "iou": 0.0,
+          "rel_vel": 118.58,
+          "conv_angle": 142.2
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 595.4,
+          "norm_prox": 4.787,
+          "iou": 0.0,
+          "rel_vel": 143.01,
+          "conv_angle": 150.9
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 564.5,
+          "norm_prox": 4.546,
+          "iou": 0.0,
+          "rel_vel": 123.99,
+          "conv_angle": 124.0
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 552.1,
+          "norm_prox": 4.418,
+          "iou": 0.0,
+          "rel_vel": 100.11,
+          "conv_angle": 140.0
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 533.9,
+          "norm_prox": 3.921,
+          "iou": 0.0,
+          "rel_vel": 145.94,
+          "conv_angle": 134.3
+        }
+      ]
+    },
+    "7_25": {
+      "id_a": 7,
+      "id_b": 25,
+      "co_existing_frames": 15,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 597.1,
+          "norm_prox": 5.247,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 13,
+          "timestamp": 1.618,
+          "distance": 586.8,
+          "norm_prox": 4.539,
+          "iou": 0.0,
+          "rel_vel": 82.43,
+          "conv_angle": 91.0
+        },
+        {
+          "frame": 14,
+          "timestamp": 1.743,
+          "distance": 572.3,
+          "norm_prox": 4.009,
+          "iou": 0.0,
+          "rel_vel": 116.79,
+          "conv_angle": 163.3
+        },
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 557.2,
+          "norm_prox": 3.929,
+          "iou": 0.0,
+          "rel_vel": 121.32,
+          "conv_angle": 156.8
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 543.0,
+          "norm_prox": 3.885,
+          "iou": 0.0,
+          "rel_vel": 113.94,
+          "conv_angle": 175.9
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 517.2,
+          "norm_prox": 3.76,
+          "iou": 0.0,
+          "rel_vel": 103.79,
+          "conv_angle": 175.6
+        },
+        {
+          "frame": 19,
+          "timestamp": 2.365,
+          "distance": 493.7,
+          "norm_prox": 3.778,
+          "iou": 0.0,
+          "rel_vel": 188.6,
+          "conv_angle": 163.5
+        },
+        {
+          "frame": 20,
+          "timestamp": 2.49,
+          "distance": 471.6,
+          "norm_prox": 3.596,
+          "iou": 0.0,
+          "rel_vel": 177.55,
+          "conv_angle": 147.9
+        },
+        {
+          "frame": 21,
+          "timestamp": 2.614,
+          "distance": 455.5,
+          "norm_prox": 3.458,
+          "iou": 0.0,
+          "rel_vel": 128.91,
+          "conv_angle": 166.9
+        },
+        {
+          "frame": 22,
+          "timestamp": 2.739,
+          "distance": 435.5,
+          "norm_prox": 3.175,
+          "iou": 0.0,
+          "rel_vel": 161.19,
+          "conv_angle": 158.4
+        },
+        {
+          "frame": 23,
+          "timestamp": 2.863,
+          "distance": 418.3,
+          "norm_prox": 2.884,
+          "iou": 0.0,
+          "rel_vel": 138.16,
+          "conv_angle": 161.8
+        },
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 397.6,
+          "norm_prox": 2.729,
+          "iou": 0.0,
+          "rel_vel": 166.37,
+          "conv_angle": 159.7
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 361.7,
+          "norm_prox": 2.357,
+          "iou": 0.0,
+          "rel_vel": 143.86,
+          "conv_angle": 155.7
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 347.6,
+          "norm_prox": 2.213,
+          "iou": 0.0,
+          "rel_vel": 113.67,
+          "conv_angle": 153.5
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 329.3,
+          "norm_prox": 2.067,
+          "iou": 0.0,
+          "rel_vel": 146.99,
+          "conv_angle": 179.3
+        }
+      ]
+    },
+    "8_25": {
+      "id_a": 8,
+      "id_b": 25,
+      "co_existing_frames": 1,
+      "frames": [
+        {
+          "frame": 12,
+          "timestamp": 1.494,
+          "distance": 320.2,
+          "norm_prox": 1.661,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        }
+      ]
+    },
+    "1_33": {
+      "id_a": 1,
+      "id_b": 33,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 161.7,
+          "norm_prox": 0.345,
+          "iou": 0.0045,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 153.6,
+          "norm_prox": 0.335,
+          "iou": 0.0147,
+          "rel_vel": 65.07,
+          "conv_angle": 29.3
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 143.0,
+          "norm_prox": 0.318,
+          "iou": 0.021,
+          "rel_vel": 85.11,
+          "conv_angle": 117.3
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 137.0,
+          "norm_prox": 0.31,
+          "iou": 0.0269,
+          "rel_vel": 48.89,
+          "conv_angle": 2.8
+        }
+      ]
+    },
+    "2_33": {
+      "id_a": 2,
+      "id_b": 33,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 293.7,
+          "norm_prox": 0.626,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 294.5,
+          "norm_prox": 0.642,
+          "iou": 0.0,
+          "rel_vel": -6.56,
+          "conv_angle": 35.4
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 288.4,
+          "norm_prox": 0.641,
+          "iou": 0.0,
+          "rel_vel": 49.21,
+          "conv_angle": 106.1
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 288.7,
+          "norm_prox": 0.653,
+          "iou": 0.0,
+          "rel_vel": -2.89,
+          "conv_angle": 31.5
+        }
+      ]
+    },
+    "7_33": {
+      "id_a": 7,
+      "id_b": 33,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 289.3,
+          "norm_prox": 0.617,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 289.9,
+          "norm_prox": 0.632,
+          "iou": 0.0,
+          "rel_vel": -5.05,
+          "conv_angle": 24.1
+        },
+        {
+          "frame": 17,
+          "timestamp": 2.116,
+          "distance": 283.9,
+          "norm_prox": 0.631,
+          "iou": 0.0,
+          "rel_vel": 48.26,
+          "conv_angle": 117.7
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 281.6,
+          "norm_prox": 0.637,
+          "iou": 0.0,
+          "rel_vel": 18.62,
+          "conv_angle": 13.9
+        }
+      ]
+    },
+    "25_33": {
+      "id_a": 25,
+      "id_b": 33,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 15,
+          "timestamp": 1.867,
+          "distance": 353.7,
+          "norm_prox": 0.754,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 16,
+          "timestamp": 1.992,
+          "distance": 342.7,
+          "norm_prox": 0.747,
+          "iou": 0.0,
+          "rel_vel": 87.85,
+          "conv_angle": 160.0
+        },
+        {
+          "frame": 18,
+          "timestamp": 2.241,
+          "distance": 335.0,
+          "norm_prox": 0.758,
+          "iou": 0.0,
+          "rel_vel": 30.95,
+          "conv_angle": 128.2
+        }
+      ]
+    },
+    "1_49": {
+      "id_a": 1,
+      "id_b": 49,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 191.3,
+          "norm_prox": 2.491,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 194.4,
+          "norm_prox": 1.822,
+          "iou": 0.0,
+          "rel_vel": -24.47,
+          "conv_angle": 127.6
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 200.2,
+          "norm_prox": 1.628,
+          "iou": 0.0,
+          "rel_vel": -23.23,
+          "conv_angle": 149.1
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 204.0,
+          "norm_prox": 1.779,
+          "iou": 0.0,
+          "rel_vel": -31.12,
+          "conv_angle": 163.8
+        }
+      ]
+    },
+    "2_49": {
+      "id_a": 2,
+      "id_b": 49,
+      "co_existing_frames": 5,
+      "frames": [
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 306.6,
+          "norm_prox": 1.696,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 298.4,
+          "norm_prox": 1.619,
+          "iou": 0.0,
+          "rel_vel": 66.07,
+          "conv_angle": 123.4
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 288.9,
+          "norm_prox": 1.529,
+          "iou": 0.0,
+          "rel_vel": 76.46,
+          "conv_angle": 137.0
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 279.7,
+          "norm_prox": 1.434,
+          "iou": 0.0,
+          "rel_vel": 73.63,
+          "conv_angle": 161.6
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 270.0,
+          "norm_prox": 1.366,
+          "iou": 0.0,
+          "rel_vel": 77.95,
+          "conv_angle": 167.1
+        }
+      ]
+    },
+    "4_49": {
+      "id_a": 4,
+      "id_b": 49,
+      "co_existing_frames": 5,
+      "frames": [
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 439.1,
+          "norm_prox": 6.005,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 430.5,
+          "norm_prox": 6.028,
+          "iou": 0.0,
+          "rel_vel": 68.91,
+          "conv_angle": 91.7
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 419.4,
+          "norm_prox": 5.882,
+          "iou": 0.0,
+          "rel_vel": 89.26,
+          "conv_angle": 128.6
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 409.6,
+          "norm_prox": 6.026,
+          "iou": 0.0,
+          "rel_vel": 78.66,
+          "conv_angle": 136.8
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 398.3,
+          "norm_prox": 5.737,
+          "iou": 0.0,
+          "rel_vel": 90.79,
+          "conv_angle": 118.9
+        }
+      ]
+    },
+    "7_49": {
+      "id_a": 7,
+      "id_b": 49,
+      "co_existing_frames": 5,
+      "frames": [
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 248.4,
+          "norm_prox": 1.705,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 25,
+          "timestamp": 3.112,
+          "distance": 237.2,
+          "norm_prox": 1.587,
+          "iou": 0.0,
+          "rel_vel": 89.83,
+          "conv_angle": 149.9
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 224.8,
+          "norm_prox": 1.465,
+          "iou": 0.0,
+          "rel_vel": 99.16,
+          "conv_angle": 149.3
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 214.7,
+          "norm_prox": 1.367,
+          "iou": 0.0,
+          "rel_vel": 81.43,
+          "conv_angle": 150.3
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 202.9,
+          "norm_prox": 1.274,
+          "iou": 0.0,
+          "rel_vel": 94.59,
+          "conv_angle": 163.8
+        }
+      ]
+    },
+    "25_49": {
+      "id_a": 25,
+      "id_b": 49,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 24,
+          "timestamp": 2.988,
+          "distance": 156.3,
+          "norm_prox": 1.257,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 26,
+          "timestamp": 3.237,
+          "distance": 145.1,
+          "norm_prox": 1.169,
+          "iou": 0.0,
+          "rel_vel": 44.87,
+          "conv_angle": 6.2
+        },
+        {
+          "frame": 27,
+          "timestamp": 3.361,
+          "distance": 142.5,
+          "norm_prox": 1.14,
+          "iou": 0.0,
+          "rel_vel": 21.43,
+          "conv_angle": 3.1
+        },
+        {
+          "frame": 28,
+          "timestamp": 3.486,
+          "distance": 135.7,
+          "norm_prox": 0.997,
+          "iou": 0.0,
+          "rel_vel": 54.08,
+          "conv_angle": 15.5
+        }
+      ]
+    },
+    "1_61": {
+      "id_a": 1,
+      "id_b": 61,
+      "co_existing_frames": 5,
+      "frames": [
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 326.2,
+          "norm_prox": 1.713,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 316.1,
+          "norm_prox": 1.714,
+          "iou": 0.0,
+          "rel_vel": 80.87,
+          "conv_angle": 133.8
+        },
+        {
+          "frame": 34,
+          "timestamp": 4.233,
+          "distance": 301.3,
+          "norm_prox": 1.614,
+          "iou": 0.0,
+          "rel_vel": 119.12,
+          "conv_angle": 143.8
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 270.3,
+          "norm_prox": 1.532,
+          "iou": 0.0,
+          "rel_vel": 124.62,
+          "conv_angle": 161.9
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 259.9,
+          "norm_prox": 1.478,
+          "iou": 0.0,
+          "rel_vel": 83.73,
+          "conv_angle": 171.8
+        }
+      ]
+    },
+    "2_61": {
+      "id_a": 2,
+      "id_b": 61,
+      "co_existing_frames": 4,
+      "frames": [
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 520.0,
+          "norm_prox": 2.423,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 510.8,
+          "norm_prox": 2.367,
+          "iou": 0.0,
+          "rel_vel": 73.78,
+          "conv_angle": 158.7
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 443.6,
+          "norm_prox": 1.965,
+          "iou": 0.0,
+          "rel_vel": 179.78,
+          "conv_angle": 150.3
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 429.6,
+          "norm_prox": 1.786,
+          "iou": 0.0,
+          "rel_vel": 113.15,
+          "conv_angle": 116.6
+        }
+      ]
+    },
+    "4_61": {
+      "id_a": 4,
+      "id_b": 61,
+      "co_existing_frames": 3,
+      "frames": [
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 697.8,
+          "norm_prox": 3.664,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 689.5,
+          "norm_prox": 3.739,
+          "iou": 0.0,
+          "rel_vel": 66.35,
+          "conv_angle": 172.3
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 619.5,
+          "norm_prox": 3.51,
+          "iou": 0.0,
+          "rel_vel": 187.55,
+          "conv_angle": 152.3
+        }
+      ]
+    },
+    "7_61": {
+      "id_a": 7,
+      "id_b": 61,
+      "co_existing_frames": 6,
+      "frames": [
+        {
+          "frame": 32,
+          "timestamp": 3.984,
+          "distance": 460.6,
+          "norm_prox": 2.419,
+          "iou": 0.0,
+          "rel_vel": 0.0,
+          "conv_angle": 0.0
+        },
+        {
+          "frame": 33,
+          "timestamp": 4.108,
+          "distance": 450.7,
+          "norm_prox": 2.444,
+          "iou": 0.0,
+          "rel_vel": 79.15,
+          "conv_angle": 171.3
+        },
+        {
+          "frame": 34,
+          "timestamp": 4.233,
+          "distance": 427.2,
+          "norm_prox": 2.288,
+          "iou": 0.0,
+          "rel_vel": 189.05,
+          "conv_angle": 146.4
+        },
+        {
+          "frame": 35,
+          "timestamp": 4.357,
+          "distance": 402.3,
+          "norm_prox": 2.169,
+          "iou": 0.0,
+          "rel_vel": 199.44,
+          "conv_angle": 152.5
+        },
+        {
+          "frame": 36,
+          "timestamp": 4.482,
+          "distance": 376.8,
+          "norm_prox": 1.982,
+          "iou": 0.0,
+          "rel_vel": 205.38,
+          "conv_angle": 150.2
+        },
+        {
+          "frame": 37,
+          "timestamp": 4.606,
+          "distance": 357.4,
+          "norm_prox": 1.841,
+          "iou": 0.0,
+          "rel_vel": 155.62,
+          "conv_angle": 159.6
+        }
+      ]
+    }
+  },
+  "interaction_candidates_count": 5,
+  "interaction_candidates": [
+    {
+      "object_a_id": 1,
+      "object_b_id": 3,
+      "start_frame": 9,
+      "end_frame": 20,
+      "start_time": 1.1203784389393752,
+      "peak_time": 2.4897298643097225,
+      "end_time": 2.4897298643097225,
+      "min_distance": 0.34067010455777624,
+      "max_relative_velocity": 35.78861142006829,
+      "peak_iou": 0.0825883157996263,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 20,
+        "max_frame": 37,
+        "obj_a": {
+          "pre_vel": 65.79,
+          "post_vel": 88.55,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 55.78,
+          "post_vel": 90.24,
+          "terminated": true
+        },
+        "passing_filter_would_apply": false
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 3,
+      "end_frame": 37,
+      "start_time": 0.37345947964645837,
+      "peak_time": 4.481513755757501,
+      "end_time": 4.606000248972987,
+      "min_distance": 0.33324086747251086,
+      "max_relative_velocity": 7.269175538404771,
+      "peak_iou": 0.23532916178148383,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 37,
+        "max_frame": 37,
+        "obj_a": {
+          "pre_vel": 37.35,
+          "post_vel": 37.35,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 47.52,
+          "post_vel": 47.52,
+          "terminated": false
+        },
+        "passing_filter_would_apply": "True"
+      }
+    },
+    {
+      "object_a_id": 1,
+      "object_b_id": 33,
+      "start_frame": 16,
+      "end_frame": 18,
+      "start_time": 1.9917838914477781,
+      "peak_time": 2.2407568778787503,
+      "end_time": 2.2407568778787503,
+      "min_distance": 0.309693166519057,
+      "max_relative_velocity": 85.11094395704826,
+      "peak_iou": 0.026850066006616043,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 18,
+        "max_frame": 37,
+        "obj_a": {
+          "pre_vel": 61.63,
+          "post_vel": 82.5,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 13.18,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "passing_filter_would_apply": false
+      }
+    },
+    {
+      "object_a_id": 7,
+      "object_b_id": 49,
+      "start_frame": 26,
+      "end_frame": 28,
+      "start_time": 3.236648823602639,
+      "peak_time": 3.4856218100336114,
+      "end_time": 3.4856218100336114,
+      "min_distance": 1.2735410736412551,
+      "max_relative_velocity": 99.15824327126786,
+      "peak_iou": 0.0,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 28,
+        "max_frame": 37,
+        "obj_a": {
+          "pre_vel": 41.59,
+          "post_vel": 49.49,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 75.25,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "passing_filter_would_apply": false
+      }
+    },
+    {
+      "object_a_id": 25,
+      "object_b_id": 49,
+      "start_frame": 26,
+      "end_frame": 28,
+      "start_time": 3.236648823602639,
+      "peak_time": 3.4856218100336114,
+      "end_time": 3.4856218100336114,
+      "min_distance": 0.9968418246668079,
+      "max_relative_velocity": 54.07889835189739,
+      "peak_iou": 0.0,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 28,
+        "max_frame": 37,
+        "obj_a": {
+          "pre_vel": 113.58,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 75.25,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "passing_filter_would_apply": false
+      }
+    }
+  ],
+  "accident_result": {
+    "accident": true,
+    "confidence": 1.0,
+    "start_time": 3.236648823602639,
+    "impact_time": 3.4856218100336114,
+    "end_time": 3.4856218100336114,
+    "involved_object_ids": [
+      49,
+      25,
+      7
+    ],
+    "evidence_list": [
+      "proximity_and_convergence",
+      "track_loss"
+    ]
+  },
+  "severity": "MEDIUM"
+}
