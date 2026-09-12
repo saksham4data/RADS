@@ -1,0 +1,1392 @@
+{
+  "video": "-FQxK6HdxNU_00.mp4",
+  "gt": "accident",
+  "failure_type": "FN",
+  "accident_result": {
+    "accident": false,
+    "confidence": 0.4,
+    "evidence_list": [],
+    "involved_object_ids": []
+  },
+  "interaction_candidates": [
+    {
+      "object_a_id": 1,
+      "object_b_id": 2,
+      "start_frame": 34,
+      "end_frame": 43,
+      "min_distance": 0.7542996117512127,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 272.01906036629913,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 43,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 143.77,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 26.56,
+          "post_vel": 25.09,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 1,
+      "object_b_id": 3,
+      "start_frame": 19,
+      "end_frame": 43,
+      "min_distance": 0.725544376915313,
+      "peak_iou": 0.03267517797369431,
+      "max_relative_velocity": 260.9482625240108,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 43,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 143.77,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 55.15,
+          "post_vel": 49.88,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 1,
+      "object_b_id": 5,
+      "start_frame": 1,
+      "end_frame": 36,
+      "min_distance": 0.3064065116681771,
+      "peak_iou": 0.3129283201307045,
+      "max_relative_velocity": 274.01306669132015,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 36,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 114.84,
+          "post_vel": 135.25,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 60.32,
+          "post_vel": 95.76,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 3,
+      "start_frame": 1,
+      "end_frame": 12,
+      "min_distance": 0.8999797543565318,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 55.09430525258613,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 12,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 38.28,
+          "post_vel": 32.22,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 72.71,
+          "post_vel": 56.05,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 3,
+      "start_frame": 16,
+      "end_frame": 27,
+      "min_distance": 0.8789158784226319,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 32.756517019633506,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 27,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 32.57,
+          "post_vel": 26.56,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 54.66,
+          "post_vel": 55.15,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 3,
+      "start_frame": 29,
+      "end_frame": 32,
+      "min_distance": 0.8597779279807379,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 21.224203311486967,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 32,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 27.07,
+          "post_vel": 26.06,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 57.55,
+          "post_vel": 51.76,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 5,
+      "start_frame": 1,
+      "end_frame": 3,
+      "min_distance": 1.2246632591790987,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 29.051456272121047,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 3,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 27.41,
+          "post_vel": 37.71,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 48.01,
+          "post_vel": 60.14,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 5,
+      "start_frame": 5,
+      "end_frame": 14,
+      "min_distance": 1.1358972315678908,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 44.03695345639727,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 14,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 36.36,
+          "post_vel": 29.84,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 58.12,
+          "post_vel": 52.46,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 5,
+      "start_frame": 20,
+      "end_frame": 23,
+      "min_distance": 1.1357401642566545,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 35.54665903226949,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 23,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 33.64,
+          "post_vel": 26.74,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 52.97,
+          "post_vel": 61.2,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 5,
+      "start_frame": 27,
+      "end_frame": 35,
+      "min_distance": 1.019140273135843,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 60.59335814199547,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 35,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 26.65,
+          "post_vel": 26.23,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 57.61,
+          "post_vel": 64.54,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 5,
+      "start_frame": 44,
+      "end_frame": 48,
+      "min_distance": 0.6187965730260253,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 75.19585175970587,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 48,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 26.06,
+          "post_vel": 22.53,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 59.8,
+          "post_vel": 159.94,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 3,
+      "end_frame": 10,
+      "min_distance": 1.2337710206479982,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 29.08054621919771,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 10,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 38.22,
+          "post_vel": 32.92,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 24.21,
+          "post_vel": 21.83,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 18,
+      "end_frame": 22,
+      "min_distance": 1.2193355112112172,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 30.149925536417417,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 22,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 34.29,
+          "post_vel": 27.96,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 20.61,
+          "post_vel": 23.17,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 31,
+      "end_frame": 33,
+      "min_distance": 1.1469346648865875,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 28.474108675553214,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 33,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 25.8,
+          "post_vel": 25.44,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 19.58,
+          "post_vel": 20.15,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 39,
+      "end_frame": 42,
+      "min_distance": 1.2078035020059057,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 28.322992921510476,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 42,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 27.08,
+          "post_vel": 25.37,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 21.23,
+          "post_vel": 18.79,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 7,
+      "start_frame": 48,
+      "end_frame": 51,
+      "min_distance": 1.1857021849001188,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 25.633771186767568,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 51,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 26.23,
+          "post_vel": 22.37,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 19.32,
+          "post_vel": 17.43,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 1,
+      "end_frame": 3,
+      "min_distance": 0.7256433495374326,
+      "peak_iou": 0.007717678874767803,
+      "max_relative_velocity": 57.14329597097773,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 3,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 55.0,
+          "post_vel": 62.52,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 48.01,
+          "post_vel": 60.14,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 5,
+      "end_frame": 7,
+      "min_distance": 0.7411560781362508,
+      "peak_iou": 0.006532830977328178,
+      "max_relative_velocity": 42.44644269286011,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 7,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 69.28,
+          "post_vel": 58.62,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 56.82,
+          "post_vel": 52.97,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 10,
+      "end_frame": 13,
+      "min_distance": 0.7443806279333433,
+      "peak_iou": 0.004736881224367312,
+      "max_relative_velocity": 21.304402632846088,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 13,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 69.66,
+          "post_vel": 55.33,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 57.79,
+          "post_vel": 49.69,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 21,
+      "end_frame": 23,
+      "min_distance": 0.7700283336025,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 41.58703941485836,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 23,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 58.62,
+          "post_vel": 55.09,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 52.97,
+          "post_vel": 61.2,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 32,
+      "end_frame": 44,
+      "min_distance": 0.7333246345082882,
+      "peak_iou": 0.004018716391408434,
+      "max_relative_velocity": 50.3932229184433,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 44,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 53.0,
+          "post_vel": 48.54,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 64.34,
+          "post_vel": 103.85,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 5,
+      "start_frame": 46,
+      "end_frame": 48,
+      "min_distance": 0.6582278863260926,
+      "peak_iou": 0.0575609746440051,
+      "max_relative_velocity": 36.91284690826227,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 48,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 51.76,
+          "post_vel": 45.39,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 59.8,
+          "post_vel": 159.94,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 4,
+      "object_b_id": 6,
+      "start_frame": 41,
+      "end_frame": 53,
+      "min_distance": 0.6425187776179374,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 78.03393078874157,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 53,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 99.64,
+          "post_vel": 90.5,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 55.41,
+          "post_vel": 0.0,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 5,
+      "object_b_id": 7,
+      "start_frame": 48,
+      "end_frame": 51,
+      "min_distance": 1.2676961982046724,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 101.34411153347226,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 51,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 64.54,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 19.32,
+          "post_vel": 17.43,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 4,
+      "object_b_id": 27,
+      "start_frame": 16,
+      "end_frame": 25,
+      "min_distance": 0.5669469690336366,
+      "peak_iou": 0.06633371349230706,
+      "max_relative_velocity": 22.25247485981412,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 25,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 71.72,
+          "post_vel": 81.21,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 64.14,
+          "post_vel": 67.2,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 4,
+      "object_b_id": 27,
+      "start_frame": 48,
+      "end_frame": 51,
+      "min_distance": 0.45444221602289725,
+      "peak_iou": 0.10609137411120799,
+      "max_relative_velocity": 25.82260166585607,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 51,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 96.86,
+          "post_vel": 94.66,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 77.5,
+          "post_vel": 76.67,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 4,
+      "object_b_id": 27,
+      "start_frame": 53,
+      "end_frame": 60,
+      "min_distance": 0.402407848471463,
+      "peak_iou": 0.1823553137110964,
+      "max_relative_velocity": 74.15044331150315,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 60,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 116.96,
+          "post_vel": 72.87,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 88.99,
+          "post_vel": 41.06,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 6,
+      "object_b_id": 27,
+      "start_frame": 43,
+      "end_frame": 49,
+      "min_distance": 0.7174117445795009,
+      "peak_iou": 0.020029831890765456,
+      "max_relative_velocity": 59.64873763141633,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 49,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 62.04,
+          "post_vel": 58.12,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 77.96,
+          "post_vel": 79.27,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 6,
+      "object_b_id": 27,
+      "start_frame": 51,
+      "end_frame": 53,
+      "min_distance": 0.6376490673514776,
+      "peak_iou": 0.023255759293519824,
+      "max_relative_velocity": 57.15992072773169,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 53,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 55.41,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 80.33,
+          "post_vel": 72.38,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 1,
+      "object_b_id": 32,
+      "start_frame": 17,
+      "end_frame": 23,
+      "min_distance": 0.9969680949050723,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 80.57051751608141,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 23,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 108.38,
+          "post_vel": 137.01,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 172.73,
+          "post_vel": 0.0,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 32,
+      "start_frame": 22,
+      "end_frame": 24,
+      "min_distance": 1.3609026218238767,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 121.48169875167794,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 24,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 55.63,
+          "post_vel": 56.91,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 169.91,
+          "post_vel": 0.0,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 5,
+      "object_b_id": 32,
+      "start_frame": 20,
+      "end_frame": 24,
+      "min_distance": 1.204030832712929,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 107.89570099658222,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 24,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 53.39,
+          "post_vel": 63.31,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 169.91,
+          "post_vel": 0.0,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 1,
+      "object_b_id": 47,
+      "start_frame": 29,
+      "end_frame": 33,
+      "min_distance": 1.3832482291808672,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 50.48133717376629,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 33,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 105.96,
+          "post_vel": 154.84,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 152.25,
+          "post_vel": 150.87,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 63,
+      "start_frame": 46,
+      "end_frame": 68,
+      "min_distance": 1.049779730420601,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 109.2961760628119,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 68,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 23.27,
+          "post_vel": 18.41,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 97.42,
+          "post_vel": 86.07,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 3,
+      "object_b_id": 63,
+      "start_frame": 45,
+      "end_frame": 70,
+      "min_distance": 0.9681859898209648,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 94.56462004477437,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 70,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 47.7,
+          "post_vel": 20.54,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 98.24,
+          "post_vel": 93.88,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 7,
+      "object_b_id": 63,
+      "start_frame": 49,
+      "end_frame": 60,
+      "min_distance": 1.3130410287877212,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 97.4487875299871,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 60,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 18.67,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 89.83,
+          "post_vel": 93.72,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 12,
+      "object_b_id": 63,
+      "start_frame": 50,
+      "end_frame": 61,
+      "min_distance": 1.3581453032980604,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 69.7268094960847,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 61,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 32.93,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 86.18,
+          "post_vel": 94.94,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 47,
+      "object_b_id": 63,
+      "start_frame": 63,
+      "end_frame": 68,
+      "min_distance": 0.32896717913349893,
+      "peak_iou": 0.1183285925609729,
+      "max_relative_velocity": 106.00659057827035,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 68,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 118.67,
+          "post_vel": 96.16,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 97.42,
+          "post_vel": 86.07,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 47,
+      "object_b_id": 63,
+      "start_frame": 70,
+      "end_frame": 76,
+      "min_distance": 0.3767452278734784,
+      "peak_iou": 0.14573483637600915,
+      "max_relative_velocity": 59.83577964933192,
+      "evidence_list": [
+        "overlap",
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 76,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 104.17,
+          "post_vel": 104.17,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 93.72,
+          "post_vel": 93.72,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 22,
+      "object_b_id": 63,
+      "start_frame": 48,
+      "end_frame": 61,
+      "min_distance": 1.2130260763863614,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 62.80401639995821,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 61,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 31.91,
+          "post_vel": 26.96,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 86.18,
+          "post_vel": 94.94,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 47,
+      "object_b_id": 80,
+      "start_frame": 61,
+      "end_frame": 68,
+      "min_distance": 0.8931123646959407,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 76.75421442504326,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 68,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 118.67,
+          "post_vel": 96.16,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 136.02,
+          "post_vel": 116.35,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 47,
+      "object_b_id": 80,
+      "start_frame": 72,
+      "end_frame": 74,
+      "min_distance": 0.9612567972838005,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 73.32946175564226,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 74,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 107.02,
+          "post_vel": 102.43,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 131.81,
+          "post_vel": 136.87,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 63,
+      "object_b_id": 80,
+      "start_frame": 57,
+      "end_frame": 76,
+      "min_distance": 0.7793816799607377,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 119.6196034011349,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 76,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 93.72,
+          "post_vel": 93.72,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 132.09,
+          "post_vel": 132.09,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 47,
+      "object_b_id": 82,
+      "start_frame": 59,
+      "end_frame": 71,
+      "min_distance": 0.9767981891084372,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 210.94872920349223,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 71,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 113.77,
+          "post_vel": 95.74,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 95.22,
+          "post_vel": 182.54,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 63,
+      "object_b_id": 82,
+      "start_frame": 59,
+      "end_frame": 76,
+      "min_distance": 0.8597644772729893,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 158.1626875865737,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 76,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 93.72,
+          "post_vel": 93.72,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 133.63,
+          "post_vel": 133.63,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 80,
+      "object_b_id": 82,
+      "start_frame": 66,
+      "end_frame": 76,
+      "min_distance": 1.2350131763656493,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 300.26417244438255,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 76,
+        "max_frame": 76,
+        "obj_a": {
+          "pre_vel": 132.09,
+          "post_vel": 132.09,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 133.63,
+          "post_vel": 133.63,
+          "terminated": false
+        }
+      }
+    }
+  ],
+  "track_info": {
+    "1": {
+      "num_frames": 44,
+      "first_frame": 0,
+      "last_frame": 43,
+      "class": "car"
+    },
+    "2": {
+      "num_frames": 77,
+      "first_frame": 0,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "3": {
+      "num_frames": 74,
+      "first_frame": 0,
+      "last_frame": 73,
+      "class": "car"
+    },
+    "4": {
+      "num_frames": 70,
+      "first_frame": 0,
+      "last_frame": 70,
+      "class": "car"
+    },
+    "5": {
+      "num_frames": 45,
+      "first_frame": 0,
+      "last_frame": 51,
+      "class": "car"
+    },
+    "6": {
+      "num_frames": 54,
+      "first_frame": 0,
+      "last_frame": 53,
+      "class": "car"
+    },
+    "7": {
+      "num_frames": 55,
+      "first_frame": 0,
+      "last_frame": 60,
+      "class": "car"
+    },
+    "8": {
+      "num_frames": 48,
+      "first_frame": 0,
+      "last_frame": 51,
+      "class": "car"
+    },
+    "9": {
+      "num_frames": 2,
+      "first_frame": 0,
+      "last_frame": 1,
+      "class": "car"
+    },
+    "10": {
+      "num_frames": 44,
+      "first_frame": 0,
+      "last_frame": 74,
+      "class": "car"
+    },
+    "11": {
+      "num_frames": 2,
+      "first_frame": 0,
+      "last_frame": 2,
+      "class": "car"
+    },
+    "12": {
+      "num_frames": 56,
+      "first_frame": 0,
+      "last_frame": 64,
+      "class": "car"
+    },
+    "22": {
+      "num_frames": 34,
+      "first_frame": 7,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "27": {
+      "num_frames": 40,
+      "first_frame": 10,
+      "last_frame": 63,
+      "class": "car"
+    },
+    "32": {
+      "num_frames": 11,
+      "first_frame": 14,
+      "last_frame": 24,
+      "class": "car"
+    },
+    "33": {
+      "num_frames": 29,
+      "first_frame": 14,
+      "last_frame": 64,
+      "class": "truck"
+    },
+    "45": {
+      "num_frames": 11,
+      "first_frame": 24,
+      "last_frame": 52,
+      "class": "car"
+    },
+    "47": {
+      "num_frames": 51,
+      "first_frame": 26,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "48": {
+      "num_frames": 49,
+      "first_frame": 26,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "51": {
+      "num_frames": 1,
+      "first_frame": 30,
+      "last_frame": 30,
+      "class": "car"
+    },
+    "63": {
+      "num_frames": 34,
+      "first_frame": 42,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "70": {
+      "num_frames": 15,
+      "first_frame": 50,
+      "last_frame": 71,
+      "class": "car"
+    },
+    "80": {
+      "num_frames": 21,
+      "first_frame": 56,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "82": {
+      "num_frames": 19,
+      "first_frame": 58,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "87": {
+      "num_frames": 2,
+      "first_frame": 66,
+      "last_frame": 69,
+      "class": "truck"
+    },
+    "105": {
+      "num_frames": 2,
+      "first_frame": 75,
+      "last_frame": 76,
+      "class": "car"
+    },
+    "107": {
+      "num_frames": 1,
+      "first_frame": 76,
+      "last_frame": 76,
+      "class": "car"
+    }
+  }
+}

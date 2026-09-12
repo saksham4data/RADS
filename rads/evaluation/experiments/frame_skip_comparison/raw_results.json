@@ -1,0 +1,172 @@
+{
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\positive\\real\\-2UPLUV7JLg_00.mp4": {
+        "gt": "accident",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "14.99s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "4.56s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\positive\\real\\-6SQSDj8cYU_00.mp4": {
+        "gt": "accident",
+        "skip_1": {
+            "prediction": "accident",
+            "confidence": "1.00",
+            "event_time": "3.54s",
+            "severity": "LOW",
+            "runtime": "16.30s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.29",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "6.58s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\positive\\real\\-7-vQ4obVwQ_00.mp4": {
+        "gt": "accident",
+        "skip_1": {
+            "prediction": "accident",
+            "confidence": "1.00",
+            "event_time": "5.07s",
+            "severity": "MEDIUM",
+            "runtime": "15.32s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "5.57s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\positive\\real\\-9oifpjUxxM_00.mp4": {
+        "gt": "accident",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "17.13s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "8.60s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\positive\\real\\-AztVDZ6cEE_00.mp4": {
+        "gt": "accident",
+        "skip_1": {
+            "prediction": "accident",
+            "confidence": "1.00",
+            "event_time": "0.53s",
+            "severity": "LOW",
+            "runtime": "12.62s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.03",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "3.76s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-2UPLUV7JLg_00.mp4": {
+        "gt": "normal",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "7.86s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "2.93s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-6SQSDj8cYU_00.mp4": {
+        "gt": "normal",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.15",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "8.86s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.04",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "3.47s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-7-vQ4obVwQ_00.mp4": {
+        "gt": "normal",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "9.38s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "3.38s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-9oifpjUxxM_00.mp4": {
+        "gt": "normal",
+        "skip_1": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "11.32s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.00",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "4.19s"
+        }
+    },
+    "e:\\Rads\\Datasets\\processed\\picek_sorted\\trimmed\\negative\\real\\-dmYsQc-odI_00.mp4": {
+        "gt": "normal",
+        "skip_1": {
+            "prediction": "accident",
+            "confidence": "1.00",
+            "event_time": "3.49s",
+            "severity": "MEDIUM",
+            "runtime": "5.03s"
+        },
+        "skip_3": {
+            "prediction": "normal",
+            "confidence": "0.05",
+            "event_time": "N/A",
+            "severity": null,
+            "runtime": "1.51s"
+        }
+    }
+}

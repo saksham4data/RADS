@@ -7,20 +7,26 @@ def get_velocities_around_frame(traj: List[Dict[str, Any]], frame_idx: int, max_
     post_pts = [p for p in traj if frame_idx < p['frame_index'] <= frame_idx + window]
     
     def get_vel(pts):
-        if len(pts) < 2: return 0.0
+        if len(pts) < 2: return None
         dx = pts[-1]['cx'] - pts[0]['cx']
         dy = pts[-1]['cy'] - pts[0]['cy']
         dt = pts[-1]['timestamp'] - pts[0]['timestamp']
         if dt <= 0.01: return 0.0
         return np.sqrt(dx**2 + dy**2) / dt
 
-    pre_vel = get_vel(pre_pts)
+    pre_vel = get_vel(pre_pts) or 0.0
     post_vel = get_vel(post_pts)
     
     last_frame = traj[-1]['frame_index'] if traj else 0
     # A track is only considered terminated if it drops before the end of the video
     terminated_soon = (last_frame <= frame_idx + 5) and (last_frame < max_frame - 5)
     
+    if post_vel is None:
+        if terminated_soon:
+            post_vel = 0.0
+        else:
+            post_vel = pre_vel
+            
     return pre_vel, post_vel, terminated_soon
 
 def evaluate_accident(interaction_candidates: List[Dict[str, Any]], track_history: Any) -> Dict[str, Any]:
@@ -77,7 +83,17 @@ def evaluate_accident(interaction_candidates: List[Dict[str, Any]], track_histor
         
         # Trajectory disruption / termination (strong collision indicator)
         if term_a or term_b:
-            anomaly_boost += 0.6
+            track_loss_boost = 0.6
+            
+            # P1-A: Guard track_loss boost by checking the surviving object's behavior
+            if term_a and not term_b:
+                if not (pre_b > 15.0 and post_b < pre_b * 0.5):
+                    track_loss_boost = 0.1
+            elif term_b and not term_a:
+                if not (pre_a > 15.0 and post_a < pre_a * 0.5):
+                    track_loss_boost = 0.1
+
+            anomaly_boost += track_loss_boost
             if 'track_loss' not in evidence:
                 evidence.append('track_loss')
                 
@@ -99,13 +115,19 @@ def evaluate_accident(interaction_candidates: List[Dict[str, Any]], track_histor
         if iou > 0.85 and rel_vel < 30.0:
             score *= 0.1
             
-        # Normal Passing Car Filter
-        # If neither terminated and both maintained >50% of their pre-interaction velocity,
-        # it is almost certainly a normal pass in 2D perspective.
+        # P1-B: Normal Passing Car Filter
+        # If surviving objects maintained >50% of their pre-interaction velocity,
+        # it is almost certainly a normal pass.
         if not term_a and not term_b:
             if pre_a > 0 and pre_b > 0:
                 if post_a > pre_a * 0.5 and post_b > pre_b * 0.5:
-                    score *= 0.1  # Heavy penalty
+                    score *= 0.1  # Heavy penalty for mutual passing
+        elif term_a and not term_b:
+            if pre_b > 0 and post_b > pre_b * 0.5:
+                score *= 0.3  # Penalty for surviving object passing normally
+        elif term_b and not term_a:
+            if pre_a > 0 and post_a > pre_a * 0.5:
+                score *= 0.3  # Penalty for surviving object passing normally
                     
         # Update evidence list
         cand['evidence_list'] = evidence

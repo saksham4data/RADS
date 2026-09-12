@@ -1,0 +1,188 @@
+{
+  "video": "-PpBteU0p3Q_00.mp4",
+  "gt": "normal",
+  "failure_type": "FP",
+  "accident_result": {
+    "accident": true,
+    "confidence": 1.0,
+    "evidence_list": [
+      "proximity_and_convergence",
+      "track_loss"
+    ],
+    "involved_object_ids": [
+      1,
+      2,
+      3
+    ]
+  },
+  "interaction_candidates": [
+    {
+      "object_a_id": 1,
+      "object_b_id": 3,
+      "start_frame": 2,
+      "end_frame": 22,
+      "min_distance": 0.7779797399043936,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 283.42889763485897,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 22,
+        "max_frame": 33,
+        "obj_a": {
+          "pre_vel": 140.54,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 60.86,
+          "post_vel": 40.42,
+          "terminated": true
+        }
+      }
+    },
+    {
+      "object_a_id": 2,
+      "object_b_id": 3,
+      "start_frame": 1,
+      "end_frame": 13,
+      "min_distance": 0.9132333582701359,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 44.06071221604705,
+      "evidence_list": [
+        "proximity_and_convergence",
+        "track_loss"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 13,
+        "max_frame": 33,
+        "obj_a": {
+          "pre_vel": 67.5,
+          "post_vel": 0.0,
+          "terminated": true
+        },
+        "obj_b": {
+          "pre_vel": 83.36,
+          "post_vel": 49.85,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 15,
+      "object_b_id": 32,
+      "start_frame": 30,
+      "end_frame": 33,
+      "min_distance": 1.2323763743858915,
+      "peak_iou": 0.0,
+      "max_relative_velocity": 564.7976034567915,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 33,
+        "max_frame": 33,
+        "obj_a": {
+          "pre_vel": 284.68,
+          "post_vel": 284.68,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 710.08,
+          "post_vel": 710.08,
+          "terminated": false
+        }
+      }
+    },
+    {
+      "object_a_id": 24,
+      "object_b_id": 32,
+      "start_frame": 30,
+      "end_frame": 33,
+      "min_distance": 0.67381576575627,
+      "peak_iou": 0.008683431107062493,
+      "max_relative_velocity": 171.068841267527,
+      "evidence_list": [
+        "proximity_and_convergence"
+      ],
+      "_forensic_velocity_context": {
+        "end_frame": 33,
+        "max_frame": 33,
+        "obj_a": {
+          "pre_vel": 584.19,
+          "post_vel": 584.19,
+          "terminated": false
+        },
+        "obj_b": {
+          "pre_vel": 710.08,
+          "post_vel": 710.08,
+          "terminated": false
+        }
+      }
+    }
+  ],
+  "track_info": {
+    "1": {
+      "num_frames": 23,
+      "first_frame": 0,
+      "last_frame": 22,
+      "class": "car"
+    },
+    "2": {
+      "num_frames": 14,
+      "first_frame": 0,
+      "last_frame": 13,
+      "class": "car"
+    },
+    "3": {
+      "num_frames": 28,
+      "first_frame": 0,
+      "last_frame": 27,
+      "class": "car"
+    },
+    "4": {
+      "num_frames": 6,
+      "first_frame": 0,
+      "last_frame": 5,
+      "class": "car"
+    },
+    "15": {
+      "num_frames": 21,
+      "first_frame": 13,
+      "last_frame": 33,
+      "class": "car"
+    },
+    "17": {
+      "num_frames": 12,
+      "first_frame": 14,
+      "last_frame": 27,
+      "class": "car"
+    },
+    "19": {
+      "num_frames": 11,
+      "first_frame": 18,
+      "last_frame": 29,
+      "class": "car"
+    },
+    "24": {
+      "num_frames": 10,
+      "first_frame": 24,
+      "last_frame": 33,
+      "class": "car"
+    },
+    "30": {
+      "num_frames": 1,
+      "first_frame": 27,
+      "last_frame": 27,
+      "class": "car"
+    },
+    "32": {
+      "num_frames": 5,
+      "first_frame": 29,
+      "last_frame": 33,
+      "class": "car"
+    }
+  }
+}
