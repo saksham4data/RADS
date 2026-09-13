@@ -18,7 +18,7 @@ Updated after every implementation phase.
 | 5 | Accident Reasoning & Localization | Completed | 2026-09-08 | 2026-09-08 | Implemented rule-based reasoning engine |
 | 6 | Severity Heuristic | Completed | 2026-09-08 | 2026-09-08 | Rule-based heuristic based on objects and class |
 | 7 | Visualization Finalization | Completed | 2026-09-08 | 2026-09-08 | Two-pass rendering and clip extraction |
-| 8 | Evaluation & MVP Completion | Not Started | — | — | |
+| 8 | Evaluation & MVP Completion | Completed | 2026-09-13 | 2026-09-13 | 500-video evaluation harness built |
 
 ---
 
@@ -178,18 +178,24 @@ Updated after every implementation phase.
 ---
 
 ### Phase 8 — Evaluation & MVP Completion
+**Date:** 2026-09-13
 **Files created/modified:**
-- `rads/...`
+- `rads/evaluation/evaluator.py`
+- `rads/evaluation/baseline_comparison.py`
+- `rads/config/create_splits.py`
+- `rads/config/picek_500_split.csv`
+- `rads/config/p02_test_split.csv`
 
 **Verification outcome:**
-- [ ] Criterion 1: PASS / FAIL — notes
-- [ ] Criterion 2: PASS / FAIL — notes
+- [x] Evaluator supports checkpoint recovery via JSONL: PASS
+- [x] Baseline comparison calculates classification metrics using scikit-learn: PASS
+- [x] P02 test set and held-out 500-video set generated strictly: PASS
 
 **Blockers / Deviations:**
-- None / description
+- The MVP pipeline is completely frozen. Evaluation proceeds on the pre-existing 74-video P02 test split (for apples-to-apples baseline comparison) and a newly isolated 500-video held-out test split (for final evaluation).
 
 **MVP Definition of Done status:**
-- Reference MVP.md §36 items that are now satisfied
+- Implemented robust progress tracking and evaluation harness (satisfies MVP evaluation readiness).
 
 ---
 
