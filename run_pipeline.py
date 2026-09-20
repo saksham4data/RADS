@@ -1,8 +1,14 @@
 import argparse
 import json
+import os
 import sys
 
 from rads.pipeline.pipeline import Pipeline
+
+def _ensure_parent_dir(path: str):
+    parent = os.path.dirname(os.path.abspath(path))
+    if parent:
+        os.makedirs(parent, exist_ok=True)
 
 def main():
     parser = argparse.ArgumentParser(description="Run RADS Pipeline")
@@ -15,6 +21,11 @@ def main():
     args = parser.parse_args()
     
     try:
+        # cv2.VideoWriter fails silently if the directory is missing, so create both up front
+        _ensure_parent_dir(args.output)
+        if args.visualize:
+            _ensure_parent_dir(args.output_video)
+        
         # Initialize and run pipeline
         pipeline = Pipeline(args.config)
         result = pipeline.run(args.video, visualize=args.visualize, output_video_path=args.output_video)

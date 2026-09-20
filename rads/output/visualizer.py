@@ -3,6 +3,15 @@ import numpy as np
 import os
 from typing import List, Dict, Any, Tuple
 from rads.motion.trajectory import TrackHistory
+from rads.output.event_schema import involved_ids_from_result
+
+def format_timestamp(seconds: float) -> str:
+    """MM:SS.s per TECH_STACK.md section 16."""
+    if seconds is None:
+        return "--:--.-"
+    seconds = max(float(seconds), 0.0)
+    minutes = int(seconds // 60)
+    return f"{minutes:02d}:{seconds - minutes * 60:04.1f}"
 
 class Visualizer:
     """Renders pipeline output onto video frames in a post-processing pass."""
@@ -43,7 +52,8 @@ class Visualizer:
                 cv2.polylines(annotated_frame, [pts], isClosed=False, color=color, thickness=2)
 
         # 3. Draw current bounding boxes
-        involved_ids = event_result.get('objects_involved', [])
+        # objects_involved holds {id, class} objects, so membership needs an id set
+        involved_ids = involved_ids_from_result(event_result)
         
         for t_id in track_history.get_all_track_ids():
             traj = track_history.get_trajectory(t_id)
@@ -75,10 +85,51 @@ class Visualizer:
             text = f"ACCIDENT DETECTED | Conf: {conf:.2f} | Sev: {sev}"
             color = (0, 0, 255) if in_event_window else (0, 165, 255) # Red if inside window, Orange otherwise
             cv2.putText(annotated_frame, text, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+            impact_time = (event_result.get('event') or {}).get('impact_time')
+            cv2.putText(annotated_frame, f"TIME: {format_timestamp(impact_time)}", (20, 72),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
         else:
             cv2.putText(annotated_frame, "NORMAL TRAFFIC", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
         self.writer.write(annotated_frame)
+
+    def write_summary_frame(self, event_result: Dict[str, Any], hold_seconds: float = 2.0):
+        """Appends a held end-of-video frame carrying the structured result."""
+        width, height = self.resolution
+        frame = np.zeros((height, width, 3), dtype=np.uint8)
+
+        is_accident = event_result.get('accident', False)
+        color = (0, 0, 255) if is_accident else (0, 255, 0)
+        event = event_result.get('event') or {}
+        severity_detail = event_result.get('severity_detail') or {}
+
+        lines = [("ACCIDENT DETECTED" if is_accident else "NO ACCIDENT DETECTED", color)]
+        if is_accident:
+            lines.append((f"TIME: {format_timestamp(event.get('impact_time'))}", color))
+            lines.append((f"WINDOW: {format_timestamp(event.get('start_time'))}"
+                          f" - {format_timestamp(event.get('end_time'))}", (255, 255, 255)))
+            lines.append((f"SEVERITY: {event_result.get('severity')}"
+                          f" (score {severity_detail.get('score')})", (255, 255, 255)))
+            lines.append((f"TYPE: {event_result.get('accident_type')}", (255, 255, 255)))
+            for obj in event_result.get('objects_involved', []) or []:
+                lines.append((f"  {obj.get('class', 'unknown').upper()} #{obj.get('id')}", (255, 255, 255)))
+            evidence = event_result.get('evidence_list', []) or []
+            lines.append(("EVIDENCE:", (255, 255, 255)))
+            for item in evidence:
+                lines.append((f"  - {item}", (255, 255, 255)))
+        lines.append((f"CONFIDENCE: {event_result.get('confidence')}"
+                      f" (raw score {event_result.get('score')})", (255, 255, 255)))
+        lines.append((f"TRACKS: {len(event_result.get('tracks_summary', {}) or {})}", (255, 255, 255)))
+
+        y = 60
+        for text, line_color in lines:
+            cv2.putText(frame, text, (40, y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, line_color, 2)
+            y += 34
+            if y > height - 20:
+                break
+
+        for _ in range(max(1, int(self.fps * hold_seconds))):
+            self.writer.write(frame)
 
     def _get_color(self, track_id: int) -> Tuple[int, int, int]:
         if track_id == -1:

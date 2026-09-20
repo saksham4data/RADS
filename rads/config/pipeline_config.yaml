@@ -16,5 +16,75 @@ interaction:
   overlap_iou_threshold: 0.1
   # Multiplier for relative velocity threshold (pixels per frame)
   relative_velocity_threshold: 5.0
-  # Convergence angle threshold (in degrees) - if vectors point towards each other within this angle
-  convergence_angle_threshold: 45.0
+reasoning:
+  # Accident is reported when the raw candidate score reaches this value
+  accident_score_threshold: 0.5
+  # Half-width, in frames, of the window used to measure pre/post interaction velocity
+  velocity_window_frames: 15
+  # Candidates whose peak_time is within this many seconds of the best candidate may be clustered
+  clustering_window_seconds: 3.0
+  score_weights:
+    # Relative velocity contributes weight * min(rel_vel / divisor, 1.0)
+    relative_velocity: 0.4
+    relative_velocity_divisor: 50.0
+    # Flat bonus when peak IoU exceeds iou_gate
+    iou: 0.3
+    iou_gate: 0.05
+    # Flat bonus when the interaction carried 'overlap' evidence
+    overlap_evidence: 0.2
+  track_loss:
+    # Boost when a track terminates mid-video near the interaction
+    boost: 0.6
+    # Reduced boost when the surviving object shows no corroborating slowdown
+    unguarded_boost: 0.1
+    guard_pre_velocity: 15.0
+    guard_post_velocity_ratio: 0.5
+  deceleration:
+    boost: 0.3
+    pre_velocity: 15.0
+    post_velocity_ratio: 0.3
+  filters:
+    # Same object detected twice: near-identical boxes moving together
+    duplicate_track_iou: 0.85
+    duplicate_track_rel_velocity: 30.0
+    duplicate_track_scale: 0.1
+    # A vehicle that keeps this fraction of its pre-interaction speed did not crash
+    passing_velocity_retention: 0.5
+    passing_both_survive_scale: 0.1
+    passing_one_survives_scale: 0.3
+  clustering:
+    # B11: require merged candidates to carry their own qualifying evidence and cap involvement
+    require_own_evidence: true
+    max_involved_objects: 4
+    qualifying_evidence: ["overlap", "proximity_and_convergence"]
+  confidence:
+    # B12: report confidence as 1 - exp(-score / scale) instead of clipping the raw score
+    bounded_transform: true
+    transform_scale: 0.5
+severity:
+  weights:
+    # Object count contributes weight * max(0, num_objects - 1)
+    object_count: 1.0
+    object_count_cap: 2.0
+    # Flat contribution when any involved object is a vulnerable road user
+    vulnerable_class: 3.0
+    # Peak relative velocity contributes weight * min(value / divisor, 1.0)
+    # Divisors are pixel-space and set from magnitudes observed on the 10-clip sample
+    relative_velocity: 2.0
+    relative_velocity_divisor: 600.0
+    # Velocity drop (pre - post) contributes weight * min(value / divisor, 1.0)
+    velocity_change: 1.5
+    velocity_change_divisor: 400.0
+    # Post-impact centroid displacement in pixels
+    post_impact_displacement: 1.0
+    post_impact_displacement_divisor: 250.0
+  vulnerable_classes: ["person", "bicycle", "motorcycle"]
+  # Frames after impact over which post-impact displacement is measured
+  post_impact_window_frames: 15
+  thresholds:
+    high: 4.5
+    medium: 2.0
+visualization:
+  # Held end-of-video frame carrying the structured result
+  summary_frame: true
+  summary_frame_seconds: 2.0

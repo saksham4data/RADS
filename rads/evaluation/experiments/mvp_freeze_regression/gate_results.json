@@ -1,0 +1,1321 @@
+{
+  "frame_skip": 1,
+  "config_path": "rads/config/pipeline_config.yaml",
+  "recorded_baseline": {
+    "correct": 6,
+    "false_positives": 3,
+    "false_negatives": 1
+  },
+  "acceptance": {
+    "min_correct": 6,
+    "max_false_positives": 3
+  },
+  "configurations": {
+    "flags_enabled": {
+      "b11_require_own_evidence": true,
+      "b12_bounded_confidence": true,
+      "summary": {
+        "clips": 10,
+        "correct": 6,
+        "false_positives": 3,
+        "false_negatives": 1,
+        "label_matches_baseline": 10,
+        "identical_to_baseline": true,
+        "total_runtime_seconds": 380.57
+      },
+      "rows": [
+        {
+          "clip": "-FQxK6HdxNU_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.5507,
+          "score": 0.4,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 46,
+          "num_tracks": 27,
+          "kinematics": {},
+          "runtime_seconds": 32.96
+        },
+        {
+          "clip": "-NgnSm_oEB4_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.9257,
+          "score": 1.3,
+          "severity": "HIGH",
+          "severity_score": 5.7664,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 4,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 668.8,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 496.58,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 66.6,
+              "contribution": 0.2664
+            }
+          ],
+          "impact_time": 0.4157139887757223,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss",
+            "sudden_deceleration"
+          ],
+          "objects_involved": [
+            {
+              "id": 6,
+              "class": "car"
+            },
+            {
+              "id": 9,
+              "class": "car"
+            },
+            {
+              "id": 10,
+              "class": "car"
+            },
+            {
+              "id": 12,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 75,
+          "num_tracks": 27,
+          "kinematics": {
+            "peak_relative_velocity": 668.7972700358924,
+            "peak_iou": 0.020699440916606363,
+            "max_velocity_drop": 496.58149321246873,
+            "impact_frame": 13,
+            "best_candidate": {
+              "object_a_id": 6,
+              "object_b_id": 9,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss",
+                "sudden_deceleration"
+              ]
+            }
+          },
+          "runtime_seconds": 43.59
+        },
+        {
+          "clip": "-PpBteU0p3Q_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.8647,
+          "score": 1.0,
+          "severity": "MEDIUM",
+          "severity_score": 3.5275,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 283.43,
+              "contribution": 0.9448
+            },
+            {
+              "factor": "velocity_change",
+              "value": 140.54,
+              "contribution": 0.527
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 13.92,
+              "contribution": 0.0557
+            }
+          ],
+          "impact_time": 1.4018691588785046,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 9,
+          "num_tracks": 14,
+          "kinematics": {
+            "peak_relative_velocity": 283.42889763485897,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 140.543755605027,
+            "impact_frame": 22,
+            "best_candidate": {
+              "object_a_id": 1,
+              "object_b_id": 3,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 35.57
+        },
+        {
+          "clip": "-PpjzmhI_PE_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.8647,
+          "score": 1.0,
+          "severity": "HIGH",
+          "severity_score": 6.2015,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 777.86,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 436.69,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 175.38,
+              "contribution": 0.7015
+            }
+          ],
+          "impact_time": 3.7291070120530065,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 127,
+              "class": "car"
+            },
+            {
+              "id": 135,
+              "class": "truck"
+            },
+            {
+              "id": 159,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 2,
+          "num_tracks": 19,
+          "kinematics": {
+            "peak_relative_velocity": 777.8590050068996,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 436.69353681179854,
+            "impact_frame": 65,
+            "best_candidate": {
+              "object_a_id": 127,
+              "object_b_id": 135,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 39.42
+        },
+        {
+          "clip": "-Qt5bDJNT84_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.8647,
+          "score": 1.0,
+          "severity": "HIGH",
+          "severity_score": 6.5,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 4,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 803.75,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 690.94,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 264.73,
+              "contribution": 1.0
+            }
+          ],
+          "impact_time": 0.8170888292284346,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 20,
+              "class": "car"
+            },
+            {
+              "id": 24,
+              "class": "car"
+            },
+            {
+              "id": 23,
+              "class": "car"
+            },
+            {
+              "id": 1,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 44,
+          "num_tracks": 20,
+          "kinematics": {
+            "peak_relative_velocity": 803.7474002800798,
+            "peak_iou": 0.268328970570336,
+            "max_velocity_drop": 690.9382854270622,
+            "impact_frame": 21,
+            "best_candidate": {
+              "object_a_id": 20,
+              "object_b_id": 24,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 47.02
+        },
+        {
+          "clip": "-NgnSm_oEB4_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.9257,
+          "score": 1.3,
+          "severity": "HIGH",
+          "severity_score": 5.7664,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 4,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 668.8,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 496.58,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 66.6,
+              "contribution": 0.2664
+            }
+          ],
+          "impact_time": 0.4157139887757223,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss",
+            "sudden_deceleration"
+          ],
+          "objects_involved": [
+            {
+              "id": 6,
+              "class": "car"
+            },
+            {
+              "id": 9,
+              "class": "car"
+            },
+            {
+              "id": 10,
+              "class": "car"
+            },
+            {
+              "id": 12,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 38,
+          "num_tracks": 13,
+          "kinematics": {
+            "peak_relative_velocity": 668.7972700358924,
+            "peak_iou": 0.020699440916606363,
+            "max_velocity_drop": 496.58149321246873,
+            "impact_frame": 13,
+            "best_candidate": {
+              "object_a_id": 6,
+              "object_b_id": 9,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss",
+                "sudden_deceleration"
+              ]
+            }
+          },
+          "runtime_seconds": 17.11
+        },
+        {
+          "clip": "-PpBteU0p3Q_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.8647,
+          "score": 1.0,
+          "severity": "MEDIUM",
+          "severity_score": 3.5275,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 283.43,
+              "contribution": 0.9448
+            },
+            {
+              "factor": "velocity_change",
+              "value": 140.54,
+              "contribution": 0.527
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 13.92,
+              "contribution": 0.0557
+            }
+          ],
+          "impact_time": 1.4018691588785046,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 4,
+          "num_tracks": 10,
+          "kinematics": {
+            "peak_relative_velocity": 283.42889763485897,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 140.543755605027,
+            "impact_frame": 22,
+            "best_candidate": {
+              "object_a_id": 1,
+              "object_b_id": 3,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 13.17
+        },
+        {
+          "clip": "-RE3XseZINA_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.0,
+          "score": 0.0,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 0,
+          "num_tracks": 1,
+          "kinematics": {},
+          "runtime_seconds": 26.7
+        },
+        {
+          "clip": "-RrDtLjWsT4_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.6197,
+          "score": 0.4834,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 3,
+          "num_tracks": 10,
+          "kinematics": {},
+          "runtime_seconds": 65.84
+        },
+        {
+          "clip": "-SNFUobKjoM_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.7548,
+          "score": 0.7029,
+          "severity": "MEDIUM",
+          "severity_score": 2.1227,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 4,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 29.69,
+              "contribution": 0.099
+            },
+            {
+              "factor": "velocity_change",
+              "value": 5.35,
+              "contribution": 0.02
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 0.92,
+              "contribution": 0.0037
+            }
+          ],
+          "impact_time": 0.904007767770449,
+          "evidence_list": [
+            "overlap",
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 20,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            },
+            {
+              "id": 4,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 36,
+          "num_tracks": 16,
+          "kinematics": {
+            "peak_relative_velocity": 29.68903408333723,
+            "peak_iou": 0.4377960486416575,
+            "max_velocity_drop": 5.346022423372908,
+            "impact_frame": 27,
+            "best_candidate": {
+              "object_a_id": 3,
+              "object_b_id": 20,
+              "evidence_list": [
+                "overlap",
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 59.19
+        }
+      ]
+    },
+    "flags_disabled": {
+      "b11_require_own_evidence": false,
+      "b12_bounded_confidence": false,
+      "summary": {
+        "clips": 10,
+        "correct": 6,
+        "false_positives": 3,
+        "false_negatives": 1,
+        "label_matches_baseline": 10,
+        "identical_to_baseline": true,
+        "total_runtime_seconds": 272.83
+      },
+      "rows": [
+        {
+          "clip": "-FQxK6HdxNU_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.4,
+          "score": 0.4,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 46,
+          "num_tracks": 27,
+          "kinematics": {},
+          "runtime_seconds": 30.93
+        },
+        {
+          "clip": "-NgnSm_oEB4_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.3,
+          "severity": "HIGH",
+          "severity_score": 5.8086,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 11,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 668.8,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 496.58,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 77.14,
+              "contribution": 0.3086
+            }
+          ],
+          "impact_time": 0.4157139887757223,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss",
+            "sudden_deceleration"
+          ],
+          "objects_involved": [
+            {
+              "id": 6,
+              "class": "car"
+            },
+            {
+              "id": 9,
+              "class": "car"
+            },
+            {
+              "id": 10,
+              "class": "car"
+            },
+            {
+              "id": 12,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            },
+            {
+              "id": 38,
+              "class": "car"
+            },
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 5,
+              "class": "car"
+            },
+            {
+              "id": 14,
+              "class": "car"
+            },
+            {
+              "id": 35,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 75,
+          "num_tracks": 27,
+          "kinematics": {
+            "peak_relative_velocity": 668.7972700358924,
+            "peak_iou": 0.020699440916606363,
+            "max_velocity_drop": 496.58149321246873,
+            "impact_frame": 13,
+            "best_candidate": {
+              "object_a_id": 6,
+              "object_b_id": 9,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss",
+                "sudden_deceleration"
+              ]
+            }
+          },
+          "runtime_seconds": 37.65
+        },
+        {
+          "clip": "-PpBteU0p3Q_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.0,
+          "severity": "MEDIUM",
+          "severity_score": 3.5275,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 283.43,
+              "contribution": 0.9448
+            },
+            {
+              "factor": "velocity_change",
+              "value": 140.54,
+              "contribution": 0.527
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 13.92,
+              "contribution": 0.0557
+            }
+          ],
+          "impact_time": 1.4018691588785046,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 9,
+          "num_tracks": 14,
+          "kinematics": {
+            "peak_relative_velocity": 283.42889763485897,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 140.543755605027,
+            "impact_frame": 22,
+            "best_candidate": {
+              "object_a_id": 1,
+              "object_b_id": 3,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 34.81
+        },
+        {
+          "clip": "-PpjzmhI_PE_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.0,
+          "severity": "HIGH",
+          "severity_score": 6.2015,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 777.86,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 436.69,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 175.38,
+              "contribution": 0.7015
+            }
+          ],
+          "impact_time": 3.7291070120530065,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 127,
+              "class": "car"
+            },
+            {
+              "id": 135,
+              "class": "truck"
+            },
+            {
+              "id": 159,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 2,
+          "num_tracks": 19,
+          "kinematics": {
+            "peak_relative_velocity": 777.8590050068996,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 436.69353681179854,
+            "impact_frame": 65,
+            "best_candidate": {
+              "object_a_id": 127,
+              "object_b_id": 135,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 35.39
+        },
+        {
+          "clip": "-Qt5bDJNT84_00.mp4",
+          "ground_truth": "accident",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.0,
+          "severity": "HIGH",
+          "severity_score": 6.1904,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 6,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 803.75,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 690.94,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 172.6,
+              "contribution": 0.6904
+            }
+          ],
+          "impact_time": 0.8170888292284346,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 20,
+              "class": "car"
+            },
+            {
+              "id": 24,
+              "class": "car"
+            },
+            {
+              "id": 23,
+              "class": "car"
+            },
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            },
+            {
+              "id": 4,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 44,
+          "num_tracks": 20,
+          "kinematics": {
+            "peak_relative_velocity": 803.7474002800798,
+            "peak_iou": 0.268328970570336,
+            "max_velocity_drop": 690.9382854270622,
+            "impact_frame": 21,
+            "best_candidate": {
+              "object_a_id": 20,
+              "object_b_id": 24,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 30.27
+        },
+        {
+          "clip": "-NgnSm_oEB4_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.3,
+          "severity": "HIGH",
+          "severity_score": 5.8855,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 10,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 668.8,
+              "contribution": 2.0
+            },
+            {
+              "factor": "velocity_change",
+              "value": 496.58,
+              "contribution": 1.5
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 96.38,
+              "contribution": 0.3855
+            }
+          ],
+          "impact_time": 0.4157139887757223,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss",
+            "sudden_deceleration"
+          ],
+          "objects_involved": [
+            {
+              "id": 6,
+              "class": "car"
+            },
+            {
+              "id": 9,
+              "class": "car"
+            },
+            {
+              "id": 10,
+              "class": "car"
+            },
+            {
+              "id": 12,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 5,
+              "class": "car"
+            },
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 14,
+              "class": "car"
+            },
+            {
+              "id": 23,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 38,
+          "num_tracks": 13,
+          "kinematics": {
+            "peak_relative_velocity": 668.7972700358924,
+            "peak_iou": 0.020699440916606363,
+            "max_velocity_drop": 496.58149321246873,
+            "impact_frame": 13,
+            "best_candidate": {
+              "object_a_id": 6,
+              "object_b_id": 9,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss",
+                "sudden_deceleration"
+              ]
+            }
+          },
+          "runtime_seconds": 14.47
+        },
+        {
+          "clip": "-PpBteU0p3Q_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 1.0,
+          "score": 1.0,
+          "severity": "MEDIUM",
+          "severity_score": 3.5275,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 3,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 283.43,
+              "contribution": 0.9448
+            },
+            {
+              "factor": "velocity_change",
+              "value": 140.54,
+              "contribution": 0.527
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 13.92,
+              "contribution": 0.0557
+            }
+          ],
+          "impact_time": 1.4018691588785046,
+          "evidence_list": [
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 1,
+              "class": "car"
+            },
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 4,
+          "num_tracks": 10,
+          "kinematics": {
+            "peak_relative_velocity": 283.42889763485897,
+            "peak_iou": 0.0,
+            "max_velocity_drop": 140.543755605027,
+            "impact_frame": 22,
+            "best_candidate": {
+              "object_a_id": 1,
+              "object_b_id": 3,
+              "evidence_list": [
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 12.29
+        },
+        {
+          "clip": "-RE3XseZINA_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.0,
+          "score": 0.0,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 0,
+          "num_tracks": 1,
+          "kinematics": {},
+          "runtime_seconds": 27.33
+        },
+        {
+          "clip": "-RrDtLjWsT4_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "normal",
+          "prediction": "normal",
+          "correct": true,
+          "matches_baseline": true,
+          "confidence": 0.48,
+          "score": 0.4834,
+          "severity": null,
+          "severity_score": 0.0,
+          "severity_evidence": [],
+          "impact_time": null,
+          "evidence_list": [],
+          "objects_involved": [],
+          "interaction_candidate_count": 3,
+          "num_tracks": 10,
+          "kinematics": {},
+          "runtime_seconds": 33.32
+        },
+        {
+          "clip": "-SNFUobKjoM_00.mp4",
+          "ground_truth": "normal",
+          "baseline_prediction": "accident",
+          "prediction": "accident",
+          "correct": false,
+          "matches_baseline": true,
+          "confidence": 0.7,
+          "score": 0.7029,
+          "severity": "MEDIUM",
+          "severity_score": 2.1227,
+          "severity_evidence": [
+            {
+              "factor": "num_objects_involved",
+              "value": 4,
+              "contribution": 2.0
+            },
+            {
+              "factor": "vulnerable_class_involved",
+              "value": [],
+              "contribution": 0.0
+            },
+            {
+              "factor": "peak_relative_velocity",
+              "value": 29.69,
+              "contribution": 0.099
+            },
+            {
+              "factor": "velocity_change",
+              "value": 5.35,
+              "contribution": 0.02
+            },
+            {
+              "factor": "post_impact_displacement",
+              "value": 0.92,
+              "contribution": 0.0037
+            }
+          ],
+          "impact_time": 0.904007767770449,
+          "evidence_list": [
+            "overlap",
+            "proximity_and_convergence",
+            "track_loss"
+          ],
+          "objects_involved": [
+            {
+              "id": 3,
+              "class": "car"
+            },
+            {
+              "id": 20,
+              "class": "car"
+            },
+            {
+              "id": 2,
+              "class": "car"
+            },
+            {
+              "id": 4,
+              "class": "car"
+            }
+          ],
+          "interaction_candidate_count": 36,
+          "num_tracks": 16,
+          "kinematics": {
+            "peak_relative_velocity": 29.68903408333723,
+            "peak_iou": 0.4377960486416575,
+            "max_velocity_drop": 5.346022423372908,
+            "impact_frame": 27,
+            "best_candidate": {
+              "object_a_id": 3,
+              "object_b_id": 20,
+              "evidence_list": [
+                "overlap",
+                "proximity_and_convergence",
+                "track_loss"
+              ]
+            }
+          },
+          "runtime_seconds": 16.37
+        }
+      ]
+    }
+  },
+  "gate_passed": true,
+  "behaviour_preserving": true
+}

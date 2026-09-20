@@ -12,7 +12,7 @@ from rads.interaction.pairwise import compute_pairwise_metrics, enrich_with_moti
 from rads.interaction.interaction_engine import detect_interactions
 from rads.reasoning.accident_reasoner import evaluate_accident
 from rads.severity.severity_engine import estimate_severity
-from rads.output.event_schema import get_stub_event_result
+from rads.output.event_schema import build_event_result
 from rads.output.visualizer import Visualizer, extract_evidence_clip
 
 class Pipeline:
@@ -34,6 +34,9 @@ class Pipeline:
         print(f"Starting pipeline on {video_path}")
         total_start_time = time.perf_counter()
         
+        # Tracking runs with persist=True, so state must be cleared per video
+        self.tracker.reset()
+        
         track_summaries = {}
         frame_skip = self.config.frame_skip
         
@@ -41,6 +44,8 @@ class Pipeline:
         
         # Pass 1: Tracking
         with VideoReader(video_path) as video:
+            total_frames = video.total_frames
+            fps = video.fps
             for frame_idx, timestamp, frame in video.get_frames():
                 if frame_idx % frame_skip != 0:
                     continue
@@ -66,7 +71,7 @@ class Pipeline:
                 frame_end_time = time.perf_counter()
                 if frame_idx % 30 == 0:
                     frame_ms = (frame_end_time - frame_start_time) * 1000
-                    print(f"Processed frame {frame_idx}/{video.total_frames} ({frame_ms:.1f} ms)")
+                    print(f"Processed frame {frame_idx}/{total_frames} ({frame_ms:.1f} ms)")
 
         # Phase 3: compute motion features
         print("Computing motion features...")
@@ -74,7 +79,7 @@ class Pipeline:
         
         total_end_time = time.perf_counter()
         pipeline_time = total_end_time - total_start_time
-        processed_frames = video.total_frames // frame_skip
+        processed_frames = total_frames // frame_skip
         avg_fps = processed_frames / pipeline_time if pipeline_time > 0 else 0
         
         print(f"Finished processing {video_path}")
@@ -96,25 +101,16 @@ class Pipeline:
         
         # Phase 5 & 6: Reasoning and Severity
         print("Evaluating accident likelihood...")
-        accident_result = evaluate_accident(interaction_candidates, track_history)
-        severity = estimate_severity(accident_result, track_history)
-        accident_result['severity'] = severity
+        accident_result = evaluate_accident(interaction_candidates, track_history, self.config)
+        severity_result = estimate_severity(accident_result, track_history, self.config)
         
-        # Generate the structured output
-        result = get_stub_event_result(video_path, track_summaries)
-        result["interaction_candidates"] = interaction_candidates
-        
-        # Update event result with our reasoning
-        result["accident"] = accident_result["accident"]
-        result["confidence"] = accident_result["confidence"]
-        result["event"] = {
-            "start_time": accident_result.get("start_time"),
-            "impact_time": accident_result.get("impact_time"),
-            "end_time": accident_result.get("end_time")
-        }
-        result["objects_involved"] = accident_result.get("involved_object_ids", [])
-        result["severity"] = severity
-        result["status"] = "PHASE_5_COMPLETE"
+        result = build_event_result(
+            video_path,
+            tracks_summary=track_summaries,
+            accident_result=accident_result,
+            severity_result=severity_result,
+            interaction_candidates=interaction_candidates
+        )
         
         # Pass 2: Visualization (Phase 7)
         if visualize and output_video_path:
@@ -125,6 +121,9 @@ class Pipeline:
                         if frame_idx % frame_skip != 0:
                             continue
                         visualizer.draw_frame(frame, frame_idx, timestamp, track_history, result)
+                    if self.config.visualization_summary_frame:
+                        visualizer.write_summary_frame(
+                            result, hold_seconds=self.config.visualization_summary_frame_seconds)
             
             if result.get("accident"):
                 base, ext = os.path.splitext(output_video_path)

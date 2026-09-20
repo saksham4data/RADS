@@ -91,7 +91,8 @@ for video_path, gt, failure_type in FAILURES:
     
     # Accident reasoning
     accident_result = evaluate_accident(interaction_candidates, track_history)
-    severity = estimate_severity(accident_result, track_history)
+    # estimate_severity now returns {severity, score, evidence}; config carries the YAML weights
+    severity_result = estimate_severity(accident_result, track_history, config)
     
     # --- DUMP EVERYTHING ---
     report = {
@@ -114,7 +115,11 @@ for video_path, gt, failure_type in FAILURES:
         "interaction_candidates_count": len(interaction_candidates),
         "interaction_candidates": interaction_candidates,
         "accident_result": accident_result,
-        "severity": severity
+        "severity": severity_result["severity"],
+        "severity_detail": {
+            "score": severity_result["score"],
+            "evidence": severity_result["evidence"]
+        }
     }
     
     # Track summaries with class + lifespan

@@ -14,6 +14,7 @@ class Tracker:
         if YOLO is None:
             raise ImportError("ultralytics package is required for tracking.")
         
+        self.model_path = model_path
         self.model = YOLO(model_path)
         self.tracker_type = tracker_type
         
@@ -28,6 +29,34 @@ class Tracker:
         self.confidence = confidence
         self.iou = iou
         self.classes = classes
+        self.last_reset_path = None
+
+    def reset(self) -> str:
+        """Clears per-video tracker state. Returns the path taken.
+
+        track() runs with persist=True, so without this call track IDs and Kalman state
+        from one video carry into the next. Paths, in preference order:
+        'no_state' (nothing tracked yet), 'predictor_trackers' (ultralytics exposes live
+        trackers), 'model_rebuild' (fallback for versions that do not).
+        """
+        predictor = getattr(self.model, 'predictor', None)
+        if predictor is None:
+            self.last_reset_path = 'no_state'
+            return self.last_reset_path
+
+        trackers = getattr(predictor, 'trackers', None)
+        if trackers:
+            try:
+                for tracker in trackers:
+                    tracker.reset()
+                self.last_reset_path = 'predictor_trackers'
+                return self.last_reset_path
+            except AttributeError:
+                pass
+
+        self.model = YOLO(self.model_path)
+        self.last_reset_path = 'model_rebuild'
+        return self.last_reset_path
 
     def track(self, frame: np.ndarray, frame_index: int, timestamp: float) -> List[Dict[str, Any]]:
         """Runs detection and tracking on a single frame."""
