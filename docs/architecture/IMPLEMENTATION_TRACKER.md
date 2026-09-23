@@ -1,8 +1,10 @@
-# RADS — Implementation Tracker
+# RADS -- Implementation Tracker
 
-Companion to [IMPLEMENTATION_AUDIT_AND_ORDER.md](file:///e:/Rads/docs/architecture/IMPLEMENTATION_AUDIT_AND_ORDER.md).
+Companion to [IMPLEMENTATION_PLAN.md](file:///e:/Rads/docs/architecture/IMPLEMENTATION_PLAN.md).
 
 Updated after every implementation phase.
+
+This document contains two progress tables: the historical MVP phases (0-8, completed) and the current Runtime v1 phases. All historical records from the MVP phase are preserved unmodified below.
 
 ---
 
@@ -24,7 +26,32 @@ The Status cells for Phases 6, 7 and 8 were amended on 2026-09-20. The original 
 
 ---
 
-## Phase Completion Records
+## Runtime v1 Progress
+
+Phases defined in [IMPLEMENTATION_PLAN.md](file:///e:/Rads/docs/architecture/IMPLEMENTATION_PLAN.md). Detailed requirements in [PROD.md](file:///e:/Rads/docs/architecture/PROD.md).
+
+| Phase | Name | Status | Date Started | Date Completed | Notes |
+|---|---|---|---|---|---|
+| 0 | Repository Stabilization | Not Started | -- | -- | Restore deleted files, verify tests, move model weights |
+| 1A | Core Library Namespace | Not Started | -- | -- | `rads/core/__init__.py` re-exports |
+| 1B | Configuration Extension | Not Started | -- | -- | Add runtime/device/api sections to config |
+| 1C | Environment Variable Resolver | Not Started | -- | -- | `rads/config/env_resolver.py` |
+| 2A | Source Abstraction | Not Started | -- | -- | `rads/runtime/source.py` (file/webcam/RTSP) |
+| 2B | Frame Processor | Not Started | -- | -- | `rads/runtime/frame_processor.py` (streaming per-frame pipeline) |
+| 2C | Runtime Engine | Not Started | -- | -- | `rads/runtime/engine.py` (main loop) |
+| 2D | Health and Signal Handling | Not Started | -- | -- | `rads/runtime/health.py` |
+| 2E | Event Lifecycle Manager | Not Started | -- | -- | `rads/runtime/event_lifecycle.py` |
+| 2F | Runtime Entry Point | Not Started | -- | -- | `rads_runtime.py` CLI |
+| 3A | API Server and Health Endpoint | Not Started | -- | -- | FastAPI server with `/health` |
+| 3B | Event Endpoints | Not Started | -- | -- | `/events`, `/events/latest`, `/events/{id}` |
+| 3C | WebSocket Event Stream | Not Started | -- | -- | `/ws/events` |
+| 4A | Dockerfile and Build | Not Started | -- | -- | `Dockerfile`, `.dockerignore` |
+| 4B | Docker Compose and Deployment | Not Started | -- | -- | `docker-compose.yml`, GPU override |
+| 5 | Integration Testing | Not Started | -- | -- | End-to-end verification |
+
+---
+
+## Historical MVP Phase Completion Records
 
 ### Phase 0 — Scaffolding
 
@@ -577,3 +604,11 @@ Record key configuration decisions here:
 | 2 | `-2UPLUV7JLg_00.mp4` | Unknown | 7.20 | 299 | 41.54 | ~138 | CPU |
 | 2 | `-6SQSDj8cYU_00.mp4` | Unknown | 6.60 | 450 | 68.23 | ~151 | CPU |
 | 2 | `022uvRkRJ8E_00.mp4` | Unknown | 7.15 | 596 | 83.38 | ~140 | CPU |
+
+---
+
+## Runtime v1 Phase Completion Records
+
+Records will be added here as each runtime phase is completed.
+
+(No phases completed yet.)

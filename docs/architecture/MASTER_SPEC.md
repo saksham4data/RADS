@@ -1,31 +1,32 @@
-## RADS — Master Specification
+## RADS -- Master Specification
 
 - Document: 00_MASTER_SPEC.md
 - Project: RADS
-- Version: 1.0
-- Status: Active — MVP Development
-- Target: MVP / Demonstration
+- Version: 2.0
+- Status: Active -- Deployable Runtime v1
+- Target: Production Runtime
 - Last Updated: September 2026
+- History: Version 1.0 covered the research MVP phase (completed). Version 2.0 covers the transition to a deployable runtime.
 
 # 1. Project Definition
 ---
 
 RADS is an AI-based road accident detection and severity analysis system designed to identify accident events from traffic video, determine when and how an accident occurred, and provide an interpretable estimate of accident severity.
 
-The system is being developed as a research-oriented MVP.
+The research MVP phase is complete. The core intelligence pipeline (detection, tracking, motion, interaction, reasoning, severity) has been demonstrated end-to-end on pre-recorded clips.
 
-The immediate objective is not to create a production-ready autonomous safety system.
+The current objective is to build RADS Deployable Runtime v1: a system that can process live and recorded video from real sources (files, webcams, RTSP/IP cameras), emit structured accident events over a network API, and run portably on any supported machine via Docker.
 
-The immediate objective is to demonstrate a technically coherent pipeline that can:
+The system must:
 
-Understand objects in a traffic scene.
-Maintain identities of those objects across frames.
-Extract their movement and interaction over time.
-Detect anomalous or collision-like events.
-Determine whether an accident occurred.
-Localize the event temporally.
-Estimate accident severity using measurable evidence.
-Present the result in an interpretable form.
+Process continuous video streams, not only pre-recorded clips.
+Maintain object identities across frames within a sliding temporal window.
+Detect accident events incrementally as frames arrive.
+Emit structured events with a defined lifecycle (candidate, detected, confirmed, resolved).
+Expose results over REST and WebSocket APIs.
+Run on CPU or CUDA without hardcoded local paths.
+Be deployable via Docker with configuration-only setup.
+Preserve the existing research and evaluation system unchanged.
 ---
 # 2. Core Design Philosophy
 
@@ -54,85 +55,106 @@ toward:
 The fundamental principle is:
 
 Accidents are temporal events involving interacting objects, not merely accident-looking frames.
+
+This principle applies equally to batch processing of recorded clips and to live stream processing.
 ---
 # 3. Target End-to-End System
 
-The intended architecture is:
+The system operates in two modes sharing the same core intelligence modules:
 
-                    INPUT VIDEO
-                         │
-                         ▼
-                 Frame Extraction
-                         │
-                         ▼
-                Object Detection
-                      (YOLO)
-                         │
-                         ▼
-                Object Tracking
-             (Persistent Object IDs)
-                         │
-                         ▼
-              Track Reconstruction
-                         │
-                         ▼
-          Motion / Interaction Features
-                         │
-                         ▼
-               Event Reasoning
-                         │
-                         ▼
-             Accident Detection
-                         │
-                         ▼
-             Event Localization
-                         │
-                         ▼
-             Severity Estimation
-                         │
-                         ▼
-                    OUTPUT
+Batch mode (research/evaluation):
+
+    Complete Video File
+         |
+         v
+    Full Processing
+         |
+         v
+    Result JSON
+
+Runtime mode (deployment):
+
+    Source (file / webcam / RTSP)
+         |
+         v
+    Frame Acquisition
+         |
+         v
+    Object Detection (YOLO)
+         |
+         v
+    Object Tracking (Persistent IDs)
+         |
+         v
+    Track History (Sliding Window)
+         |
+         v
+    Motion / Interaction Features
+         |
+         v
+    Event Reasoning
+         |
+         v
+    Accident Detection
+         |
+         v
+    Event Lifecycle (candidate / detected / confirmed / resolved)
+         |
+         v
+    Severity Estimation
+         |
+         v
+    API / WebSocket / Alerts
 
 The architecture is intentionally modular.
 
 Each stage must produce structured information that can be inspected independently.
+
+Both modes use the same detection, tracking, motion, interaction, reasoning, and severity modules.
 ---
-# 4. Primary MVP Objective
+# 4. Primary Objective
 
-The MVP must demonstrate the following complete flow:
+The deployable runtime must process video from any supported source through the complete reasoning chain and deliver structured accident events over a network API.
 
-Video
-  ↓
+Input (file / webcam / RTSP)
+  |
+  v
 Detect vehicles / relevant road objects
-  ↓
+  |
+  v
 Assign persistent IDs
-  ↓
-Track objects across time
-  ↓
+  |
+  v
+Track objects within a sliding temporal window
+  |
+  v
 Calculate movement and interaction information
-  ↓
+  |
+  v
 Identify collision-like temporal events
-  ↓
+  |
+  v
 Classify accident vs non-accident
-  ↓
-Identify approximate event timestamp
-  ↓
+  |
+  v
+Assign event lifecycle status
+  |
+  v
 Estimate severity
-  ↓
-Display interpretable result
+  |
+  v
+Emit structured event via API
 
-A successful MVP does not require perfect accuracy.
+The runtime requires:
 
-It requires:
-
-A functioning end-to-end pipeline.
-Consistent object tracking.
-Meaningful temporal reasoning.
-Demonstrable accident detection.
-Event localization.
-A defensible severity mechanism.
-Clear outputs.
-Reproducible evaluation.
+Processing of all three source types (file, webcam, RTSP).
+Automatic reconnection on RTSP disconnection.
+Bounded memory usage via sliding window.
+Structured event output with lifecycle tracking.
+REST and WebSocket API for event access.
+Graceful shutdown on signals.
+Docker-based deployment without hardcoded paths.
+Full backward compatibility with the batch pipeline.
 ---
 # 5. Object-Centric Intelligence
 
@@ -551,60 +573,69 @@ Confusion matrix
 
 The system must report class-specific performance, particularly accident recall and normal false-positive rate.
 ---
-# 18. MVP Success Criteria
+# 18. Runtime v1 Success Criteria
 
-The MVP is considered successful if it can demonstrate:
+The deployable runtime is considered successful if it can demonstrate:
 
 Perception
-Detect relevant road objects.
-Maintain object identities across multiple frames.
+Detect relevant road objects from file, webcam, and RTSP sources.
+Maintain object identities within a sliding temporal window.
 Tracking
 Produce stable trajectories for relevant objects.
 Preserve IDs sufficiently for downstream reasoning.
+Reset state cleanly on stream reconnection.
 Temporal reasoning
-Calculate meaningful motion and interaction features.
-Identify abnormal temporal behavior.
+Calculate meaningful motion and interaction features incrementally.
+Identify abnormal temporal behavior within the sliding window.
 Accident detection
-Distinguish accident events from normal traffic better than the existing baseline.
-Produce an interpretable accident decision.
+Distinguish accident events from normal traffic.
+Produce an interpretable accident decision with lifecycle status.
 Event localization
 Identify approximately when the accident occurred.
+Emit events with start_time, impact_time, and end_time.
 Severity
-Produce LOW / MEDIUM / HIGH severity.
-Provide measurable evidence supporting the severity estimate.
-Demonstration
-Process a complete video.
-Visualize detections and tracking.
-Display the detected event.
-Display accident confidence/result.
-Display severity.
-Show relevant reasoning evidence.
+Produce LOW / MEDIUM / HIGH severity with numeric score and evidence list.
+API
+Expose health, events, and WebSocket endpoints.
+Function correctly when API is disabled.
+Deployment
+Run via Docker on a clean machine.
+Support CPU and CUDA configurations.
+Operate without hardcoded local paths.
 ---
-# 19. MVP vs Final System
+# 19. Runtime v1 vs Future System
 
-The MVP should deliberately be smaller than the eventual RADS system.
-
-MVP
+Runtime v1
 YOLO
-  ↓
-Tracking
-  ↓
-Trajectories
-  ↓
+  |
+  v
+Tracking (ByteTrack)
+  |
+  v
+Trajectories (Sliding Window)
+  |
+  v
 Motion / Interaction Features
-  ↓
-Temporal Event Reasoning
-  ↓
+  |
+  v
+Temporal Event Reasoning (Rule-Based)
+  |
+  v
 Accident Detection
-  ↓
-Event Timestamp
-  ↓
-Prototype Severity Scoring
-  ↓
-Visualization / Dashboard
-Future RADS
+  |
+  v
+Event Lifecycle
+  |
+  v
+Severity Scoring (Heuristic)
+  |
+  v
+REST API / WebSocket
+  |
+  v
+Docker Deployment
 
-The long-term system may include:
+Future RADS may include:
 
 Advanced object detection
 +
@@ -618,49 +649,49 @@ Object interaction graphs
 +
 Advanced temporal models
 +
-Event localization
-+
 Accident type classification
 +
 Learned severity estimation
 +
 Multimodal reasoning
 +
-Real-time optimization
+Multi-stream support
 +
 Edge deployment
 +
-Production monitoring
+Production monitoring and alerting
++
+Camera calibration and world-space coordinates
 
-The future architecture must not dictate unnecessary MVP complexity.
+Future features must not be introduced prematurely.
 ---
 # 20. Development Priority
 
-Development should proceed in dependency order.
+The core intelligence pipeline (stages 1-11 below) is implemented. Development priority is now the runtime and deployment layers.
 
-The current priority is:
+Implemented (core intelligence):
 
-1. Detection
-        ↓
-2. Tracking / Persistent IDs
-        ↓
+1. Detection (YOLO)
+2. Tracking / Persistent IDs (ByteTrack)
 3. Track Data Representation
-        ↓
 4. Motion Feature Extraction
-        ↓
 5. Object Interaction Analysis
-        ↓
 6. Temporal Event Detection
-        ↓
-7. Accident Classification
-        ↓
+7. Accident Reasoning
 8. Event Localization
-        ↓
 9. Severity Estimation
-        ↓
-10. Visualization / Integration
-        ↓
-11. Evaluation
+
+Current priority (runtime v1):
+
+10. Source Abstraction (file / webcam / RTSP)
+11. Streaming Frame Processor
+12. Event Lifecycle Manager
+13. Runtime Engine and Main Loop
+14. REST API and WebSocket
+15. Docker Deployment
+16. Integration Testing
+
+See IMPLEMENTATION_PLAN.md for the detailed phase breakdown.
 
 A later component must not be built on undocumented assumptions about an earlier component.
 
@@ -765,12 +796,11 @@ RESULT VISUALIZED
 
 The system should also retain enough intermediate information to inspect how the final decision was reached.
 ---
-# 25. Non-Goals for the Current MVP
+# 25. Non-Goals for Runtime v1
 
-The following are explicitly not required for the first MVP:
+The following are explicitly not required for runtime v1:
 
-Production-grade deployment
-Perfect real-time performance
+Perfect real-time performance guarantees
 Perfect accident classification
 Large-scale distributed training
 Fully learned severity model
@@ -778,6 +808,10 @@ Perfect frame-level localization
 Full autonomous emergency response
 Cloud-scale infrastructure
 Universal performance across every camera/environment
+Multi-stream processing (architecture supports it, not implemented)
+Accident type classification
+Camera calibration or world-space coordinates
+Frontend dashboard UI
 
 These may become future objectives.
 ---
@@ -805,41 +839,47 @@ If a new technical discovery requires changing the architecture, the change shou
 ---
 # 27. Current Strategic Direction
 
-As of September 2026, RADS is transitioning from:
+As of September 2026, RADS has completed the transition from:
 
 Raw video
-    ↓
+    |
+    v
 ResNet18
-    ↓
+    |
+    v
 GRU
-    ↓
+    |
+    v
 Video classification
 
-toward:
+to:
 
 Raw video
-    ↓
+    |
+    v
 YOLO
-    ↓
+    |
+    v
 Persistent object tracking
-    ↓
+    |
+    v
 Object trajectories
-    ↓
+    |
+    v
 Motion + interaction reasoning
-    ↓
+    |
+    v
 Temporal event detection
-    ↓
+    |
+    v
 Accident detection
-    ↓
+    |
+    v
 Severity estimation
 
-The ResNet18 + GRU system remains the experimental baseline.
+The object-centric architecture is now the established system. The ResNet18 + GRU system remains as the experimental baseline for comparison.
 
-The new architecture is the primary development direction.
-
-The purpose of this transition is not simply to replace one neural network with another.
-
-The purpose is to change RADS from a visual classification system into an event understanding system.
+The current phase is making this architecture deployable: processing live sources, exposing events over APIs, and packaging for portable execution via Docker.
 ---
 # 28. Guiding Principle
 
@@ -851,4 +891,4 @@ It is:
 
 "Understand what happened on the road, identify whether an accident occurred, determine when it occurred, identify the objects involved, and estimate its severity from observable evidence."
 
-The MVP should be the smallest credible implementation of that idea.
+The deployable runtime makes this intelligence accessible to real video sources and downstream systems.

@@ -1,10 +1,11 @@
-# RADS — System Architecture Specification
+# RADS -- System Architecture Specification
 
 **Project:** RADS
 **Document:** System Architecture Specification
-**Version:** 1.0
-**Status:** Active
-**Date:** 2026-09-03
+**Version:** 2.0
+**Status:** Active -- Deployable Runtime v1
+**Date:** September 2026
+**History:** Version 1.0 covered the research MVP architecture. Version 2.0 extends the architecture for streaming runtime deployment.
 
 ---
 
@@ -94,10 +95,12 @@ The primary RADS architecture is:
                     │      OUTPUT      │
                     └───────┬──────────┘
                             │
-                  ┌─────────┴─────────┐
-                  ↓                   ↓
-             DASHBOARD             ALERT
+              ┌─────────────┼─────────────┐
+              ↓             ↓             ↓
+          REST API     WebSocket      Handlers
 ```
+
+The architecture supports two operating modes (batch and streaming) that share the same core pipeline stages.
 
 ---
 
@@ -133,18 +136,19 @@ A downstream component should not need to understand the internal implementation
 
 ---
 
-# 4. Stage 1 — Video Input
+# 4. Stage 1 -- Video Input
 
-The pipeline begins with a video.
+The pipeline begins with a video source.
 
 Input may come from:
 
-* Dataset video
-* Uploaded video
-* Camera stream
+* Local video file (MP4, AVI, MOV)
+* Webcam device (by index)
+* RTSP / IP camera stream (by URL)
 * Recorded traffic footage
 
-For the MVP, file-based video input is sufficient.
+Batch mode: file-based input, processed to completion.
+Runtime mode: any source, processed continuously with reconnection support.
 
 The video-processing layer should extract or expose:
 
@@ -155,17 +159,15 @@ Timestamp
 FPS
 Width
 Height
-Video Duration
 ```
 
-Example:
+For file sources, video duration is also available.
+For streaming sources, duration is undefined.
 
-```text
-Frame 120
-Timestamp: 4.00 s
-FPS: 30
-Resolution: 1280 × 720
-```
+The source module must handle:
+* Connection failure at startup (report and retry or exit)
+* Mid-stream disconnection (RTSP: reconnect with configurable interval)
+* Graceful shutdown on SIGINT/SIGTERM
 
 ---
 
@@ -801,55 +803,79 @@ This is useful for:
 
 ---
 
-# 23. Dashboard Integration
+# 23. API Integration
 
-The existing dashboard should consume structured RADS events.
+The runtime exposes a REST and WebSocket API for downstream consumers.
 
-It should not contain the core accident reasoning logic.
+It does not contain the core accident reasoning logic.
 
 Architecture:
 
 ```text
 AI Pipeline
-     ↓
+     |
+     v
 Structured Event
-     ↓
-Dashboard
+     |
+     v
+Event Lifecycle Manager
+     |
+     v
++--------+--------+
+|        |        |
+REST   WebSocket  Log
+API    Stream     File
 ```
 
-This allows the AI system to be tested independently of the interface.
+This allows the AI system to be tested independently of any interface.
+
+The API is optional. When disabled, the runtime still processes video and logs events.
 
 ---
 
-# 24. Telegram Alert Integration
+# 24. Event Notification
 
-The existing Telegram integration should also consume the structured event.
+Downstream consumers receive structured events through registered handlers.
 
 Conceptually:
 
 ```text
 Accident Event
-      ↓
-Alert Formatter
-      ↓
-Telegram
+      |
+      v
+Event Handler Registry
+      |
+      v
++---------+---------+
+|         |         |
+REST    WebSocket  Custom
+Push    Broadcast  Handler
 ```
 
-Example alert:
+The handler interface is:
 
 ```text
-RADS ALERT
-
-Accident detected.
-
-Time: 00:07.4
-Type: Rear-End
-Severity: High
-Objects involved: 2
-Confidence: 91%
+callback(event_dict) -> None
 ```
 
-The exact alert format may change.
+Any consumer (dashboard, alert system, logging, webhook) can register as a handler without modifying the core pipeline.
+
+Example event payload:
+
+```json
+{
+  "event_id": "RADS-20260922-00017",
+  "status": "confirmed",
+  "start_time": 123.4,
+  "impact_time": 125.1,
+  "end_time": 132.7,
+  "severity": "medium",
+  "confidence": 0.87,
+  "objects_involved": [{"id": 3, "class": "car"}, {"id": 7, "class": "car"}]
+}
+```
+
+The exact schema is defined in PROD.md section 5.
 
 ---
 
@@ -908,26 +934,24 @@ The implementation should conceptually expose modules similar to:
 
 ```text
 video/
-    video_reader
-    frame_processor
+    video_reader          (batch mode)
 
 detection/
     detector
 
 tracking/
     tracker
-    track_manager
 
 motion/
     trajectory
     motion_features
 
 interaction/
+    pairwise
     interaction_engine
 
 reasoning/
-    event_detector
-    accident_classifier
+    accident_reasoner
 
 severity/
     severity_engine
@@ -935,11 +959,32 @@ severity/
 output/
     event_schema
     visualizer
-    dashboard_adapter
-    telegram_adapter
-```
 
-The exact repository structure may differ.
+runtime/
+    source              (file / webcam / RTSP)
+    frame_processor     (streaming per-frame pipeline)
+    engine              (main loop, signal handling)
+    event_lifecycle     (event state machine)
+    health              (health monitoring)
+
+api/
+    server              (FastAPI endpoints)
+    schemas             (response models)
+
+config/
+    config_loader
+    env_resolver        (environment variable overrides)
+
+core/
+    __init__            (re-exports of intelligence modules)
+
+pipeline/
+    pipeline            (batch mode orchestrator, preserved)
+
+evaluation/
+    evaluator
+    baseline_comparison
+```
 
 The important requirement is functional separation.
 
@@ -991,41 +1036,54 @@ Downstream modules should consume these outputs rather than accessing hidden int
 
 ---
 
-# 28. Offline and Real-Time Modes
+# 28. Batch and Streaming Modes
 
-The architecture should support two conceptual modes.
+The architecture supports two operating modes.
 
-## Offline Mode
+## Batch Mode (Research/Evaluation)
 
 ```text
 Complete Video
-      ↓
-Process
-      ↓
-Analyze
-      ↓
-Generate Result
+      |
+      v
+Two-Pass Processing
+      |
+      v
+Result JSON
 ```
 
-This should be the initial MVP priority.
+Entry point: `run_pipeline.py`
+Orchestrator: `rads/pipeline/pipeline.py`
 
-## Streaming / Real-Time Mode
+This mode is preserved unchanged for research evaluation.
+
+## Streaming Mode (Deployment)
 
 ```text
-Incoming Frames
-      ↓
-Detection
-      ↓
-Tracking
-      ↓
-Rolling Temporal Window
-      ↓
+Source (file / webcam / RTSP)
+      |
+      v
+Per-Frame Detection + Tracking
+      |
+      v
+Incremental Motion + Pairwise (Sliding Window)
+      |
+      v
 Event Reasoning
-      ↓
-Alert
+      |
+      v
+Event Lifecycle
+      |
+      v
+API / Handlers
 ```
 
-Real-time optimization is a future concern unless required for the MVP demonstration.
+Entry point: `rads_runtime.py`
+Orchestrator: `rads/runtime/engine.py`
+
+Streaming mode is the primary deployment mode. It processes frames as they arrive and emits events incrementally.
+
+Both modes share the same core intelligence modules under `rads/core/`.
 
 ---
 
@@ -1115,39 +1173,45 @@ Values should not be scattered throughout source code.
 
 ---
 
-# 32. MVP Architecture
+# 32. Deployed Architecture
 
-The MVP should implement the smallest coherent version of the architecture:
+The deployed runtime implements:
 
 ```text
-Video
-  ↓
-YOLO
-  ↓
-Tracker
-  ↓
+Source (file / webcam / RTSP)
+  |
+  v
+YOLO + ByteTrack
+  |
+  v
 Persistent IDs
-  ↓
-Track History
-  ↓
-Trajectory / Motion Features
-  ↓
-Interaction Logic
-  ↓
-Accident Event Logic
-  ↓
-Event Timestamp
-  ↓
-Objects Involved
-  ↓
+  |
+  v
+Track History (Sliding Window, 30s default)
+  |
+  v
+Motion Features (Incremental)
+  |
+  v
+Pairwise Interaction (Windowed)
+  |
+  v
+Accident Reasoning
+  |
+  v
+Event Lifecycle (candidate / detected / confirmed / resolved)
+  |
+  v
 Severity Scoring
-  ↓
-Visualization
-  ↓
-Structured Output
+  |
+  v
+REST API + WebSocket
+  |
+  v
+Docker Container
 ```
 
-The MVP should demonstrate the complete flow even if individual components remain imperfect.
+The batch pipeline (`run_pipeline.py`) is preserved alongside this for research use.
 
 ---
 
@@ -1285,4 +1349,4 @@ ACTIONABLE OUTPUT
 
 RADS is therefore not intended to be merely a video classifier.
 
-It is intended to become a **temporal, object-centric accident understanding system**.
+It is intended to become a **temporal, object-centric accident understanding system**, deployable on real video sources and accessible to downstream consumers.

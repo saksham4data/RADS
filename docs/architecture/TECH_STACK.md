@@ -1,10 +1,11 @@
-# RADS — Technology Stack Specification
+# RADS -- Technology Stack Specification
 
 **Project:** RADS
 **Document:** Technology Stack Specification
-**Version:** 1.0
-**Status:** Active
-**Date:** 2026-09-03
+**Version:** 2.0
+**Status:** Active -- Deployable Runtime v1
+**Date:** September 2026
+**History:** Version 1.0 covered the research MVP stack. Version 2.0 adds runtime, API, and deployment technologies.
 
 ---
 
@@ -65,20 +66,30 @@ The initial RADS stack is conceptually:
 
 ```text
 Python
-   ↓
-OpenCV
-   ↓
+   |
+   v
+OpenCV (frame acquisition)
+   |
+   v
 YOLO-based Object Detection
-   ↓
-Multi-Object Tracking
-   ↓
+   |
+   v
+Multi-Object Tracking (ByteTrack)
+   |
+   v
 Trajectory / Motion Processing
-   ↓
+   |
+   v
 Temporal Accident Reasoning
-   ↓
+   |
+   v
 Severity Engine
-   ↓
-Output / Dashboard / Alerts
+   |
+   v
+FastAPI (REST + WebSocket)
+   |
+   v
+Docker (deployment)
 ```
 
 The exact versions of individual packages should be pinned in the project environment once implementation begins.
@@ -487,36 +498,44 @@ Visualization is important for both debugging and demonstration.
 
 ---
 
-# 17. Dashboard and Alert Integration
+# 17. API and Event Integration
 
-RADS already has a dashboard and Telegram alert integration from an earlier project phase.
+The runtime exposes structured events through a REST and WebSocket API built with FastAPI.
 
-These components should remain separate from the core computer-vision reasoning pipeline.
+These components are separate from the core computer-vision reasoning pipeline.
 
 The conceptual architecture is:
 
 ```text
 RADS AI Pipeline
-       ↓
+       |
+       v
 Structured Event
-       ↓
-┌──────┴──────┐
-↓             ↓
-Dashboard   Telegram
+       |
+       v
+Event Lifecycle Manager
+       |
+       v
++---------+---------+
+|         |         |
+REST    WebSocket  Custom
+API     Stream     Handlers
 ```
 
-The AI system should produce a structured event rather than directly coupling model logic to a specific user interface.
+The AI system produces a structured event. Downstream consumers register as handlers.
 
 Example structured result:
 
 ```json
 {
-  "accident": true,
-  "timestamp": 7.4,
-  "severity": "high",
-  "objects_involved": [3, 7],
-  "type": "rear_end",
-  "confidence": 0.91
+  "event_id": "RADS-20260922-00017",
+  "status": "confirmed",
+  "start_time": 123.4,
+  "impact_time": 125.1,
+  "end_time": 132.7,
+  "severity": "medium",
+  "confidence": 0.87,
+  "objects_involved": [{"id": 3, "class": "car"}, {"id": 7, "class": "car"}]
 }
 ```
 
@@ -673,46 +692,49 @@ They are not requirements for the MVP.
 
 ---
 
-# 24. MVP Technology Stack
+# 24. Runtime v1 Technology Stack
 
-The initial MVP should aim for something close to:
+The deployed runtime uses:
 
 ```text
 Language:
-Python
+Python 3.11+
 
-Video:
-OpenCV
+Video Acquisition:
+OpenCV (cv2.VideoCapture for file / webcam / RTSP)
 
 Detection:
-Pretrained YOLO
+YOLO11n (pretrained, via ultralytics)
 
 Tracking:
-ByteTrack or equivalent
+ByteTrack (via ultralytics)
 
 Data Processing:
-NumPy / Pandas as appropriate
+NumPy
 
 Temporal Reasoning:
-Lightweight temporal model and/or engineered reasoning
+Rule-based engineered reasoning
 
 Severity:
-Interpretable scoring/rule engine initially
+Heuristic scoring engine
 
-Experiment Tracking:
-Weights & Biases
+API:
+FastAPI + Uvicorn (REST + WebSocket)
 
-Visualization:
-OpenCV / existing dashboard
+Deployment:
+Docker + Docker Compose
 
-Alerts:
-Existing Telegram integration
+Device:
+CPU or CUDA (configurable)
 
 Configuration:
-Existing project configuration system
+YAML + environment variable overrides
+
+Experiment Tracking (research mode):
+Weights and Biases
 ```
 
-The exact package versions and model variants should be finalized during implementation.
+The exact package versions are pinned in `requirements.txt`.
 
 ---
 
@@ -819,18 +841,22 @@ The following decisions are currently established:
 
 | Component           | Current Direction           | Status      |
 | ------------------- | --------------------------- | ----------- |
-| Programming         | Python                      | Established |
-| Video Processing    | OpenCV                      | Established |
-| Detection           | YOLO family                 | Preferred   |
-| Tracking            | ByteTrack / equivalent      | Candidate   |
-| Persistent IDs      | Tracker-generated IDs       | Required    |
-| Trajectories        | Track-based                 | Required    |
-| Motion Features     | Engineered initially        | Preferred   |
-| Temporal Reasoning  | Lightweight / experimental  | Open        |
-| Severity            | Rule/scoring initially      | Preferred   |
-| Experiment Tracking | W&B                         | Existing    |
-| Visualization       | OpenCV + existing dashboard | Existing    |
-| Alerts              | Telegram integration        | Existing    |
+| Programming         | Python 3.11+                | Established |
+| Video Acquisition   | OpenCV                      | Established |
+| Detection           | YOLO11n (ultralytics)       | Established |
+| Tracking            | ByteTrack (ultralytics)     | Established |
+| Persistent IDs      | Tracker-generated IDs       | Established |
+| Trajectories        | Track-based                 | Established |
+| Motion Features     | Engineered                  | Established |
+| Temporal Reasoning  | Rule-based                  | Established |
+| Severity            | Heuristic scoring           | Established |
+| API Framework       | FastAPI + Uvicorn           | Established |
+| WebSocket           | FastAPI native              | Established |
+| Deployment          | Docker + Docker Compose     | Established |
+| Device Management   | CPU / CUDA configurable     | Established |
+| Configuration       | YAML + env var overrides    | Established |
+| Experiment Tracking | W&B (research mode)         | Existing    |
+| Visualization       | OpenCV (batch mode)         | Existing    |
 
 ---
 
