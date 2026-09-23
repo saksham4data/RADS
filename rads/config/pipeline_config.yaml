@@ -1,5 +1,5 @@
 detector:
-  model: "yolo11n.pt"        # smallest model for initial testing
+  model: "models/yolo11n.pt"        # smallest model for initial testing
   confidence: 0.25
   iou: 0.45
   classes: [0, 1, 2, 3, 5, 7]  # COCO: person, bicycle, car, motorcycle, bus, truck
