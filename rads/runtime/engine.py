@@ -4,6 +4,7 @@ import time
 
 from rads.config.config_loader import ConfigLoader
 from rads.config.env_resolver import resolve_config
+from rads.runtime.event_lifecycle import EventLifecycleManager
 from rads.runtime.frame_processor import FrameProcessor
 from rads.runtime.health import HealthMonitor
 from rads.runtime.source import create_source
@@ -19,6 +20,12 @@ class RuntimeEngine:
         self.processor = FrameProcessor(self.config)
         self.health = HealthMonitor()
         self._handlers = []
+        self.lifecycle = EventLifecycleManager(
+            confirmation_window_s=self.config.runtime_event_confirmation_window_s,
+            resolution_timeout_s=self.config.runtime_event_resolution_timeout_s,
+            buffer_size=self.config.api_event_buffer_size,
+            handlers=self._handlers,
+        )
         self._running = False
         self._frames_processed = 0
         self._events_detected = 0
@@ -65,18 +72,18 @@ class RuntimeEngine:
                 if item is None:
                     break
                 frame_idx, timestamp_s, frame = item
-                if frame_idx % frame_skip != 0:
-                    continue
-                try:
-                    result = self.processor.process_frame(frame, frame_idx, timestamp_s)
-                except KeyboardInterrupt:
-                    self.stop()
-                    break
-                self._frames_processed += 1
-                if result is not None and result.get('accident'):
-                    self._events_detected += 1
-                    for handler in list(self._handlers):
-                        handler(result)
+                if frame_idx % frame_skip == 0:
+                    try:
+                        result = self.processor.process_frame(frame, frame_idx, timestamp_s)
+                    except KeyboardInterrupt:
+                        self.stop()
+                        break
+                    self._frames_processed += 1
+                    if result is not None and result.get('accident'):
+                        self.lifecycle.submit_detection(result)
+                        self._events_detected = self.lifecycle.created_count
+                self.lifecycle.active_track_ids = self.processor.track_history.get_all_track_ids()
+                self.lifecycle.tick(timestamp_s)
                 self.health.source_status = "open" if self.source.is_open() else "closed"
                 self.health.update(self._frames_processed, self._events_detected)
         finally:
