@@ -228,3 +228,55 @@ class ConfigLoader:
     def visualization_summary_frame_seconds(self) -> float:
         return float(self.config.get('visualization', {}).get('summary_frame_seconds', 2.0))
 
+    @property
+    def runtime_source(self) -> str:
+        return self.config.get('runtime', {}).get('source', 'file')
+
+    @property
+    def runtime_source_uri(self) -> str:
+        return self.config.get('runtime', {}).get('source_uri', '')
+
+    @property
+    def runtime_reconnect_interval_s(self) -> int:
+        return int(self.config.get('runtime', {}).get('reconnect_interval_s', 5))
+
+    @property
+    def runtime_max_reconnect_attempts(self) -> int:
+        return int(self.config.get('runtime', {}).get('max_reconnect_attempts', -1))
+
+    @property
+    def runtime_sliding_window_s(self) -> int:
+        return int(self.config.get('runtime', {}).get('sliding_window_s', 30))
+
+    @property
+    def runtime_event_confirmation_window_s(self) -> float:
+        return float(self.config.get('runtime', {}).get('event_confirmation_window_s', 2.0))
+
+    @property
+    def runtime_event_resolution_timeout_s(self) -> float:
+        return float(self.config.get('runtime', {}).get('event_resolution_timeout_s', 10.0))
+
+    @property
+    def device_compute(self) -> str:
+        return self.config.get('device', {}).get('compute', 'auto')
+
+    @property
+    def device_model_path(self) -> str:
+        return self.config.get('device', {}).get('model_path', 'models/yolo11n.pt')
+
+    @property
+    def api_enabled(self) -> bool:
+        return bool(self.config.get('api', {}).get('enabled', False))
+
+    @property
+    def api_host(self) -> str:
+        return self.config.get('api', {}).get('host', '0.0.0.0')
+
+    @property
+    def api_port(self) -> int:
+        return int(self.config.get('api', {}).get('port', 8100))
+
+    @property
+    def api_event_buffer_size(self) -> int:
+        return int(self.config.get('api', {}).get('event_buffer_size', 100))
+
