@@ -32,16 +32,16 @@ Phases defined in [IMPLEMENTATION_PLAN.md](file:///e:/Rads/docs/architecture/IMP
 
 | Phase | Name | Status | Date Started | Date Completed | Notes |
 |---|---|---|---|---|---|
-| 0 | Repository Stabilization | Not Started | -- | -- | Restore deleted files, verify tests, move model weights |
-| 1A | Core Library Namespace | Not Started | -- | -- | `rads/core/__init__.py` re-exports |
-| 1B | Configuration Extension | Not Started | -- | -- | Add runtime/device/api sections to config |
-| 1C | Environment Variable Resolver | Not Started | -- | -- | `rads/config/env_resolver.py` |
-| 2A | Source Abstraction | Not Started | -- | -- | `rads/runtime/source.py` (file/webcam/RTSP) |
-| 2B | Frame Processor | Not Started | -- | -- | `rads/runtime/frame_processor.py` (streaming per-frame pipeline) |
-| 2C | Runtime Engine | Not Started | -- | -- | `rads/runtime/engine.py` (main loop) |
-| 2D | Health and Signal Handling | Not Started | -- | -- | `rads/runtime/health.py` |
-| 2E | Event Lifecycle Manager | Not Started | -- | -- | `rads/runtime/event_lifecycle.py` |
-| 2F | Runtime Entry Point | Not Started | -- | -- | `rads_runtime.py` CLI |
+| 0 | Repository Stabilization | Completed | 2026-09-24 | 2026-09-24 | Weights moved to `models/yolo11n.pt`; batch pipeline verified |
+| 1A | Core Library Namespace | Completed | 2026-09-24 | 2026-09-24 | `rads/core/__init__.py` re-exports |
+| 1B | Configuration Extension | Completed | 2026-09-24 | 2026-09-24 | `runtime`, `device`, and `api` sections; 13 config getters |
+| 1C | Environment Variable Resolver | Completed | 2026-09-24 | 2026-09-24 | `rads/config/env_resolver.py` |
+| 2A | Source Abstraction | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/source.py` (file/webcam/RTSP) |
+| 2B | Frame Processor | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/frame_processor.py` (streaming per-frame pipeline) |
+| 2C | Runtime Engine | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/engine.py` (main loop) |
+| 2D | Health and Signal Handling | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/health.py` |
+| 2E | Event Lifecycle Manager | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/event_lifecycle.py` |
+| 2F | Runtime Entry Point | Completed | 2026-09-24 | 2026-09-24 | `rads_runtime.py` CLI |
 | 3A | API Server and Health Endpoint | Not Started | -- | -- | FastAPI server with `/health` |
 | 3B | Event Endpoints | Not Started | -- | -- | `/events`, `/events/latest`, `/events/{id}` |
 | 3C | WebSocket Event Stream | Not Started | -- | -- | `/ws/events` |
@@ -589,6 +589,7 @@ Added 2026-09-20. Ticked only where evidence exists in the working tree today. E
 
 Record key configuration decisions here:
 - YOLO model: `yolo11n.pt` (Phase 1)
+  - Amendment 2026-09-24: Phase 0 moved the weights to `models/yolo11n.pt`. `detector.model` and `device.model_path` in `rads/config/pipeline_config.yaml` both reference that path.
 - Tracker: ByteTrack (Phase 1)
 - Severity thresholds: (to be decided at Phase 6)
   - Amendment 2026-09-20: the line above is retained as the historical record. It was never filled in, which contradicts the Phase 6 Completed claim. See Correction Record C1. Actual severity weights and LOW/MEDIUM/HIGH cut-offs: PENDING, to be recorded from `rads/config/pipeline_config.yaml` once the severity rewrite lands.
@@ -609,6 +610,196 @@ Record key configuration decisions here:
 
 ## Runtime v1 Phase Completion Records
 
-Records will be added here as each runtime phase is completed.
+### Phase 0 — Repository Stabilization
 
-(No phases completed yet.)
+**Date:** 2026-09-24
+**Commit:** `5053e92`
+**Files created/modified:**
+- `rads/config/pipeline_config.yaml` (`detector.model` set to `models/yolo11n.pt`)
+- `yolo11n.pt` moved on disk to `models/yolo11n.pt` (gitignored; not in the commit)
+- Architecture documents already present in the working tree were committed with this phase
+
+**Verification outcome:**
+- [x] `from rads.config.config_loader import ConfigLoader`: PASS
+- [x] `from rads.output.event_schema import build_event_result`: PASS
+- [x] `from rads.output.visualizer import Visualizer`: PASS
+- [x] `python -m unittest discover -s rads/tests -t .`: 23 tests, 21 passed, 2 skipped
+- [x] `python run_pipeline.py --help`: PASS
+- [x] `python run_pipeline.py` on `-PpBteU0p3Q_00.mp4`: PASS, 94 frames, exit 0
+
+**Blockers / Deviations:**
+- `ultralytics` was not installed in `.venv`. It was installed from `requirements.txt` so the pipeline check could run.
+- The 2 skipped tests were `test_pipeline_isolation`. At this commit they still looked for `yolo11n.pt` at the repository root. The path was corrected on 2026-09-24 to `models/yolo11n.pt`. Re-run result is recorded at the end of this section.
+
+---
+
+### Phase 1A — Core Library Namespace
+
+**Date:** 2026-09-24
+**Commit:** `bcf3847`
+**Files created/modified:**
+- `rads/core/__init__.py`
+
+**Verification outcome:**
+- [x] `from rads.core import Tracker, evaluate_accident, estimate_severity`: PASS
+
+**Blockers / Deviations:**
+- None. No other file was created or modified.
+
+---
+
+### Phase 1B — Configuration Extension
+
+**Date:** 2026-09-24
+**Commit:** `a883e51`
+**Files created/modified:**
+- `rads/config/pipeline_config.yaml` (`runtime`, `device`, `api`)
+- `rads/config/config_loader.py` (13 getters)
+
+**Verification outcome:**
+- [x] Existing unittest suite: 23 tests, 21 passed, 2 skipped
+- [x] `python run_pipeline.py --help`: PASS
+- [x] `config.runtime_source` is `"file"`
+- [x] `config.detector_model` is `"models/yolo11n.pt"`
+- [x] `ConfigLoader.defaults()` returns the specified fallbacks
+
+**Blockers / Deviations:**
+- The plan's verification text says `config.model`. `ConfigLoader` has no `model` property. The existing property is `detector_model`. No `model` property was added.
+
+---
+
+### Phase 1C — Environment Variable Resolver
+
+**Date:** 2026-09-24
+**Commit:** `0fef4c2`
+**Files created/modified:**
+- `rads/config/env_resolver.py`
+
+**Verification outcome:**
+- [x] With `RADS_DEVICE=cpu`, `resolve_config` returns `{"device.compute": "cpu"}` and `device_compute` is `"cpu"`
+
+**Blockers / Deviations:**
+- `RADS_API_PORT` is stored as an int. `RADS_API_ENABLED` accepts `1/0`, `true/false`, and `yes/no`.
+
+---
+
+### Phase 2A — Source Abstraction
+
+**Date:** 2026-09-24
+**Commit:** `70c270c`
+**Files created/modified:**
+- `rads/runtime/__init__.py`
+- `rads/runtime/source.py`
+- `rads/tests/test_source.py`
+
+**Verification outcome:**
+- [x] `python -m pytest rads/tests/test_source.py`: 4 passed
+- [x] `FileSource` opened and read a frame from `-PpBteU0p3Q_00.mp4`
+
+**Blockers / Deviations:**
+- `pytest` was not in `requirements.txt`. It was installed in `.venv` to run the plan's verification command. It was not added to `requirements.txt`.
+- `FileSource` rejects a non-empty missing path at construction. An empty `source_uri` is rejected at `open()`, so `RuntimeEngine` can construct from the default config.
+
+---
+
+### Phase 2B — Frame Processor
+
+**Date:** 2026-09-24
+**Commit:** `99c6da2`
+**Files created/modified:**
+- `rads/runtime/frame_processor.py`
+- `rads/runtime/motion_adapter.py`
+- `rads/runtime/pairwise_adapter.py`
+- `rads/tests/test_frame_processor.py`
+
+**Verification outcome:**
+- [x] `python -m pytest rads/tests/test_frame_processor.py`: 4 passed
+- [x] Existing suite after this phase: 31 tests, 29 passed, 2 skipped
+
+**Blockers / Deviations:**
+- `Tracker` is constructed with `device_model_path`. `device.compute` is not passed in. `rads/tracking/tracker.py` has no device argument and was not modified.
+
+---
+
+### Phase 2C — Runtime Engine
+
+**Date:** 2026-09-24
+**Commit:** `26a2143`
+**Files created/modified:**
+- `rads/runtime/engine.py`
+- `rads/tests/test_engine.py`
+
+**Verification outcome:**
+- [x] `RuntimeEngine("rads/config/pipeline_config.yaml")` constructs: PASS
+- [x] `python -m pytest rads/tests/test_engine.py`: 3 passed
+
+**Blockers / Deviations:**
+- None at this commit. Signal handling and the lifecycle manager were added in Phases 2D and 2E.
+
+---
+
+### Phase 2D — Health and Signal Handling
+
+**Date:** 2026-09-24
+**Commit:** `ceec9fe`
+**Files created/modified:**
+- `rads/runtime/health.py`
+- `rads/runtime/engine.py` (`SIGINT` and `SIGTERM`, health update each frame)
+- `rads/tests/test_engine.py` (`TestHealthMonitor`)
+
+**Verification outcome:**
+- [x] `python -m pytest rads/tests/test_engine.py`: 5 passed
+- [x] `get_health()` returns start time, frames processed, events detected, last event time, source status, and current FPS
+- [x] Uptime calculation: start 1000.0, clock 1002.5, uptime 2.5 seconds
+
+**Blockers / Deviations:**
+- Health tests were added to `rads/tests/test_engine.py`. The plan's file inventory does not list a separate health test file.
+
+---
+
+### Phase 2E — Event Lifecycle Manager
+
+**Date:** 2026-09-24
+**Commit:** `9d20392`
+**Files created/modified:**
+- `rads/runtime/event_lifecycle.py`
+- `rads/tests/test_event_lifecycle.py`
+- `rads/runtime/engine.py` (submit on accident, `tick` each frame, handlers called on status transitions)
+
+**Verification outcome:**
+- [x] `python -m pytest rads/tests/test_event_lifecycle.py`: 4 passed
+- [x] `python -m pytest rads/tests/test_event_lifecycle.py rads/tests/test_engine.py`: 9 passed
+
+**Blockers / Deviations:**
+- `tick(current_time_s)` keeps the specified signature. Active track ids are read from `active_track_ids`, set by the engine before each tick, so a confirmed event can resolve when those tracks are gone.
+
+---
+
+### Phase 2F — Runtime Entry Point
+
+**Date:** 2026-09-24
+**Commit:** `d098565`
+**Files created/modified:**
+- `rads_runtime.py`
+
+**Verification outcome:**
+- [x] `python rads_runtime.py --help`: PASS
+- [x] `python rads_runtime.py --config rads/config/pipeline_config.yaml --source` `-PpBteU0p3Q_00.mp4`: PASS, 94 frames, 22.17 s, exit 0
+- [x] One JSON event on stdout: `RADS-20260924-00001`, status `candidate`, confidence 0.8647, severity `MEDIUM`, objects 1, 3, and 2
+- [x] `python -m pytest rads/tests`: 38 passed, 2 skipped
+
+**Blockers / Deviations:**
+- The event stayed `candidate`. A later detection did not report a higher confidence, so the plan's transition to `detected` did not occur before the file ended.
+- `--api` sets `RADS_API_ENABLED`. No server is started. That is Phase 3A.
+- The 2 skipped tests were the pipeline isolation tests, corrected after this commit. See the follow-up below.
+
+---
+
+### Follow-up — pipeline isolation weight path
+
+**Date:** 2026-09-24
+**Files created/modified:**
+- `rads/tests/test_pipeline_isolation.py` (`WEIGHTS` set to `models/yolo11n.pt`)
+
+**Verification outcome:**
+- [x] `python -m unittest rads.tests.test_pipeline_isolation -v`: 2 passed in 63.686 s, exit 0

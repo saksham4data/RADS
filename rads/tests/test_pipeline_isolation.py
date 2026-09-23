@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 CONFIG_PATH = os.path.join(REPO_ROOT, 'rads', 'config', 'pipeline_config.yaml')
-WEIGHTS = os.path.join(REPO_ROOT, 'yolo11n.pt')
+WEIGHTS = os.path.join(REPO_ROOT, 'models', 'yolo11n.pt')
 CLIP_DIR = os.path.join(REPO_ROOT, 'Datasets', 'processed', 'picek_sorted', 'trimmed', 'positive', 'real')
 VIDEO_A = os.path.join(CLIP_DIR, '-PpBteU0p3Q_00.mp4')
 VIDEO_B = os.path.join(CLIP_DIR, '-Qt5bDJNT84_00.mp4')
