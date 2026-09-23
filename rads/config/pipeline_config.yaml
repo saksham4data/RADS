@@ -88,3 +88,21 @@ visualization:
   # Held end-of-video frame carrying the structured result
   summary_frame: true
   summary_frame_seconds: 2.0
+runtime:
+  source: "file"
+  source_uri: ""
+  reconnect_interval_s: 5
+  max_reconnect_attempts: -1
+  sliding_window_s: 30
+  event_confirmation_window_s: 2.0
+  event_resolution_timeout_s: 10.0
+
+device:
+  compute: "auto"
+  model_path: "models/yolo11n.pt"
+
+api:
+  enabled: false
+  host: "0.0.0.0"
+  port: 8100
+  event_buffer_size: 100
