@@ -42,9 +42,9 @@ Phases defined in [IMPLEMENTATION_PLAN.md](file:///e:/Rads/docs/architecture/IMP
 | 2D | Health and Signal Handling | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/health.py` |
 | 2E | Event Lifecycle Manager | Completed | 2026-09-24 | 2026-09-24 | `rads/runtime/event_lifecycle.py` |
 | 2F | Runtime Entry Point | Completed | 2026-09-24 | 2026-09-24 | `rads_runtime.py` CLI |
-| 3A | API Server and Health Endpoint | Not Started | -- | -- | FastAPI server with `/health` |
-| 3B | Event Endpoints | Not Started | -- | -- | `/events`, `/events/latest`, `/events/{id}` |
-| 3C | WebSocket Event Stream | Not Started | -- | -- | `/ws/events` |
+| 3A | API Server and Health Endpoint | Completed | 2026-09-25 | 2026-09-25 | FastAPI server with `/health` and `/config` |
+| 3B | Event Endpoints | Completed | 2026-09-25 | 2026-09-25 | `/events`, `/events/latest`, `/events/{id}` |
+| 3C | WebSocket Event Stream | Completed | 2026-09-25 | 2026-09-25 | `/ws/events` |
 | 4A | Dockerfile and Build | Not Started | -- | -- | `Dockerfile`, `.dockerignore` |
 | 4B | Docker Compose and Deployment | Not Started | -- | -- | `docker-compose.yml`, GPU override |
 | 5 | Integration Testing | Not Started | -- | -- | End-to-end verification |
@@ -803,3 +803,61 @@ Record key configuration decisions here:
 
 **Verification outcome:**
 - [x] `python -m unittest rads.tests.test_pipeline_isolation -v`: 2 passed in 63.686 s, exit 0
+
+---
+
+### Phase 3A — API Server and Health Endpoint
+
+**Date:** 2026-09-25
+**Commit:** uncommitted
+**Files created/modified:**
+- `rads/api/__init__.py`
+- `rads/api/server.py`
+- `rads/api/schemas.py`
+- `rads/runtime/engine.py` (starts the server in a daemon thread when `api.enabled` is true)
+- `requirements.txt` (`fastapi`, `uvicorn`, `websockets`)
+
+**Verification outcome:**
+- [x] `python rads_runtime.py --config rads/config/pipeline_config.yaml --source` `-PpBteU0p3Q_00.mp4 --api`: PASS, 94 frames, 1 event, 20.30 s, exit 0
+- [x] `GET http://127.0.0.1:8100/health`: 200, `source_status` `open`, `frames_processed` 0 at first poll
+- [x] `GET http://127.0.0.1:8100/config`: 200, `api.enabled` true, `runtime.source_uri` set to the video path
+
+**Blockers / Deviations:**
+- Installed FastAPI 0.141 has no `on_event`. The server captures the asyncio loop with a lifespan handler.
+- Uvicorn signal handlers are disabled so `SIGINT` and `SIGTERM` stay with `RuntimeEngine`.
+
+---
+
+### Phase 3B — Event Endpoints
+
+**Date:** 2026-09-25
+**Commit:** uncommitted
+**Files created/modified:**
+- `rads/api/server.py` (`GET /events`, `GET /events/latest`, `GET /events/{event_id}`)
+
+**Verification outcome:**
+- [x] `GET /events`: 200, one event, `RADS-20260925-00001`, confidence 0.8647, severity `MEDIUM`
+- [x] `GET /events/latest`: 200, same event
+- [x] `GET /events/RADS-20260925-00001`: 200, same event
+- [x] Unknown event id: 404
+- [x] `GET /events/latest` with an empty buffer: 404
+
+**Blockers / Deviations:**
+- The event stayed `candidate`, same as the Phase 2F run on this file.
+
+---
+
+### Phase 3C — WebSocket Event Stream
+
+**Date:** 2026-09-25
+**Commit:** uncommitted
+**Files created/modified:**
+- `rads/api/server.py` (`WebSocket /ws/events`)
+
+**Verification outcome:**
+- [x] A client connected to `ws://127.0.0.1:8100/ws/events` received `RADS-20260925-00001` as JSON during the same run
+- [x] Existing runtime tests after this phase: `python -m pytest rads/tests/test_source.py rads/tests/test_frame_processor.py rads/tests/test_engine.py rads/tests/test_event_lifecycle.py`: 17 passed
+
+**Blockers / Deviations:**
+- Disconnect handling catches both `WebSocketDisconnect` and `WebSocketDisconnected`. Starlette 1.7 raises the second after a disconnect message.
+- `GET /status` is listed in PROD.md section 6. It is not a Phase 3 step in IMPLEMENTATION_PLAN.md, so it was not added.

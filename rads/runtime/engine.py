@@ -60,7 +60,16 @@ class RuntimeEngine:
         started = time.perf_counter()
         frame_skip = self.config.frame_skip
         previous_handlers = self._install_signal_handlers()
+        server = None
         try:
+            if self.config.api_enabled:
+                from rads.api.server import start_api
+                server = start_api(self)
+                deadline = time.time() + 10
+                while not server.started and time.time() < deadline:
+                    time.sleep(0.05)
+                if not server.started:
+                    raise RuntimeError("API server failed to start")
             self.source.open()
             self.health.source_status = "open"
             while self._running:
@@ -87,6 +96,8 @@ class RuntimeEngine:
                 self.health.source_status = "open" if self.source.is_open() else "closed"
                 self.health.update(self._frames_processed, self._events_detected)
         finally:
+            if server is not None:
+                server.should_exit = True
             self._restore_signal_handlers(previous_handlers)
             self.source.close()
             self.health.source_status = "closed"
