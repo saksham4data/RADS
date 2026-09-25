@@ -47,3 +47,8 @@ tqdm>=4.65.0
 
 # Object-centric RADS pipeline
 ultralytics>=8.0.0
+
+# Runtime API
+fastapi>=0.100.0
+uvicorn>=0.23.0
+websockets>=11.0
