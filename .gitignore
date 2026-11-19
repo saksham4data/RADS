@@ -1,222 +1,45 @@
-# ============================================================
-# RADS Project - .gitignore
-# ============================================================
-
-# ============================================================
 # Python
-# ============================================================
-
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-*.egg
-*.egg-info/
-.eggs/
-build/
-dist/
-
-# ============================================================
-# Virtual Environments
-# ============================================================
-
 .venv/
 venv/
-env/
-ENV/
 .env
-.env.*
-
-# ============================================================
-# Jupyter
-# ============================================================
-
+.pytest_cache/
 .ipynb_checkpoints/
 
-# ============================================================
-# IDEs
-# ============================================================
-
+# Editors / OS
 .vscode/
 .idea/
-*.code-workspace
-*.swp
-*.swo
-*~
-
-# ============================================================
-# Cursor
-# ============================================================
-
-.cursor/plans/
-
-# ============================================================
-# Operating System
-# ============================================================
-
+.cursor/
 .DS_Store
 Thumbs.db
 Desktop.ini
-$RECYCLE.BIN/
 
-# ============================================================
-# Weights & Biases
-# ============================================================
+# Local documentation and research notes (kept on disk, not in git)
+docs/
+tests/
+# Data: only the split definitions are tracked
+data/*
+!data/splits/
 
+# Model weights and checkpoints
+models/
+*.pt
+*.pth
+*.onnx
+
+# Generated outputs
+results/
+baseline/outputs/
 wandb/
-
-# ============================================================
-# Logs
-# ============================================================
-
-logs/
-eda/logs/
-
-!logs/.gitkeep
-!eda/logs/.gitkeep
-
-# ============================================================
-# RAW DATASETS
-# ============================================================
-
-Datasets/raw/
-Datasets/trimmed_videos/
-
-# ============================================================
-# PROCESSED DATASETS
-# Ignore everything...
-# ============================================================
-
-Datasets/processed/*
-
-# ...except the global metadata
-!Datasets/processed/global_master_metadata.csv
-
-# Keep README if present
-!Datasets/processed/README.md
-
-# ── TUDAT v2 dataset definition (version-controlled) ──
-# These are dataset-definition files (not large data), and must be tracked.
-!Datasets/processed/tudat/
-!Datasets/processed/tudat/v2/
-!Datasets/processed/tudat/v2/global_master_metadata_v2.csv
-!Datasets/processed/tudat/v2/tudat_v2_manifest.json
-!Datasets/processed/tudat/v2/tudat_v2_integrity_report.md
-
-# ============================================================
-# Large Dataset Files
-# ============================================================
-
-*.csv.gz
-*.parquet
-*.feather
-*.arrow
-*.h5
-*.hdf5
-*.db
-*.sqlite
-
-# ============================================================
-# Images & Videos
-# ============================================================
-
+*.log
 *.mp4
 *.avi
 *.mov
-*.mkv
-*.wmv
-*.flv
-*.webm
 
-# ============================================================
-# Models
-# ============================================================
 
-/Outputs/
-*.pt
-*.pth
-*.ckpt
-*.onnx
-*.engine
-*.tflite
-*.pb
-*.pkl
-*.pickle
-*.joblib
+# Claude Code local agent definitions
+.claude/
 
-checkpoints/
-weights/
-/models/
-
-# ============================================================
-# Generated EDA Outputs
-# ============================================================
-
-eda/figures/*
-eda/reports/*
-eda/exports/*
-
-!eda/figures/.gitkeep
-!eda/reports/.gitkeep
-!eda/exports/.gitkeep
-
-# ============================================================
-# Cache
-# ============================================================
-
-.cache/
-.pytest_cache/
-.mypy_cache/
-
-# ============================================================
-# Temporary Files
-# ============================================================
-
-*.tmp
-*.temp
-*.bak
-
-# ============================================================
-# Source Artifacts and Docs
-# ============================================================
-
-scratch/
-reports/
-
-# ============================================================
-# Secrets
-# ============================================================
-
-*.pem
-*.key
-
-# ============================================================
-# Keep Documentation
-# ============================================================
-
-!README.md
-!LICENSE
-!docs/
-!docs/**
-!*.drawio
-!*.drawio.png
-!*.svg
-!*.pdf
-
-# ============================================================
-# Training Outputs
-# ============================================================
-
-# Training/evaluation runs are generated artifacts. Keep the
-# reproducible configs and summarize important results under docs/research.
-training/outputs/
-training/wandb/
-training/p02_prediction.json
-training/prediction_result.json
-
-# ============================================================
-# Pipeline Outputs
-# ============================================================
-
-/output/
-/output_results/
+# Tests (local only)
+tests/

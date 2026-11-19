@@ -1,70 +1,60 @@
-# RADS
+# RADS — Road Accident Detection and Severity
 
-RADS is a research-oriented road accident detection and severity analysis project.
-
-The current direction is an object-centric temporal pipeline:
+RADS watches road-camera video, detects accidents, estimates when they happened and how severe they look, and raises an event for a human operator to confirm. It is built to speed up the operator, not replace them.
 
 ```text
-video -> YOLO detection -> tracking -> trajectories -> motion features
--> object interactions -> accident event reasoning -> localization
--> severity estimate -> structured output / visualization
+video -> YOLO + ByteTrack -> trajectories -> motion features -> object interactions
+      -> accident reasoning -> event time + involved objects -> severity -> event / overlay
 ```
 
-The repository also preserves the earlier ResNet18 + GRU video-classification baseline and the research path that led to the current architecture. Weak or failed experiments are intentionally documented because they explain why RADS moved from clip-level visual classification toward object and event understanding.
-
-## Current Status
-
-Phase 0 is complete. It added only scaffolding for the future RADS pipeline:
-
-- `rads/` package skeleton
-- `rads/config/pipeline_config.yaml`
-- `requirements.txt`
-- `docs/architecture/IMPLEMENTATION_TRACKER.md`
-
-No Phase 1 implementation has started yet.
-
-## Main Areas
+## Layout
 
 ```text
-rads/                  Future object-centric RADS pipeline scaffold
-training/              Existing ResNet18 + GRU baseline and training code
-Datasets/              Dataset pipeline code plus lightweight tracked metadata
-eda/                   Older EDA tooling and notebooks
-docs/architecture/     Active RADS specifications and implementation plan
-docs/research/         Dataset lineage, experiments, decisions, audits
-scripts/               Dataset construction and utility scripts
+rads/                 the system
+  config.yaml         every threshold and weight
+  config.py           typed access to config.yaml
+  perception.py       video reader, YOLO + ByteTrack tracker
+  tracks.py           track history and motion features
+  interactions.py     pairwise distance / overlap / closing speed, interaction candidates
+  reasoning.py        rule-based accident decision and event localization
+  severity.py         heuristic LOW / MEDIUM / HIGH score with evidence
+  output.py           result JSON and annotated video
+  pipeline.py         offline: one whole video in, one result out
+  live/               streaming runtime: source, processor, events, engine, API
+scripts/
+  create_splits.py    builds the held-out evaluation split
+  evaluate.py         runs the pipeline over a split CSV, writes JSONL results
+  compare_baseline.py compares pipeline results with the ResNet18 + GRU baseline
+baseline/             frozen ResNet18 + GRU clip classifier (P02), kept for comparison
+tests/                unit and integration tests
+data/                 videos (gitignored) and split CSVs (tracked)
+  raw/                PICEK real + synthetic, TUDAT, Kaggle images
+  clips/              trimmed positive / negative PICEK clips used by P02
+  splits/             p02_binary, p02_test, picek_heldout_v2, tudat_v2
+models/               yolo11n.pt (gitignored)
+run_video.py          process one video file
+run_live.py           process a file, webcam or RTSP stream continuously
 ```
 
-Large datasets, videos, checkpoints, W&B runs, logs, caches, virtual environments, and generated outputs are intentionally kept out of Git.
+`docs/` holds the architecture specs, research history and evaluation evidence. It is gitignored and lives only on disk.
 
-## Reproducibility
-
-Install the project environment:
+## Usage
 
 ```bash
 pip install -r requirements.txt
+python run_video.py --video data/clips/positive/-PpBteU0p3Q_00.mp4 --config rads/config.yaml --output results/out.json
+python run_live.py --config rads/config.yaml --source rtsp://camera/stream --api
+python scripts/evaluate.py --csv data/splits/p02_test.csv --output results/p02_test.jsonl
+python -m pytest tests
 ```
 
-For compatibility, `requirements-training.txt` remains as a thin pointer to `requirements.txt`.
-
-
-Important tracked references:
-
-- Architecture source of truth: `docs/architecture/`
-- Research history: `docs/research/README.md`
-- Dataset lineage: `docs/research/dataset_lineage.md`
-- Baseline experiments: `docs/research/experiment_history.md`
-- Repository hygiene audit: `docs/research/repository_audit_phase0.md`
+With `--api`, the live runtime serves `GET /health`, `GET /events`, `GET /events/latest`, `GET /events/{id}` and `WebSocket /ws/events` on `127.0.0.1:8100`.
 
 ## Baseline
 
-The current baseline to surpass is P02:
+P02, ResNet18 + GRU on 500 balanced PICEK clips: test accuracy 45.9%, AUROC 0.535, 83.8% false positives on normal clips. The paired positive and negative P02 clips share most of their footage, so this number reflects the dataset design as much as the model.
 
-- Dataset: 500 PICEK clips, balanced 250 accident / 250 normal
-- Split: 350 train / 76 validation / 74 test
-- Model: ResNet18 + GRU
-- Test accuracy: 45.9%
-- Test AUROC: 0.535
-- Normal false-positive rate: 83.8%
-
-See `docs/research/experiment_history.md` for context and caveats.
+```bash
+python baseline/train.py --config baseline/p02.yaml
+python baseline/test.py --config baseline/p02.yaml --checkpoint baseline/outputs/latest/checkpoints/best.pt
+```

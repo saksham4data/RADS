@@ -1,7 +1,0 @@
-# Backward-compatible training install file.
-#
-# The project now uses requirements.txt as the single source of dependency
-# truth. This file remains so existing docs/scripts that run
-# `pip install -r requirements-training.txt` continue to work.
-
--r requirements.txt
