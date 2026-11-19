@@ -17,7 +17,7 @@ Desktop.ini
 
 # Local documentation and research notes (kept on disk, not in git)
 docs/
-tests/
+
 # Data: only the split definitions are tracked
 data/*
 !data/splits/
